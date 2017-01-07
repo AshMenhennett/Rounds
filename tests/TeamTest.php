@@ -62,7 +62,7 @@ class TeamTest extends TestCase
         $teams = factory(App\Team::class, 5)->create();
 
         $this->actingAs($user)
-            ->call('post', '/teams/' . $teams->first()->slug);
+            ->call('POST', '/teams/' . $teams->first()->slug);
 
         $this->seeInDatabase('teams', [
             'user_id' => $user->id,
@@ -75,6 +75,7 @@ class TeamTest extends TestCase
         $user = factory(App\User::class)->create();
         $teams = factory(App\Team::class, 5)->create();
 
+        // also checking that we can save a team to the user->team relationship.
         $user->team()->save($teams->first());
 
         $this->actingAs($user)

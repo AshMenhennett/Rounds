@@ -81,4 +81,7 @@ class RoundTest extends TestCase
         $this->assertResponseStatus(403);
     }
 
+    // test model assoc
+    // validation
+
 }

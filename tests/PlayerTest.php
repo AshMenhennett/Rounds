@@ -22,20 +22,27 @@ class PlayerTest extends TestCase
         $this->assertResponseStatus(200);
     }
 
-    // /** @test */
-    // public function user_sees_player_error_when_no_players_in_team()
-    // {
-    //     $user = factory(App\User::class)->create();
-    //     $team = factory(App\Team::class)->create();
+    /** @test */
+    public function user_can_add_player_in_team()
+    {
+        $user = factory(App\User::class)->create();
+        $team = factory(App\Team::class)->create();
 
-    //     $user->team()->save($team);
+        $user->team()->save($team);
 
-    //     $this->actingAs($user)
-    //         ->visit('/teams/' . $team->slug . '/players');
+        $this->actingAs($user)
+            ->call('POST', '/teams/' . $team->slug . '/players/new', [
+                'name' => 'Bob',
+                'temp' => 0
+            ]);
 
-    //     $this->see('There are currently no players for this team.')
-    //         ->see('There are currently no temporary players for this team.');
-    // }
+        $this->assertResponseStatus(200);
+
+        $this->seeInDatabase('players', [
+            'name' => 'Bob',
+            'temp' => 0,
+        ]);
+    }
 
     /** @test */
     public function user_can_edit_and_update_player_name_and_temp_in_team()
@@ -103,6 +110,7 @@ class PlayerTest extends TestCase
         $player = factory(App\Player::class)->create();
         $round = factory(App\Round::class)->create();
 
+        // testing all model associations
         $user->team()->save($team);
         $team->players()->attach($player);
         $player->rounds()->attach($round);
@@ -114,7 +122,12 @@ class PlayerTest extends TestCase
         $this->assertResponseStatus(400);
     }
 
-    // add player
+
+
+    // can associate models
+
+    // test validation
+
     // test authoirzation
 
 }
