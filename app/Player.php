@@ -13,17 +13,20 @@ class Player extends Model
      * @var array
      */
     protected $fillable = [
-        'team_id', 'round_id', 'name', 'temp', 'recent',
+        'id', 'name', 'temp', 'recent',
     ];
 
     /**
-     * A Player belongs to a Team.
+     * A Player belongs to many teams.
+     * Only reason for having BelongsToMany, rather than BelongsTo, is simply to utilize the pivot table- player_team.
+     * As per the business logic of this application, we will only allow 1 Player to belong to 1 Team.
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function team()
     {
-        return $this->belongsTo(Team::class);
+        return $this->belongsToMany(Team::class)
+                    ->withTimestamps();
     }
 
     /**
@@ -33,7 +36,9 @@ class Player extends Model
      */
     public function rounds()
     {
-        return $this->belongsToMany(Round::class);
+        return $this->belongsToMany(Round::class)
+                ->withPivot('best_player', 'second_best_player', 'quarters')
+                ->withTimestamps();
     }
 
 }

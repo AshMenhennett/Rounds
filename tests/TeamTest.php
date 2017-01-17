@@ -75,16 +75,104 @@ class TeamTest extends TestCase
         $user = factory(App\User::class)->create();
         $teams = factory(App\Team::class, 5)->create();
 
-        // also checking that we can save a team to the user->team relationship.
         $user->team()->save($teams->first());
 
         $this->actingAs($user)
-            ->call('post', '/teams/' . $teams->last()->slug);
+            ->call('POST', '/teams/' . $teams->last()->slug);
 
         $this->dontSeeInDatabase('teams', [
             'id' => $teams->last()->id,
             'user_id' => $user->id,
         ]);
+    }
+
+    /** @test */
+    public function user_can_click_on_manage_link_and_be_taken_to_team_management_view()
+    {
+        $user = factory(App\User::class)->create();
+        $team = factory(App\Team::class)->create();
+
+        $user->team()->save($team);
+
+        $this->actingAs($user)
+            ->visit('/home')
+            ->click('Manage');
+
+        $this->seePageIs('/teams/' . $team->slug . '/manage');
+    }
+
+    /** @test */
+    public function user_can_click_on_add_players_link_in_team_management_view_and_be_taken_to_correct_view()
+    {
+        $user = factory(App\User::class)->create();
+        $team = factory(App\Team::class)->create();
+
+        $user->team()->save($team);
+
+        $this->actingAs($user)
+            ->visit('/teams/' . $team->slug . '/manage')
+            ->click('Add Players');
+
+        $this->seePageIs('/teams/' . $team->slug . '/players');
+    }
+
+    /** @test */
+    public function user_can_click_on_fill_in_round_link_in_team_management_view_and_be_taken_to_correct_view()
+    {
+        $user = factory(App\User::class)->create();
+        $team = factory(App\Team::class)->create();
+
+        $user->team()->save($team);
+
+        $this->actingAs($user)
+            ->visit('/teams/' . $team->slug . '/manage')
+            ->click('Fill in Round');
+
+        $this->seePageIs('/teams/' . $team->slug . '/rounds');
+    }
+
+    /** @test */
+    public function user_can_press_leave_team_button_in_team_management_view_and_be_taken_to_correct_view_as_well_as_being_removed_from_team()
+    {
+        $user = factory(App\User::class)->create();
+        $team = factory(App\Team::class)->create();
+
+        $user->team()->save($team);
+
+        $this->actingAs($user)
+            ->visit('/teams/' . $team->slug . '/manage')
+            ->press('Leave Team');
+
+        $this->dontSeeInDatabase('teams', [
+            'user_id' => $user->id
+        ]);
+
+        $this->seePageIs('/teams');
+    }
+
+    /** @test */
+    public function user_can_see_stats_in_team_management_view()
+    {
+        $user = factory(App\User::class)->create();
+        $team = factory(App\Team::class)->create();
+        $players = factory(App\Player::class, 5)->create();
+        $rounds = factory(App\Round::class, 5)->create();
+
+        $user->team()->save($team);
+
+        $players->each(function ($player) use (&$team) {
+            $team->players()->attach($player);
+        });
+        $rounds->each(function ($round) use (&$team) {
+            $team->rounds()->attach($round);
+        });
+
+        $this->actingAs($user)
+            ->visit('/teams/' . $team->slug . '/manage')
+            ->see('Stats for ' . strtoupper($team->name))
+            ->see('Coach: <strong>' . $team->user->name() . '</strong>.')
+            ->see(strtoupper($team->name) . ' has played in <strong>' . count($team->rounds) . '</strong> rounds.')
+            ->see(strtoupper($team->name) . ' has <strong>' . count($team->players) . '</strong> players.');
     }
 
     /**
@@ -100,7 +188,7 @@ class TeamTest extends TestCase
         $user->team()->save($team);
 
         $this->actingAs($user)
-            ->call('GET', '/teams/' . $team->slug);
+            ->call('GET', '/teams/' . $team->slug . '/manage');
 
         $this->assertResponseStatus(200);
     }
@@ -114,7 +202,7 @@ class TeamTest extends TestCase
         $users->first()->team()->save($team);
 
         $this->actingAs($users->last())
-            ->call('GET', '/teams/' . $team->slug);
+            ->call('GET', '/teams/' . $team->slug . '/manage');
 
         $this->assertResponseStatus(403);
     }
@@ -132,7 +220,7 @@ class TeamTest extends TestCase
         $users->first()->team()->save($team);
 
         $this->actingAs($users->last())
-            ->call('GET', '/teams/' . $team->slug);
+            ->call('GET', '/teams/' . $team->slug . '/manage');
 
         $this->assertResponseStatus(200);
     }
@@ -146,7 +234,7 @@ class TeamTest extends TestCase
         $user->team()->save($teams->first());
 
         $this->actingAs($user)
-            ->call('delete', '/teams/' . $teams->first()->slug . '/coach');
+            ->call('DELETE', '/teams/' . $teams->first()->slug . '/coach');
 
         $this->dontSeeInDatabase('teams', [
             'user_id' => $user->id
@@ -187,6 +275,20 @@ class TeamTest extends TestCase
         $this->seeInDatabase('teams', [
             'user_id' => $users->first()->id,
         ]);
+    }
+
+    /** @test */
+    public function user_can_see_add_players_button_and_leave_group_button_for_their_team()
+    {
+        $user = factory(App\User::class)->create();
+        $team = factory(App\Team::class)->create();
+
+        $user->team()->save($team);
+
+        $this->actingAs($user)
+            ->visit('/teams/' . $team->slug . '/manage')
+            ->see('Leave Team')
+            ->see('Add Players');
     }
 
 }

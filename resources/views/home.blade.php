@@ -11,7 +11,7 @@
                     @if (count($team))
                         <div class="team">
                             <h4>{{ strtoupper($team->name) }}</h4>
-                            <a href="{{ route('team.show', $team) }}" class="btn btn-default">Manage</a>
+                            <a href="{{ route('team.manage', $team) }}" class="btn btn-default">Manage</a>
                         </div>
                     @else
                         <p class="text-center">You do not have a team.</p>

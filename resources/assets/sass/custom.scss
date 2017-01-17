@@ -4,13 +4,52 @@
     border: 1px solid #d3e0e9;
     text-align: center;
 }
-.player-listing {
-    margin-top: 20px;
-}
+
 .temp-players li {
    background: #efefef;
 }
 
+.selected-player {
+    background: rgba(39, 174, 96, 0.75) !important;
+    color: #fff;
+    border-color: #fefefe;
+
+    h4 > small {
+        color: #eee;
+    }
+}
+
+hr.round-input {
+    border: 0;
+    margin: 45px 0;
+    height: 1px;
+    clear: both;
+    background: #d3e0e9;
+}
+
+.btn-round-input {
+    margin-top: 45px;
+}
+
 a > span.glyphicon {
     font-size: 1.3em;
+}
+.v-spinner {
+    margin-top: 50px;
+}
+
+.help-block.danger {
+    color: #A9443A;
+}
+
+form.custom-horizontal {
+    .btn {
+        @media (min-width: 992px) {
+            margin-top: 20px;
+        }
+    }
+}
+
+.round-input .alert {
+    margin-bottom: 50px;
 }

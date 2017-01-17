@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Team;
 use Illuminate\Database\Eloquent\Model;
 
 class Round extends Model
@@ -13,7 +14,7 @@ class Round extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
+        'name', 'default_date',
     ];
 
     /**
@@ -23,17 +24,37 @@ class Round extends Model
      */
     public function teams()
     {
-        return $this->belongsToMany(Team::class);
+        return $this->belongsToMany(Team::class)
+                ->withPivot('date')
+                ->withTimestamps();
     }
 
     /**
-     * A Team has many players.
+     * A Team belongs to many players.
      *
-     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function players()
     {
-        return $this->hasMany(Player::class);
+        return $this->belongsToMany(Player::class)
+                ->withPivot('best_player', 'second_best_player', 'quarters')
+                ->withTimestamps();
+    }
+
+    /**
+     * Returns date of a Round, given a Team.
+     * If coach hasn't entered in a different date, returns 'default_date'
+     *
+     * @param  App\Team   $team
+     * @return Illuminate\Http\Response
+     */
+    public function date(Team $team)
+    {
+        if ( isset($this->teams()->find($team->id)->pivot->date) ) {
+            return $this->teams()->find($team->id)->pivot->date;
+        }
+
+        return $this->default_date;
     }
 
 }

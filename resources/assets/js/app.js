@@ -14,6 +14,7 @@ require('./bootstrap');
  */
 
 Vue.component('players', require('./components/TeamPlayersComponent.vue'));
+Vue.component('round-input', require('./components/RoundInputComponent.vue'));
 
 // Vue.component('moon-loader', require('vue-spinner/src/MoonLoader.vue'));
 // Vue.component('bounce-loader', require('vue-spinner/src/BounceLoader.vue'));

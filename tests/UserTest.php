@@ -26,7 +26,7 @@ class UserTest extends TestCase
             ->type('secret', 'password_confirmation')
             ->press('Register')
             ->seePageIs('/home')
-            ->see('Ashley')
+            ->see('Ashley Menhennett')
             ->see('Find a Team');
     }
 

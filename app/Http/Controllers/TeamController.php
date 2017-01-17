@@ -3,32 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Team;
-use App\Round;
 use Illuminate\Http\Request;
 
 class TeamController extends Controller
 {
 
     /**
-     * Displays all rounds for a Team to select.
-     *
-     * @param  App\Team   $team
-     * @return Illuminate\Http\Response
-     */
-    public function show(Team $team)
-    {
-        $this->authorize('show', $team);
-
-        $rounds = Round::all();
-
-        return view('team.show', [
-            'team' => $team,
-            'rounds' => $rounds,
-        ]);
-    }
-
-    /**
-     * Associates a Team with a User.
+     * Saves a Team to a User.
      *
      * @param  Illuminate\Http\Request $request
      * @return Illuminate\Http\Response
@@ -43,13 +24,13 @@ class TeamController extends Controller
             $user->team()->save($team);
         }
 
-        return redirect()->route('team.show', [
+        return redirect()->route('team.manage', [
             'team' => $team,
         ]);
     }
 
     /**
-     * Detaches a User from a Team.
+     * Removes a User (coach) from a Team.
      *
      * @param  Illuminate\Http\Request $request
      * @param  App\Team    $team
@@ -57,7 +38,7 @@ class TeamController extends Controller
      */
     public function detach(Request $request, Team $team)
     {
-        $this->authorize('detach', $team);
+        $this->authorize('detachUser', $team);
 
         $user = $request->user();
 

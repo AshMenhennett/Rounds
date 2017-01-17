@@ -14,6 +14,7 @@ class PlayerController extends Controller
 
     /**
      * Displays TeamPlayersComponent.vue.
+     * Displays list of current players with input to add more.
      *
      * @param  Illuminate\Http\Request $request
      * @return Illuminate\Http\Resposne
@@ -67,7 +68,7 @@ class PlayerController extends Controller
 
         $player = $team->players()->create([
             'name' => $request->name,
-            'temp' => $request->temp,
+            'temp' => $request->temp ? 1 : 0,
         ]);
 
         return response()->json($player, 200);

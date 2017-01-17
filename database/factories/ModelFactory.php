@@ -41,6 +41,7 @@ $factory->define(App\Round::class, function (Faker\Generator $faker) {
 
     return [
         'name' => $faker->word,
+        'default_date' => $faker->date(),
     ];
 });
 

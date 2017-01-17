@@ -37,23 +37,15 @@ class Team extends Model
     }
 
     /**
-     * A Team has many rounds.
-     *
-     * @return Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function teams()
-    {
-        return $this->hasMany(Round::class);
-    }
-
-    /**
      * A Team belongs to many rounds.
      *
      * @return Illuminate\Database\Eloquent\Relations\belongsToMany
      */
     public function rounds()
     {
-        return $this->belongsToMany(Round::class);
+        return $this->belongsToMany(Round::class)
+                ->withPivot('date')
+                ->withTimestamps();
     }
 
     /**
@@ -63,7 +55,18 @@ class Team extends Model
      */
     public function players()
     {
-        return $this->belongsToMany(Player::class);
+        return $this->belongsToMany(Player::class)
+                    ->withTimestamps();
+    }
+
+    /**
+     * Return an array of Player ids associated with a Team.
+     *
+     * @return array
+     */
+    public function playersById()
+    {
+        return $this->players->pluck('id')->all();
     }
 
 }

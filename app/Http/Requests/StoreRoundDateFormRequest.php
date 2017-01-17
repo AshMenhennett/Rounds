@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditPlayerFormRequest extends FormRequest
+class StoreRoundDateFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class EditPlayerFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255',
+            'date' => 'required|date'
         ];
     }
 }

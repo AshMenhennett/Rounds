@@ -21,14 +21,16 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
 
-    // teams
+    // view available teams
     Route::get('/teams', 'TeamsController@index')->name('teams.index');
-
+    // coach joins a team
     Route::post('/teams/{team}', 'TeamController@store')->name('team.store');
-    Route::get('/teams/{team}', 'TeamController@show')->name('team.show');
+    // removes a coach from a team
     Route::delete('/teams/{team}/coach', 'TeamController@detach')->name('team.user.detach');
+    // display add players and leave team links and stats
+    Route::get('/teams/{team}/manage', 'TeamManagementController@show')->name('team.manage');
 
-    // players
+    // add players etc
     Route::get('/teams/{team}/players', 'PlayerController@index')->name('players.index');
     Route::get('/teams/{team}/players/fetch', 'PlayerController@fetch')->name('players.fetch');
 
@@ -37,7 +39,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/teams/{team}/players/{player}', 'PlayerController@update')->name('player.update');
     Route::delete('/teams/{team}/players/{player}', 'PlayerController@delete')->name('player.delete');
 
-    // rounds
-    Route::get('/teams/{team}/rounds/{round}', 'RoundController@index')->name('round.index');
+    // view all available rounds
+    Route::get('/teams/{team}/rounds', 'RoundsController@index')->name('rounds.index');
+    // joins a team to a round + display round form to fill in etc
+    Route::get('/teams/{team}/rounds/{round}', 'RoundController@show')->name('round.show');
+    Route::post('/teams/{team}/rounds/{round}/date', 'RoundDateController@store')->name('round.store.date');
+    Route::post('/teams/{team}/rounds/{round}', 'RoundController@store')->name('round.store');
+
+    Route::get('/teams/{team}/rounds/{round}/fetch ', 'RoundController@fetchPlayers')->name('round.fetch');
 
 });

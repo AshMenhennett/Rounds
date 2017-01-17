@@ -1,36 +1,35 @@
 <template>
-    <div class="player-listing">
-
+    <div>
         <scale-loader :loading="loading" :color="loader_color"></scale-loader>
 
         <h4>Players</h4>
         <ul v-if="players.length && ! loading" class="list-group">
             <li v-for="player in players" class="list-group-item text-center">
-                <h4>{{ player.name }} </h4>
-                <p>Played <strong>{{ player.rounds }}</strong> rounds.</p>
-
-                <a :href="'/teams/' + team + '/players/' + player.id + '/edit'" class="text-info" v-show="player.rounds === 0"><span class="glyphicon glyphicon-pencil"></span></a>
-                &nbsp;
-                <a href="#" @click.prevent="deletePlayer(player.id)" class="text-danger" v-show="player.rounds === 0"><span class="glyphicon glyphicon-remove"></span></a>
+                <h4>{{ player.name }} <small>{{ player.rounds }} round(s).</small></h4>
+                <span v-show="player.rounds === 0">
+                    <a :href="'/teams/' + team + '/players/' + player.id + '/edit'" class="text-info"><span class="glyphicon glyphicon-pencil"></span></a>
+                    &nbsp;
+                    <a href="#" @click.prevent="deletePlayer(player.id)" class="text-danger"><span class="glyphicon glyphicon-remove"></span></a>
+                </span>
             </li>
         </ul>
         <div v-if="! players.length && ! loading">There are currently no players for this team.</div>
-        <br />
+
         <br />
 
         <h4>Temp Players</h4>
         <ul v-if="temp_players.length && ! loading" class="list-group temp-players">
             <li v-for="player in temp_players" class="list-group-item text-center">
-                <h4>{{ player.name }} </h4>
-                <p>Played <strong>{{ player.rounds }}</strong> rounds.</p>
-
-                <a :href="'/teams/' + team + '/players/' + player.id + '/edit'" v-show="player.rounds === 0"><span class="glyphicon glyphicon-pencil"></span></a>
-                &nbsp;
-                <a href="#" @click.prevent="deletePlayer(player.id)" class="text-danger" v-show="player.rounds === 0"><span class="glyphicon glyphicon-remove"></span></a>
+                <h4>{{ player.name }} <small>{{ player.rounds }} round(s).</small></h4>
+                <span v-show="player.rounds === 0">
+                    <a :href="'/teams/' + team + '/players/' + player.id + '/edit'" class="text-info"><span class="glyphicon glyphicon-pencil"></span></a>
+                    &nbsp;
+                    <a href="#" @click.prevent="deletePlayer(player.id)" class="text-danger"><span class="glyphicon glyphicon-remove"></span></a>
+                </span>
             </li>
         </ul>
         <div v-if="! temp_players.length && ! loading">There are currently no temporary players for this team.</div>
-        <br />
+
         <br />
 
         <h4>Add a Player</h4>
@@ -70,6 +69,7 @@
                 name: '',
                 // new player is temporary?
                 temp: false,
+                // error adding new Player
                 adding_error: false,
                 loader_color: '#0d0394'
             }
