@@ -4,6 +4,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+            <a href="{{ route('rounds.index', $team) }}">&laquo; Rounds</a>
+            <br />
             <div class="panel panel-default">
                 <div class="panel-heading">Pick a date for Round {{ $round->name }}</div>
 

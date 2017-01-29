@@ -56,4 +56,14 @@ class User extends Authenticatable
     {
         return $this->role === 'admin';
     }
+
+    /**
+     * Returns 0 if the User has no Team.
+     *
+     * @return boolean
+     */
+    public function hasTeam()
+    {
+        return count($this->team);
+    }
 }

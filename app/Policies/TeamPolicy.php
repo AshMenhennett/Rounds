@@ -124,7 +124,7 @@ class TeamPolicy
      * @param  App\Team   $team
      * @return boolean
      */
-    public function deletePlayer(User $user, Team $team)
+    public function destroyPlayer(User $user, Team $team)
     {
         return  $user->id === $team->user_id || $user->isAdmin();
     }

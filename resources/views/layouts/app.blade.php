@@ -45,7 +45,11 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        @if (Auth::check() && Auth::user()->hasTeam())
+                            <li><a href="{{ route('team.manage', Auth::user()->team()->first()) }}">My Team</a></li>
+                        @else
+                            <li><a href="{{ route('home') }}">Home</a></li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -61,6 +65,11 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ route('team.manage', Auth::user()->team()->first()) }}">Manage Team</a></li>
+                                    <li><a href="{{ route('rounds.index', Auth::user()->team()->first()) }}">Fill in Rounds</a></li>
+                                    <li><a href="{{ route('players.index', Auth::user()->team()->first()) }}">Add Players</a></li>
+                                    <li><a href="{{ route('faq') }}">FAQ</a></li>
+
                                     <li>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
@@ -81,6 +90,7 @@
         </nav>
 
         @yield('content')
+        @include('includes.partials._footer')
     </div>
 
     <!-- Scripts -->

@@ -139,6 +139,10 @@ class TeamTest extends TestCase
 
         $user->team()->save($team);
 
+        $this->seeInDatabase('teams', [
+            'user_id' => $user->id
+        ]);
+
         $this->actingAs($user)
             ->visit('/teams/' . $team->slug . '/manage')
             ->press('Leave Team');
@@ -146,8 +150,6 @@ class TeamTest extends TestCase
         $this->dontSeeInDatabase('teams', [
             'user_id' => $user->id
         ]);
-
-        $this->seePageIs('/teams');
     }
 
     /** @test */
@@ -232,6 +234,10 @@ class TeamTest extends TestCase
         $teams = factory(App\Team::class, 5)->create();
 
         $user->team()->save($teams->first());
+
+        $this->seeInDatabase('teams', [
+            'user_id' => $user->id
+        ]);
 
         $this->actingAs($user)
             ->call('DELETE', '/teams/' . $teams->first()->slug . '/coach');

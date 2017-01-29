@@ -13,8 +13,30 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('players', require('./components/TeamPlayersComponent.vue'));
-Vue.component('round-input', require('./components/RoundInputComponent.vue'));
+
+Vue.component('round-input', require('./components/Coach/RoundInputComponent.vue'));
+
+
+
+// admin dashboard
+Vue.component('admin-dashboard', require('./components/Admin/AdminDashboardComponent.vue'));
+
+// stats
+Vue.component('admin-stats', require('./components/Admin/Stats/AdminStatsComponent.vue'));
+
+// houses all admin player components
+Vue.component('admin-players-master', require('./components/Admin/Players/AdminPlayerMasterComponent.vue'));
+    // imports players
+    Vue.component('admin-import-players', require('./components/Admin/Players/AdminImportPlayersComponent.vue'));
+    // creates a player
+    Vue.component('admin-create-player', require('./components/Admin/Players/AdminCreatePlayerComponent.vue'));
+    // displays all players with pagination
+    Vue.component('admin-display-players', require('./components/Admin/Players/AdminDisplayPlayersComponent.vue'));
+
+// generic
+Vue.component('bootstrap-alert', require('./components/Generic/BootstrapAlertComponent.vue'));
+Vue.component('player', require('./components/Generic/PlayerComponent.vue'));
+Vue.component('pages', require('./components/Generic/PagesComponent.vue'));
 
 // Vue.component('moon-loader', require('vue-spinner/src/MoonLoader.vue'));
 // Vue.component('bounce-loader', require('vue-spinner/src/BounceLoader.vue'));

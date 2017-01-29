@@ -10,7 +10,7 @@
                 <div class="panel-heading">Players for {{ strtoupper($team->name) }}</div>
 
                 <div class="panel-body">
-                    <players team="{{ $team->slug }}"></players>
+                    <team-players team="{{ $team->slug }}"></team-players>
                 </div>
             </div>
         </div>

@@ -21,7 +21,6 @@
                                 </div>
                             @endif
                         </div>
-                        <br />
                         <div class="form-group checkbox pull-right">
                             <label for="temp">
                                 <input type="checkbox" name="temp" id="temp" style="margin-top:4px; padding:8px;" {{ ($player->temp ? 'checked' : '') }}> Temporary Player?
@@ -31,7 +30,9 @@
                         <br />
 
                         {{ csrf_field() }}
-                        <button type="submit" class="btn btn-default pull-right">Update</button>
+                        {{  method_field('PUT') }}
+                        <button type="submit" class="btn btn-primary pull-right btn-ok-cancel-relation">Update</button>
+                        <a href="{{ route('players.index', $team) }}" class="btn btn-default pull-right btn-ok-cancel-relation">Cancel</a>
                     </form>
                 </div>
             </div>

@@ -7688,6 +7688,10 @@ button.close {
   }
 }
 
+body {
+  height: 100vh;
+}
+
 .team {
   padding: 40px;
   margin: 10px;
@@ -7696,6 +7700,10 @@ button.close {
 }
 
 .temp-players li {
+  background: #efefef;
+}
+
+li.temp-player {
   background: #efefef;
 }
 
@@ -7709,16 +7717,12 @@ button.close {
   color: #eee;
 }
 
-hr.round-input {
+hr {
   border: 0;
   margin: 45px 0;
   height: 1px;
   clear: both;
   background: #d3e0e9;
-}
-
-.btn-round-input {
-  margin-top: 45px;
 }
 
 a > span.glyphicon {
@@ -7739,8 +7743,69 @@ a > span.glyphicon {
   }
 }
 
-.round-input .alert {
-  margin-bottom: 50px;
+.footer-container {
+  border: none;
+  border-top: 1px solid #d3e0e9;
+  border-bottom: 1px solid #d3e0e9;
+  padding: 20px;
+  background: #fff;
+}
+
+.footer-container footer {
+  text-align: center;
+}
+
+.footer-container footer a {
+  color: #636b6f !important;
+}
+
+.btn-ok-cancel-relation {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.jumbotron {
+  margin-bottom: 0px;
+  padding-top: 225px;
+  background: #2b5876;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #2b5876, #4e4376);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(top, #2b5876, #4e4376);
+  background: linear-gradient(to bottom, #2b5876, #4e4376);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #fff;
+}
+
+.jumbotron .container-fluid {
+  max-width: 1200px;
+  height: 100vh;
+  margin-right: 0 auto;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .pull-right-mobile {
+    float: right;
+  }
+}
+
+.alert {
+  margin-bottom: 10px;
+}
+
+.col-no-pad.col-md-6 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.component {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.component nav.pagination-nav {
+  text-align: center;
 }
 
 /*# sourceMappingURL=app.css.map */
