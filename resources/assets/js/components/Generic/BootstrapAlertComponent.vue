@@ -1,6 +1,7 @@
 <template>
     <div v-if="expression" class="alert" :class="'alert-' + alertType" :style="styles">
-        <p><strong>{{ messageBold }}</strong> <slot></slot></p>
+        <p><strong>{{ messageBold }}</strong> <slot name="default"></slot></p>
+        <slot name="extra"></slot>
     </div>
 </template>
 

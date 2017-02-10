@@ -33,7 +33,7 @@
         },
         props: {
             pagination: {},
-            for: {
+            isFor: {
                 type: String,
                 default: 'default'
             }
@@ -44,7 +44,7 @@
                     return;
                 }
 
-                this.$emit(this.for + 'ChangedPage', page);
+                this.$emit(this.isFor + 'ChangedPage', page);
             }
         }
     }

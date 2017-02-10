@@ -15,32 +15,26 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        /**
+         * Validators
+         */
         Validator::extend('team_exists', function($attributes, $value, $parameters) {
+            // checks if a team exists
             return Team::find($value);
         });
 
-        // expects $value to be an array of objects. Objects will have a team and name property.
-        // Validator::extend('players_team_exists', function($attributes, $value, $parameters) {
-        //     $players = collect($value);
-        //     $players->each(function ($player) {
-        //        if (! Team::find($player['team'])) {
-        //             return false;
-        //        }
-        //     });
+        Validator::extend('unique_slug', function($attributes, $value, $parameters) {
+            // checks if slug'ified version of the team name is unique, compared to existing team slugs
+            return ! Team::where('slug', str_slug($value, '-'))->first();
+        });
 
-        //     return true;
-        // });
-        //Validator::extend('has_valid_player_data', function($attributes, $value, $parameters) {
-            // $has_invalid_player_data = false;
-
-            // $players = collect($value);
-            // $players->each(function ($player) use ($has_invalid_player_data) {
-            //     if ($player['name'] == '' || $player['name'] == null) {
-            //         $has_invalid_player_data = true;
-            //     }
-            // });
-            // return $has_invalid_player_data;
-        //});
+        /**
+         * Model Observers
+         */
+        Team::creating(function ($team) {
+            $team->slug = str_slug($team->name, '-');
+            return $team;
+        });
     }
 
     /**

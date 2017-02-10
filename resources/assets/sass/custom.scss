@@ -1,14 +1,18 @@
+/* Brand Colours */
 $branding-blue : #0d0394;
 $branding-white : #fff;
 $branding-light-grey : #f1f1f1;
 $branding-dark-grey : #808080;
 
+/* Bootstrap Navbar Border Color*/
 $nav-border-color: #d3e0e9;
 
+/* Global */
 body {
     height: 100vh;
 }
 
+/* Team Styling */
 .team {
     padding: 40px;
     margin: 10px;
@@ -24,7 +28,6 @@ li.temp-player {
    background: #efefef;
 }
 
-
 .selected-player {
     background: rgba(39, 174, 96, 0.75) !important;
     color: #fff;
@@ -35,6 +38,7 @@ li.temp-player {
     }
 }
 
+/* General */
 hr {
     border: 0;
     margin: 45px 0;
@@ -43,32 +47,18 @@ hr {
     background: #d3e0e9;
 }
 
-
 a > span.glyphicon {
-    font-size: 1.3em;
-}
-.v-spinner {
-    margin-top: 50px;
+    font-size: 1.15em;
 }
 
-.help-block.danger {
-    color: #A9443A;
-}
-
-form.custom-horizontal {
-    .btn {
-        @media (min-width: 992px) {
-            margin-top: 20px;
-        }
-    }
-}
-
+/* Footer */
 .footer-container {
     border: none;
     border-top: 1px solid $nav-border-color;
     border-bottom: 1px solid $nav-border-color;
     padding: 20px;
     background: #fff;
+
     footer {
         text-align: center;
         a {
@@ -77,11 +67,7 @@ form.custom-horizontal {
     }
 }
 
-.btn-ok-cancel-relation {
-    margin-left: 4px;
-    margin-right: 4px;
-}
-
+/* Welcome Page */
 .jumbotron{
     margin-bottom: 0px;
     padding-top: 225px;
@@ -93,9 +79,43 @@ form.custom-horizontal {
     .container-fluid {
         max-width: 1200px;
         height: 100vh;
-        margin-right: 0 auto;
         text-align: center;
     }
+}
+
+/* Browser Alerts */
+.upgrade-browser {
+    width: 100%;
+    height: 100%;
+    padding-top: 12px;
+    text-align: center;
+    color: #fff;
+
+    &.danger {
+        display: none;
+        font-size: 1.3em;
+        background: #9b59b6;
+
+        a {
+            color: #dedede;
+        }
+    }
+
+    &.warning {
+        border-bottom: 1px solid $nav-border-color;
+        color: #636b6f;
+        background: #f5f8fa;
+    }
+
+}
+
+/* Global Helpers */
+#flash-message {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    z-index: 999;
+    padding: 20px;
 }
 
 .pull-right-mobile {
@@ -104,15 +124,37 @@ form.custom-horizontal {
     }
 }
 
-.alert {
-    margin-bottom: 10px;
-}
-
 .col-no-pad.col-md-6 {
     padding-left: 0;
     padding-right: 0;
 }
 
+form.custom-horizontal {
+    .btn {
+        @media (min-width: 992px) {
+            margin-top: 20px;
+        }
+    }
+}
+
+.btn-ok-cancel-relation {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.v-spinner {
+    margin-top: 50px;
+}
+
+.help-block.danger {
+    color: #A9443A;
+}
+
+.alert {
+    margin-bottom: 10px;
+}
+
+/* Components */
 .component {
     margin-top: 25px;
     margin-bottom: 25px;

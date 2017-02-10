@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Coach;
 use App\Team;
 use App\Round;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreRoundDateFormRequest;
+use App\Http\Requests\Coach\StoreRoundDateFormRequest;
 
 class RoundDateController extends \App\Http\Controllers\Controller
 {
@@ -13,7 +13,7 @@ class RoundDateController extends \App\Http\Controllers\Controller
     /**
      * Sets the date for a Round and Team relation.
      *
-     * @param  App\Http\Requests\StoreRoundDateFormRequest $request
+     * @param  App\Http\Requests\Coach\StoreRoundDateFormRequest $request
      * @param  App\Team                      $team
      * @param  App\Round                     $round
      * @return Illuminate\Http\Response

@@ -5,13 +5,13 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <a href="{{ route('admin.home') }}">&laquo; Players</a>
+            <a href="{{ route('admin.home') }}">&laquo; Dashboard</a>
             <br />
             <div class="panel panel-default">
                 <div class="panel-heading">Edit player for {{ strtoupper($player->team->first()->name) }}</div>
 
                 <div class="panel-body">
-                    <form action="{{ route('admin.player.update', $player) }}" method="post">
+                    <form action="{{ route('admin.player.update', [$player, 'v=' . Request::get('v')]) }}" method="post">
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="label-control">Name</label>
                             <input type="text" name="name" id="name" class="form-control" value="{{ (old('name') ? old('name') : $player->name ) }}" required>

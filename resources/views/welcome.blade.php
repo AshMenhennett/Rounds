@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link href="{{ url('/favicon.png') }}" rel="icon" type="image/png">
+        <link href="{{ url('/img/favicon.png') }}" rel="icon" type="image/png">
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -21,9 +21,19 @@
                 'csrfToken' => csrf_token(),
             ]); ?>
         </script>
+
+        <!--[if lt IE 9]>
+            <style type="text/css">
+                .upgrade-browser.danger { display: block; }
+            </style>
+            <script src="https://raw.githubusercontent.com/scottjehl/Respond/master/src/matchmedia.polyfill.js" type="text/javascript"></script>
+            <script src="https://raw.githubusercontent.com/scottjehl/Respond/master/src/matchmedia.addListener.js" type="text/javascript"></script>
+            <script src="https://raw.githubusercontent.com/scottjehl/Respond/master/src/respond.js" type="text/javascript"></script>
+        <![endif]-->
     </head>
     <body>
         <div id="app">
+            @include('includes.partials._upgrade_browser_danger')
             <div class="jumbotron">
                 <div class="container-fluid">
                     <h1>{{ config('app.name', 'Laravel') }}</h1>

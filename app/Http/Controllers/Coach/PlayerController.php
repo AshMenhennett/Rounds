@@ -5,21 +5,22 @@ namespace App\Http\Controllers\Coach;
 use App\Team;
 use App\Player;
 use Illuminate\Http\Request;
-use App\Http\Requests\EditPlayerFormRequest;
-use App\Http\Requests\CreatePlayerFormRequest;
+use App\Http\Requests\Generic\UpdatePlayerFormRequest;
+use App\Http\Requests\Coach\StorePlayerFormRequest;
 
 class PlayerController extends \App\Http\Controllers\Controller
 {
 
     /**
      * Creates a Player.
-     * Utilized by TeamPlayersComponent.vue Vue component.
      *
-     * @param  App\Http\Requests\CreatePlayerFormRequest $request
+     * Utilized by Coach/TeamPlayersComponent.vue.
+     *
+     * @param  App\Http\Requests\Coach\StorePlayerFormRequest $request
      * @param  App\Team    $team
      * @return Illuminate\Http\Response
      */
-    public function store(CreatePlayerFormRequest $request, Team $team)
+    public function store(StorePlayerFormRequest $request, Team $team)
     {
         $this->authorize('storePlayer', $team);
 
@@ -51,12 +52,12 @@ class PlayerController extends \App\Http\Controllers\Controller
     /**
      * Updates a player's name and temp boolean.
      *
-     * @param  App\Http\Requests\EditPlayerFormRequest $request
+     * @param  App\Http\Requests\Generic\UpdatePlayerFormRequest $request
      * @param  App\Team    $team
      * @param  App\Player  $player
      * @return Illuminate\Http\Request
      */
-    public function update(EditPlayerFormRequest $request, Team $team, Player $player)
+    public function update(UpdatePlayerFormRequest $request, Team $team, Player $player)
     {
         $this->authorize('updatePlayer', $team);
 
@@ -72,7 +73,8 @@ class PlayerController extends \App\Http\Controllers\Controller
 
     /**
      * Deletes a Player, if they have not played any rounds.
-     * Utilized by TeamPlayersComponent.vue Vue component.
+     *
+     * Utilized by Coach/TeamPlayersComponent.vue
      *
      * @param  App\Team   $team
      * @param  App\Player $player

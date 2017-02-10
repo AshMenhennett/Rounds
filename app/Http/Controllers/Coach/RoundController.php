@@ -14,7 +14,8 @@ class RoundController extends \App\Http\Controllers\Controller
 
     /**
      * Displays a view to fill in data for a Round inc date.
-     * Displays RoundInputComponent.vue Vue component.
+     *
+     * Displays Coach/RoundInputComponent.vue
      *
      * @param  App\Team   $team
      * @param  App\Round  $round
@@ -37,7 +38,8 @@ class RoundController extends \App\Http\Controllers\Controller
 
     /**
      * Returns players, how many rounds they have played in and data associated with a Round.
-     * Utilized by RoundInputComponent.vue Vue component.
+     *
+     * Utilized by Coach/RoundInputComponent.vue
      *
      * @param  Illuminate\Http\Request $request
      * @param  App\Team    $team

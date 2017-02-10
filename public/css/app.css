@@ -7688,10 +7688,14 @@ button.close {
   }
 }
 
+/* Brand Colours */
+/* Bootstrap Navbar Border Color*/
+/* Global */
 body {
   height: 100vh;
 }
 
+/* Team Styling */
 .team {
   padding: 40px;
   margin: 10px;
@@ -7717,6 +7721,7 @@ li.temp-player {
   color: #eee;
 }
 
+/* General */
 hr {
   border: 0;
   margin: 45px 0;
@@ -7726,23 +7731,10 @@ hr {
 }
 
 a > span.glyphicon {
-  font-size: 1.3em;
+  font-size: 1.15em;
 }
 
-.v-spinner {
-  margin-top: 50px;
-}
-
-.help-block.danger {
-  color: #A9443A;
-}
-
-@media (min-width: 992px) {
-  form.custom-horizontal .btn {
-    margin-top: 20px;
-  }
-}
-
+/* Footer */
 .footer-container {
   border: none;
   border-top: 1px solid #d3e0e9;
@@ -7759,11 +7751,7 @@ a > span.glyphicon {
   color: #636b6f !important;
 }
 
-.btn-ok-cancel-relation {
-  margin-left: 4px;
-  margin-right: 4px;
-}
-
+/* Welcome Page */
 .jumbotron {
   margin-bottom: 0px;
   padding-top: 225px;
@@ -7780,8 +7768,41 @@ a > span.glyphicon {
 .jumbotron .container-fluid {
   max-width: 1200px;
   height: 100vh;
-  margin-right: 0 auto;
   text-align: center;
+}
+
+/* Browser Alerts */
+.upgrade-browser {
+  width: 100%;
+  height: 100%;
+  padding-top: 12px;
+  text-align: center;
+  color: #fff;
+}
+
+.upgrade-browser.danger {
+  display: none;
+  font-size: 1.3em;
+  background: #9b59b6;
+}
+
+.upgrade-browser.danger a {
+  color: #dedede;
+}
+
+.upgrade-browser.warning {
+  border-bottom: 1px solid #d3e0e9;
+  color: #636b6f;
+  background: #f5f8fa;
+}
+
+/* Global Helpers */
+#flash-message {
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+  z-index: 999;
+  padding: 20px;
 }
 
 @media (max-width: 767px) {
@@ -7790,15 +7811,35 @@ a > span.glyphicon {
   }
 }
 
-.alert {
-  margin-bottom: 10px;
-}
-
 .col-no-pad.col-md-6 {
   padding-left: 0;
   padding-right: 0;
 }
 
+@media (min-width: 992px) {
+  form.custom-horizontal .btn {
+    margin-top: 20px;
+  }
+}
+
+.btn-ok-cancel-relation {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.v-spinner {
+  margin-top: 50px;
+}
+
+.help-block.danger {
+  color: #A9443A;
+}
+
+.alert {
+  margin-bottom: 10px;
+}
+
+/* Components */
 .component {
   margin-top: 25px;
   margin-bottom: 25px;

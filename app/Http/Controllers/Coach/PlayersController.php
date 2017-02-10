@@ -10,8 +10,9 @@ class PlayersController extends \App\Http\Controllers\Controller
 {
 
     /**
-     * Displays TeamPlayersComponent.vue.
      * Displays list of current players with input to add more.
+     *
+     * Displays Coach/TeamPlayersComponent.vue
      *
      * @param  Illuminate\Http\Request $request
      * @return Illuminate\Http\Resposne
@@ -27,7 +28,8 @@ class PlayersController extends \App\Http\Controllers\Controller
 
     /**
      * Returns players and how many rounds they have played in.
-     * Utilized by TeamPlayersComponent.vue Vue component.
+     *
+     * Utilized by Coach/TeamPlayersComponent.vue
      *
      * @param  Illuminate\Http\Request $request
      * @param  App\Team    $team

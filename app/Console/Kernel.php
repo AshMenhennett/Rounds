@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\ClearImportedExcelFiles::class,
+        Commands\UpdateUserRole::class,
     ];
 
     /**

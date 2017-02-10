@@ -10,6 +10,7 @@ class HomeController extends \App\Http\Controllers\Controller
 
     /**
      * Displays home view.
+     *
      * @param  Illuminate\Http\Request $request
      * @return Illuminate\Http\Response
      */

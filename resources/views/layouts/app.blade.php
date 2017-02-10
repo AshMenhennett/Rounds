@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="{{ url('/favicon.png') }}" rel="icon" type="image/png">
+    <link href="{{ url('/img/favicon.png') }}" rel="icon" type="image/png">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -21,9 +21,21 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+    <!--[if lt IE 9]>
+        <style type="text/css">
+            .upgrade-browser.danger { display: block; }
+        </style>
+        <script src="https://raw.githubusercontent.com/scottjehl/Respond/master/src/matchmedia.polyfill.js" type="text/javascript"></script>
+        <script src="https://raw.githubusercontent.com/scottjehl/Respond/master/src/matchmedia.addListener.js" type="text/javascript"></script>
+        <script src="https://raw.githubusercontent.com/scottjehl/Respond/master/src/respond.js" type="text/javascript"></script>
+    <![endif]-->
 </head>
 <body>
     <div id="app">
+        @include('includes.partials._upgrade_browser_danger')
+        @if (Session::get('success_message'))
+            @include('includes.partials._flash_success_message')
+        @endif
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
@@ -45,12 +57,21 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        @if (Auth::check() && Auth::user()->hasTeam())
-                            <li><a href="{{ route('team.manage', Auth::user()->team()->first()) }}">My Team</a></li>
-                        @else
-                            <li><a href="{{ route('home') }}">Home</a></li>
+                        @if (Auth::check())
+                            @if (Auth::user()->isAdmin())
+                                <li><a href="{{ route('admin.home') }}">Admin Dashboard</a></li>
+                            @else
+                                @if (Auth::user()->hasTeam())
+                                    <li><a href="{{ route('team.manage', Auth::user()->team()->first()) }}">My Team</a></li>
+                                @else
+                                    <li><a href="{{ route('home') }}">Home</a></li>
+                                @endif
+                            @endif
                         @endif
                     </ul>
+
+
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
@@ -65,10 +86,25 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ route('team.manage', Auth::user()->team()->first()) }}">Manage Team</a></li>
-                                    <li><a href="{{ route('rounds.index', Auth::user()->team()->first()) }}">Fill in Rounds</a></li>
-                                    <li><a href="{{ route('players.index', Auth::user()->team()->first()) }}">Add Players</a></li>
+                                    @if (Auth::user()->isAdmin())
+                                        <li class="dropdown-header">Admin</li>
+                                        <li><a href="{{ route('admin.home') }}">Dashboard</a></li>
+                                        <li role="separator" class="divider"></li>
+
+                                        <li class="dropdown-header">Coach</li>
+                                    @endif
+
+                                    @if (Auth::user()->hasTeam())
+                                        <li><a href="{{ route('team.manage', Auth::user()->team()->first()) }}">Manage Team</a></li>
+                                        <li><a href="{{ route('rounds.index', Auth::user()->team()->first()) }}">Fill in Rounds</a></li>
+                                        <li><a href="{{ route('players.index', Auth::user()->team()->first()) }}">Add Players</a></li>
+                                    @else
+                                        <li><a href="{{ route('teams.index') }}">Join a Team</a></li>
+                                    @endif
+
                                     <li><a href="{{ route('faq') }}">FAQ</a></li>
+
+                                    <li role="separator" class="divider"></li>
 
                                     <li>
                                         <a href="{{ url('/logout') }}"
