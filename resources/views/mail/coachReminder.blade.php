@@ -97,8 +97,11 @@ $style = [
                                         <table style="{{ $style['body_action'] }}" align="center" width="100%" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td align="center">
+                                                    <?php
+                                                        $actionColor = 'button--blue';
+                                                    ?>
                                                     <a href="{{ env('APP_URL') . '/teams/' . $team->slug . '/rounds/' . $round->id}}"
-                                                        style="{{ $fontFamily }} {{ $style['button'] }} button--blue"
+                                                        style="{{ $fontFamily }} {{ $style['button'] }} {{ $style[$actionColor] }}"
                                                         class="button"
                                                         target="_blank">
                                                         Fill in Round {{ $round->name }}
