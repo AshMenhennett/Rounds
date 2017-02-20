@@ -96,16 +96,11 @@ $style = [
                                         </h1>
 
                                         <!-- Intro -->
-                                        {{-- @foreach ($introLines as $line)
+                                        @foreach ($introLines as $line)
                                             <p style="{{ $style['paragraph'] }}">
                                                 {{ $line }}
                                             </p>
-                                        @endforeach --}}
-
-                                        <p style="{{ $style['paragraph'] }}">
-                                            You have not filled in Round {{ $round->name }}'s data for {{ strtoupper($team->name) }} yet.
-                                            Please click the button below to fill in the data.
-                                        </p>
+                                        @endforeach
 
                                         <!-- Action Button -->
                                         @if (isset($actionText))
@@ -125,11 +120,11 @@ $style = [
                                                             }
                                                         ?>
 
-                                                        <a href="{{ env('APP_URL') . '/teams/' . $team->slug . '/rounds/' . $round->id}}"
+                                                        <a href="{{ $actionUrl }}"
                                                             style="{{ $fontFamily }} {{ $style['button'] }} {{ $style[$actionColor] }}"
                                                             class="button"
                                                             target="_blank">
-                                                            Fill in Round {{ $round->name }}
+                                                            {{ $actionText }}
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -137,15 +132,11 @@ $style = [
                                         @endif
 
                                         <!-- Outro -->
-                                        {{-- @foreach ($outroLines as $line)
+                                        @foreach ($outroLines as $line)
                                             <p style="{{ $style['paragraph'] }}">
                                                 {{ $line }}
                                             </p>
-                                        @endforeach --}}
-
-                                        <p style="{{ $style['paragraph'] }}">
-                                            Thank you for using our services :)
-                                        </p>
+                                        @endforeach
 
                                         <!-- Salutation -->
                                         <p style="{{ $style['paragraph'] }}">
@@ -158,13 +149,13 @@ $style = [
                                                 <tr>
                                                     <td style="{{ $fontFamily }}">
                                                         <p style="{{ $style['paragraph-sub'] }}">
-                                                            If you’re having trouble clicking the above button,
+                                                            If you’re having trouble clicking the "{{ $actionText }}" button,
                                                             copy and paste the URL below into your web browser:
                                                         </p>
 
                                                         <p style="{{ $style['paragraph-sub'] }}">
-                                                            <a style="{{ $style['anchor'] }}" href="{{ env('APP_URL') . '/teams/' . $team->slug . '/rounds/' . $round->id}}" target="_blank">
-                                                                {{ env('APP_URL') . '/teams/' . $team->slug . '/rounds/' . $round->id}}
+                                                            <a style="{{ $style['anchor'] }}" href="{{ $actionUrl }}" target="_blank">
+                                                                {{ $actionUrl }}
                                                             </a>
                                                         </p>
                                                     </td>
