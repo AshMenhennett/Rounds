@@ -84,23 +84,8 @@ $style = [
                                     <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">
                                         <!-- Greeting -->
                                         <h1 style="{{ $style['header-1'] }}">
-                                            @if (! empty($greeting))
-                                                {{ $greeting }}
-                                            @else
-                                                @if ($level == 'error')
-                                                    Whoops!
-                                                @else
-                                                    Hello!
-                                                @endif
-                                            @endif
+                                            Hello!
                                         </h1>
-
-                                        <!-- Intro -->
-                                        {{-- @foreach ($introLines as $line)
-                                            <p style="{{ $style['paragraph'] }}">
-                                                {{ $line }}
-                                            </p>
-                                        @endforeach --}}
 
                                         <p style="{{ $style['paragraph'] }}">
                                             You have not filled in Round {{ $round->name }}'s data for {{ strtoupper($team->name) }} yet.
@@ -108,40 +93,19 @@ $style = [
                                         </p>
 
                                         <!-- Action Button -->
-                                        @if (isset($actionText))
-                                            <table style="{{ $style['body_action'] }}" align="center" width="100%" cellpadding="0" cellspacing="0">
-                                                <tr>
-                                                    <td align="center">
-                                                        <?php
-                                                            switch ($level) {
-                                                                case 'success':
-                                                                    $actionColor = 'button--green';
-                                                                    break;
-                                                                case 'error':
-                                                                    $actionColor = 'button--red';
-                                                                    break;
-                                                                default:
-                                                                    $actionColor = 'button--blue';
-                                                            }
-                                                        ?>
+                                        <table style="{{ $style['body_action'] }}" align="center" width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td align="center">
+                                                    <a href="{{ env('APP_URL') . '/teams/' . $team->slug . '/rounds/' . $round->id}}"
+                                                        style="{{ $fontFamily }} {{ $style['button'] }} button--blue"
+                                                        class="button"
+                                                        target="_blank">
+                                                        Fill in Round {{ $round->name }}
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
 
-                                                        <a href="{{ env('APP_URL') . '/teams/' . $team->slug . '/rounds/' . $round->id}}"
-                                                            style="{{ $fontFamily }} {{ $style['button'] }} {{ $style[$actionColor] }}"
-                                                            class="button"
-                                                            target="_blank">
-                                                            Fill in Round {{ $round->name }}
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        @endif
-
-                                        <!-- Outro -->
-                                        {{-- @foreach ($outroLines as $line)
-                                            <p style="{{ $style['paragraph'] }}">
-                                                {{ $line }}
-                                            </p>
-                                        @endforeach --}}
 
                                         <p style="{{ $style['paragraph'] }}">
                                             Thank you for using our services :)
@@ -152,25 +116,22 @@ $style = [
                                             Regards,<br>{{ config('app.name') }}
                                         </p>
 
-                                        <!-- Sub Copy -->
-                                        @if (isset($actionText))
-                                            <table style="{{ $style['body_sub'] }}">
-                                                <tr>
-                                                    <td style="{{ $fontFamily }}">
-                                                        <p style="{{ $style['paragraph-sub'] }}">
-                                                            If you’re having trouble clicking the above button,
-                                                            copy and paste the URL below into your web browser:
-                                                        </p>
+                                        <table style="{{ $style['body_sub'] }}">
+                                            <tr>
+                                                <td style="{{ $fontFamily }}">
+                                                    <p style="{{ $style['paragraph-sub'] }}">
+                                                        If you’re having trouble clicking the above button,
+                                                        copy and paste the URL below into your web browser:
+                                                    </p>
 
-                                                        <p style="{{ $style['paragraph-sub'] }}">
-                                                            <a style="{{ $style['anchor'] }}" href="{{ env('APP_URL') . '/teams/' . $team->slug . '/rounds/' . $round->id}}" target="_blank">
-                                                                {{ env('APP_URL') . '/teams/' . $team->slug . '/rounds/' . $round->id}}
-                                                            </a>
-                                                        </p>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        @endif
+                                                    <p style="{{ $style['paragraph-sub'] }}">
+                                                        <a style="{{ $style['anchor'] }}" href="{{ env('APP_URL') . '/teams/' . $team->slug . '/rounds/' . $round->id}}" target="_blank">
+                                                            {{ env('APP_URL') . '/teams/' . $team->slug . '/rounds/' . $round->id}}
+                                                        </a>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
                                 </tr>
                             </table>
