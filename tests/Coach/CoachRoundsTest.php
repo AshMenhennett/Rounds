@@ -35,17 +35,27 @@ class CoachRoundsTest extends TestCase
         $user->team()->save($team);
 
         $this->actingAs($user)
+<<<<<<< HEAD
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
 
         $this->actingAs($user)
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id . '/date', [
                 'date' => '2018-01-03',
+=======
+            ->visit('/teams/' . $team->slug . '/rounds/' . $rounds->first()->id)
+            ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id . '/date', [
+                'date' => '2018-01-03 00:00:00',
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
             ]);
 
         $this->seeInDatabase('round_team', [
             'team_id' => $team->id,
             'round_id' => $rounds->first()->id,
+<<<<<<< HEAD
             'date' => Carbon\Carbon::parse('2018-01-03')->toDateTimeString(),
+=======
+            'date' => '2018-01-03 00:00:00',
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
         ]);
     }
 
@@ -96,7 +106,11 @@ class CoachRoundsTest extends TestCase
     }
 
     /** @test */
+<<<<<<< HEAD
     public function user_can_access_view_to_fill_in_round_data()
+=======
+    public function user_can_see_view_to_fill_in_round_data()
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
     {
         $user = factory(App\User::class)->create();
         $team = factory(App\Team::class)->create();
@@ -105,6 +119,7 @@ class CoachRoundsTest extends TestCase
         $user->team()->save($team);
 
         $this->actingAs($user)
+<<<<<<< HEAD
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $round->id);
 
         $this->assertRedirectedTo('/teams/' . $team->slug . '/rounds/' . $round->id);
@@ -112,6 +127,16 @@ class CoachRoundsTest extends TestCase
 
     /** @test */
     public function user_can_save_association_between_team_and_round()
+=======
+            ->visit('/teams/' . $team->slug . '/rounds/' . $round->id);
+
+        $this->see('Fill in Round ' . $round->name)
+                ->see('Pick a date for Round ' . $round->name);
+    }
+
+    /** @test */
+    public function user_gets_attached_to_round_on_round_show()
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
     {
         $user = factory(App\User::class)->create();
         $team = factory(App\Team::class)->create();
@@ -119,6 +144,7 @@ class CoachRoundsTest extends TestCase
 
         $user->team()->save($team);
 
+<<<<<<< HEAD
         // initial store
         $this->actingAs($user)
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $round->id);
@@ -151,6 +177,47 @@ class CoachRoundsTest extends TestCase
 
     /** @test */
     public function user_can_update_round_input()
+=======
+       $this->actingAs($user)
+            ->visit('/teams/' . $team->slug . '/rounds/' . $round->id);
+
+        $this->seeInDatabase('round_team', [
+            'round_id' => $round->id,
+            'team_id' => $team->id,
+        ]);
+    }
+
+    /** @test */
+    public function user_can_only_attach_themself_to_a_round_once()
+    {
+        $user = factory(App\User::class)->create();
+        $team = factory(App\Team::class)->create();
+        $rounds = factory(App\Round::class, 5)->create();
+
+        $user->team()->save($team);
+
+        $this->actingAs($user)
+            ->call('GET', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
+
+        $this->seeInDatabase('round_team', [
+            'id' => 1,
+            'round_id' => $rounds->first()->id,
+            'team_id' => $team->id,
+        ]);
+
+        $this->actingAs($user)
+            ->call('GET', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
+
+        $this->dontSeeInDatabase('round_team', [
+            'id' => 2,
+            'round_id' => $rounds->first()->id,
+            'team_id' => $team->id,
+        ]);
+    }
+
+    /** @test */
+    public function user_can_store_and_update_round_input()
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
     {
         $user = factory(App\User::class)->create();
         $team = factory(App\Team::class)->create();
@@ -164,11 +231,19 @@ class CoachRoundsTest extends TestCase
         });
 
         $this->actingAs($user)
+<<<<<<< HEAD
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
 
         // submit data
         $this->actingAs($user)
             ->call('PUT', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+=======
+            ->call('GET', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
+
+        // submit data
+        $this->actingAs($user)
+            ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
             'players' =>
                 [
                     [
@@ -218,7 +293,11 @@ class CoachRoundsTest extends TestCase
 
         //update data
         $this->actingAs($user)
+<<<<<<< HEAD
             ->call('PUT', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+=======
+            ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                 'players' =>
                     [
                         [
@@ -311,6 +390,7 @@ class CoachRoundsTest extends TestCase
 
     }
 
+<<<<<<< HEAD
     /** @test */
     public function user_can_destroy_association_between_team_and_round()
     {
@@ -351,6 +431,8 @@ class CoachRoundsTest extends TestCase
 
     }
 
+=======
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
     /**
      * Validation
      */
@@ -388,11 +470,19 @@ class CoachRoundsTest extends TestCase
         $user->team()->save($team);
 
         $this->actingAs($user)
+<<<<<<< HEAD
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
 
         $this->actingAs($user)
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id . '/date', [
                 'date' => '2018-01-02',
+=======
+            ->visit('/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
+
+        $this->actingAs($user)
+            ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id . '/date', [
+                'date' => '2018-01-02 00:00:00',
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
             ]);
 
         $this->actingAs($user)
@@ -403,12 +493,20 @@ class CoachRoundsTest extends TestCase
         $this->seeInDatabase('round_team', [
             'round_id' => $rounds->first()->id,
             'team_id' => $team->id,
+<<<<<<< HEAD
             'date' => Carbon\Carbon::parse('2018-01-02')->toDateTimeString(),
+=======
+            'date' => '2018-01-02 00:00:00',
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
         ]);
     }
 
     /** @test */
+<<<<<<< HEAD
     public function user_cannot_store_round_with_player_from_other_team()
+=======
+    public function user_cant_store_round_with_player_from_other_team()
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
     {
         $users = factory(App\User::class, 2)->create();
         $teams = factory(App\Team::class, 2)->create();
@@ -427,10 +525,17 @@ class CoachRoundsTest extends TestCase
 
 
         $this->actingAs($users->first())
+<<<<<<< HEAD
             ->call('POST', '/teams/' . $teams->first()->slug . '/rounds/' . $rounds->first()->id);
 
         $this->actingAs($users->first())
             ->call('PUT', '/teams/' . $teams->first()->slug . '/rounds/' . $rounds->first()->id, [
+=======
+            ->call('GET', '/teams/' . $teams->first()->slug . '/rounds/' . $rounds->first()->id);
+
+        $this->actingAs($users->first())
+            ->call('POST', '/teams/' . $teams->first()->slug . '/rounds/' . $rounds->first()->id, [
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                 'players' =>
                     [
                         [
@@ -467,10 +572,17 @@ class CoachRoundsTest extends TestCase
         $teams->first()->players()->attach($players->first());
 
         $this->actingAs($users->first())
+<<<<<<< HEAD
             ->call('POST', '/teams/' . $teams->first()->slug . '/rounds/' . $rounds->first()->id);
 
         $this->actingAs($users->first())
             ->call('PUT', '/teams/' . $teams->first()->slug . '/rounds/' . $rounds->first()->id, [
+=======
+            ->call('GET', '/teams/' . $teams->first()->slug . '/rounds/' . $rounds->first()->id);
+
+        $this->actingAs($users->first())
+            ->call('POST', '/teams/' . $teams->first()->slug . '/rounds/' . $rounds->first()->id, [
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                 'players' =>
                     [
                         [
@@ -497,7 +609,11 @@ class CoachRoundsTest extends TestCase
         ]);
 
         $this->actingAs($users->first())
+<<<<<<< HEAD
             ->call('PUT', '/teams/' . $teams->first()->slug . '/rounds/' . $rounds->first()->id, [
+=======
+            ->call('POST', '/teams/' . $teams->first()->slug . '/rounds/' . $rounds->first()->id, [
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                 'players' =>
                     [
                         //
@@ -517,7 +633,11 @@ class CoachRoundsTest extends TestCase
         ]);
 
         $this->actingAs($users->first())
+<<<<<<< HEAD
             ->call('PUT', '/teams/' . $teams->first()->slug . '/rounds/' . $rounds->first()->id, [
+=======
+            ->call('POST', '/teams/' . $teams->first()->slug . '/rounds/' . $rounds->first()->id, [
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                 'players' =>
                     [
                         [
@@ -539,7 +659,11 @@ class CoachRoundsTest extends TestCase
         ]);
 
         $this->actingAs($users->first())
+<<<<<<< HEAD
             ->call('PUT', '/teams/' . $teams->first()->slug . '/rounds/' . $rounds->first()->id, [
+=======
+            ->call('POST', '/teams/' . $teams->first()->slug . '/rounds/' . $rounds->first()->id, [
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                     //
                 ]);
 
@@ -566,10 +690,17 @@ class CoachRoundsTest extends TestCase
         $user->team()->save($team);
 
         $this->actingAs($user)
+<<<<<<< HEAD
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
 
         $this->actingAs($user)
             ->call('PUT', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+=======
+            ->call('GET', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
+
+        $this->actingAs($user)
+            ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                 'players' =>
                     [
                         [
@@ -607,11 +738,19 @@ class CoachRoundsTest extends TestCase
         });
 
         $this->actingAs($user)
+<<<<<<< HEAD
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
 
         // quarter posted as string
         $response = $this->actingAs($user)
             ->call('PUT', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+=======
+            ->call('GET', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
+
+        // quarter posted as string
+        $this->actingAs($user)
+            ->post('/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                 'players' =>
                     [
                         [
@@ -623,9 +762,16 @@ class CoachRoundsTest extends TestCase
                             ],
                         ]
                     ]
+<<<<<<< HEAD
             ]);
 
         $this->assertTrue($response->getContent() == '{"player_id":'. $players->first()->id . '}');
+=======
+            ])
+            ->seeJson([
+                 'player_id' => $players->first()->id,
+             ]);
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
 
         $this->assertResponseStatus(422);
 
@@ -635,8 +781,13 @@ class CoachRoundsTest extends TestCase
         ]);
 
         // quarters posted as invalid integer
+<<<<<<< HEAD
         $response = $this->actingAs($user)
             ->call('PUT', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+=======
+        $this->actingAs($user)
+            ->post('/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                 'players' =>
                     [
                         [
@@ -648,9 +799,16 @@ class CoachRoundsTest extends TestCase
                             ],
                         ]
                     ]
+<<<<<<< HEAD
             ]);
 
         $this->assertTrue($response->getContent() == '{"player_id":'. $players->first()->id . '}');
+=======
+            ])
+            ->seeJson([
+                 'player_id' => $players->first()->id,
+             ]);
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
 
         $this->assertResponseStatus(422);
 
@@ -675,11 +833,19 @@ class CoachRoundsTest extends TestCase
         });
 
         $this->actingAs($user)
+<<<<<<< HEAD
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
 
         // valid submission
         $this->actingAs($user)
             ->call('PUT', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+=======
+            ->call('GET', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
+
+        // valid submission
+        $this->actingAs($user)
+            ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                 'players' =>
                     [
                         [
@@ -706,8 +872,13 @@ class CoachRoundsTest extends TestCase
         ]);
 
         // invalid submission
+<<<<<<< HEAD
         $response = $this->actingAs($user)
             ->call('PUT', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+=======
+        $this->actingAs($user)
+            ->post('/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                 'players' =>
                     [
                         [
@@ -719,9 +890,16 @@ class CoachRoundsTest extends TestCase
                             ],
                         ]
                     ]
+<<<<<<< HEAD
             ]);
 
         $this->assertTrue($response->getContent() == '{"player_id":'. $players->last()->id . '}');
+=======
+            ])
+            ->seeJson([
+                 'player_id' => $players->last()->id,
+             ]);
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
 
         $this->assertResponseStatus(422);
 
@@ -761,11 +939,19 @@ class CoachRoundsTest extends TestCase
         });
 
         $this->actingAs($user)
+<<<<<<< HEAD
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
 
         // submit initial data
         $this->actingAs($user)
             ->call('PUT', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+=======
+            ->call('GET', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
+
+        // submit initial data
+        $this->actingAs($user)
+            ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                 'players' =>
                     [
                         [
@@ -794,7 +980,11 @@ class CoachRoundsTest extends TestCase
 
         // update data
         $this->actingAs($user)
+<<<<<<< HEAD
             ->call('PUT', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+=======
+            ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                 'players' =>
                     [
                         [
@@ -945,17 +1135,27 @@ class CoachRoundsTest extends TestCase
         $user->team()->save($team);
 
         $this->actingAs($user)
+<<<<<<< HEAD
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
 
         $this->actingAs($user)
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id . '/date', [
                 'date' => '2018-01-03',
+=======
+            ->visit('/teams/' . $team->slug . '/rounds/' . $rounds->first()->id)
+            ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id . '/date', [
+                'date' => '2018-01-03 00:00:00',
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
             ]);
 
         $this->seeInDatabase('round_team', [
             'team_id' => $team->id,
             'round_id' => $rounds->first()->id,
+<<<<<<< HEAD
             'date' => Carbon\Carbon::parse('2018-01-03')->toDateTimeString(),
+=======
+            'date' => '2018-01-03 00:00:00',
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
         ]);
     }
 
@@ -989,21 +1189,35 @@ class CoachRoundsTest extends TestCase
         ]);
 
         $this->actingAs($users->last())
+<<<<<<< HEAD
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
         $this->actingAs($users->last())
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id . '/date', [
                 'date' => '2018-01-04',
+=======
+            ->visit('/teams/' . $team->slug . '/rounds/' . $rounds->first()->id)
+            ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id . '/date', [
+                'date' => '2018-01-04 00:00:00',
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
             ]);
 
         $this->seeInDatabase('round_team', [
             'team_id' => $team->id,
             'round_id' => $rounds->first()->id,
+<<<<<<< HEAD
             'date' => Carbon\Carbon::parse('2018-01-04')->toDateTimeString(),
+=======
+            'date' => '2018-01-04 00:00:00',
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
         ]);
     }
 
     /** @test */
+<<<<<<< HEAD
     public function user_can_store_update_round_input_for_their_own_team()
+=======
+    public function user_can_store_round_input_for_their_own_team()
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
     {
         $user = factory(App\User::class)->create();
         $team = factory(App\Team::class)->create();
@@ -1020,7 +1234,11 @@ class CoachRoundsTest extends TestCase
             ->call('GET', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
 
         $this->actingAs($user)
+<<<<<<< HEAD
             ->call('PUT', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+=======
+            ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
             'players' =>
                 [
                     [
@@ -1038,7 +1256,11 @@ class CoachRoundsTest extends TestCase
     }
 
     /** @test */
+<<<<<<< HEAD
     public function other_user_cant_store_update_round_input_for_a_team_they_dont_own()
+=======
+    public function other_user_cant_store_round_input_for_a_team_they_dont_own()
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
     {
         $users = factory(App\User::class, 2)->create();
         $teams = factory(App\Team::class, 2)->create();
@@ -1058,7 +1280,11 @@ class CoachRoundsTest extends TestCase
         $this->assertResponseStatus(403);
 
         $this->actingAs($users->last())
+<<<<<<< HEAD
             ->call('PUT', '/teams/' . $teams->first()->slug . '/rounds/' . $rounds->first()->id, [
+=======
+            ->call('POST', '/teams/' . $teams->first()->slug . '/rounds/' . $rounds->first()->id, [
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                 'players' =>
                     [
                         [
@@ -1076,7 +1302,11 @@ class CoachRoundsTest extends TestCase
     }
 
     /** @test */
+<<<<<<< HEAD
     public function admin_user_can_store_update_round_input_for_a_team_they_dont_own()
+=======
+    public function admin_user_can_store_round_input_for_a_team_they_dont_own()
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
     {
         $users = factory(App\User::class, 2)->create();
         $teams = factory(App\Team::class, 2)->create();
@@ -1096,7 +1326,11 @@ class CoachRoundsTest extends TestCase
             ->call('GET', '/teams/' . $teams->first()->slug . '/rounds/' . $rounds->first()->id);
 
         $this->actingAs($users->last())
+<<<<<<< HEAD
             ->call('PUT', '/teams/' . $teams->first()->slug . '/rounds/' . $rounds->first()->id, [
+=======
+            ->call('POST', '/teams/' . $teams->first()->slug . '/rounds/' . $rounds->first()->id, [
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
             'players' =>
                 [
                     [
@@ -1112,6 +1346,7 @@ class CoachRoundsTest extends TestCase
 
         $this->assertResponseStatus(200);
     }
+<<<<<<< HEAD
 
     /** @test */
     public function user_can_save_association_between_their_team_and_a_round()
@@ -1247,4 +1482,6 @@ class CoachRoundsTest extends TestCase
         ]);
     }
 
+=======
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
 }

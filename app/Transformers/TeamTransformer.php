@@ -19,7 +19,10 @@ class TeamTransformer extends \League\Fractal\TransformerAbstract
             'id' => $team->id,
             'name' => $team->name,
             'slug' => $team->slug,
+<<<<<<< HEAD
             'hasCoach' => $team->user_id ? 1 : 0,
+=======
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
             'players' => count($team->players)
         ];
     }

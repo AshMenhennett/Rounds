@@ -68,8 +68,12 @@ class AdminTeamController extends \App\Http\Controllers\Controller
     }
 
     /**
+<<<<<<< HEAD
      * Deletes a Team, if they do not have any players.
      *
+=======
+     * Deletes a Team, if they have not played any rounds.
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
      * Utilized by Admin/Teams/AdminDisplayTeamsComponent.vue
      *
      * @param  App\Team $team
@@ -78,7 +82,11 @@ class AdminTeamController extends \App\Http\Controllers\Controller
     public function destroy(Team $team)
     {
         if (count($team->players)) {
+<<<<<<< HEAD
             // Team has players
+=======
+            // Team has played in a round
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
             return response()->json(null, 400);
         }
 

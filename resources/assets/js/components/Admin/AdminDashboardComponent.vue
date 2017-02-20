@@ -36,9 +36,15 @@
             changeView(component) {
                 this.currentView = component;
             },
+<<<<<<< HEAD
             getUrlVars() {
                 // Read a page's GET URL variables and return them as an associative array.
                 // obtained from: http://stackoverflow.com/questions/4656843/jquery-get-querystring-from-url
+=======
+            // Read a page's GET URL variables and return them as an associative array.
+            // obtained from: http://stackoverflow.com/questions/4656843/jquery-get-querystring-from-url
+            getUrlVars() {
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                 var vars = [],
                     hash;
                 var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
@@ -55,12 +61,15 @@
                 this.currentView = 'admin-players-master';
             } else if (this.getUrlVars()['v'] == 'teams') {
                 this.currentView = 'admin-teams-master';
+<<<<<<< HEAD
             } else if (this.getUrlVars()['v'] == 'coaches') {
                 this.currentView = 'admin-coaches-master';
             } else if (this.getUrlVars()['v'] == 'rounds') {
                 this.currentView = 'admin-rounds-master';
             } else if (this.getUrlVars()['v'] == 'stats') {
                 this.currentView = 'admin-stats';
+=======
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
             }
         }
     }

@@ -15,7 +15,10 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\ClearImportedExcelFiles::class,
         Commands\UpdateUserRole::class,
+<<<<<<< HEAD
         Commands\SendCoachesRoundReminderEmail::class,
+=======
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
     ];
 
     /**

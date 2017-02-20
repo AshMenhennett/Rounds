@@ -1,5 +1,6 @@
 <template>
     <div class="component">
+<<<<<<< HEAD
         <scale-loader :loading="loading" :color="loader_color"></scale-loader>
 
         <bootstrap-alert
@@ -26,6 +27,9 @@
             </div>
         </template>
 
+=======
+        Stats here!
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
     </div>
 </template>
 
@@ -33,6 +37,7 @@
     export default {
         data () {
             return {
+<<<<<<< HEAD
                 teams: [],
                 players: [],
                 rounds: [],
@@ -67,6 +72,16 @@
         },
         mounted() {
             this.getStats();
+=======
+
+            }
+        },
+        methods: {
+
+        },
+        mounted() {
+
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
         }
     }
 </script>

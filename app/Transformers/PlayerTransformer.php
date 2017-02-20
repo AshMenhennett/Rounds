@@ -19,7 +19,10 @@ class PlayerTransformer extends \League\Fractal\TransformerAbstract
             'id' => $player->id,
             'name' => $player->name,
             'temp' => $player->temp,
+<<<<<<< HEAD
             'recent' => $player->recent,
+=======
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
             'rounds' => count($player->rounds)
         ];
     }

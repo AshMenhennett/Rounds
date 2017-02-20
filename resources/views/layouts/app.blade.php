@@ -36,9 +36,12 @@
         @if (Session::get('success_message'))
             @include('includes.partials._flash_success_message')
         @endif
+<<<<<<< HEAD
         @if (Session::get('warning_message'))
             @include('includes.partials._flash_warning_message')
         @endif
+=======
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
@@ -65,7 +68,11 @@
                                 <li><a href="{{ route('admin.home') }}">Admin Dashboard</a></li>
                             @else
                                 @if (Auth::user()->hasTeam())
+<<<<<<< HEAD
                                     <li><a href="{{ route('coach.team.manage', Auth::user()->team()->first()) }}">My Team</a></li>
+=======
+                                    <li><a href="{{ route('team.manage', Auth::user()->team()->first()) }}">My Team</a></li>
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                                 @else
                                     <li><a href="{{ route('home') }}">Home</a></li>
                                 @endif
@@ -98,11 +105,19 @@
                                     @endif
 
                                     @if (Auth::user()->hasTeam())
+<<<<<<< HEAD
                                         <li><a href="{{ route('coach.team.manage', Auth::user()->team()->first()) }}">Manage Team</a></li>
                                         <li><a href="{{ route('coach.rounds.index', Auth::user()->team()->first()) }}">Fill in Rounds</a></li>
                                         <li><a href="{{ route('coach.players.index', Auth::user()->team()->first()) }}">Add Players</a></li>
                                     @else
                                         <li><a href="{{ route('coach.teams.index') }}">Join a Team</a></li>
+=======
+                                        <li><a href="{{ route('team.manage', Auth::user()->team()->first()) }}">Manage Team</a></li>
+                                        <li><a href="{{ route('rounds.index', Auth::user()->team()->first()) }}">Fill in Rounds</a></li>
+                                        <li><a href="{{ route('players.index', Auth::user()->team()->first()) }}">Add Players</a></li>
+                                    @else
+                                        <li><a href="{{ route('teams.index') }}">Join a Team</a></li>
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                                     @endif
 
                                     <li><a href="{{ route('faq') }}">FAQ</a></li>

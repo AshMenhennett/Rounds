@@ -168,7 +168,10 @@ return [
          */
         Spatie\Fractal\FractalServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+<<<<<<< HEAD
         PrettyRoutes\ServiceProvider::class,
+=======
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
         //
 
         /*

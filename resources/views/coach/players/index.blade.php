@@ -10,7 +10,11 @@
                 <div class="panel-heading">Players for {{ strtoupper($team->name) }}</div>
 
                 <div class="panel-body">
+<<<<<<< HEAD:resources/views/coach/players/index.blade.php
                     <coach-team-players team="{{ $team->slug }}"></coach-team-players>
+=======
+                    <team-players team="{{ $team->slug }}"></team-players>
+>>>>>>> ba045595f44a630f23913d926284dcd1f49686e3:resources/views/players/index.blade.php
                 </div>
             </div>
         </div>
