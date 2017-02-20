@@ -20,12 +20,6 @@ class TeamManagementController extends Controller
     {
         $this->authorize('showManagement', $team);
 
-        // if (! $team->user()->count() && $request->user()->isAdmin()) {
-        //     // admin is the only user able to access this
-        //     $request->session()->flash('warning_message', 'The Team needs a coach first!');
-        //     return back();
-        // }
-
         return view('coach.team.manage', [
             'team' => $team,
         ]);

@@ -1,8 +1,7 @@
 <template>
     <li class="list-group-item text-center">
         <h4>
-            <a v-if="team.hasCoach" :href="'/teams/' + team.slug + '/manage'">{{ team.name }} <small>{{ team.players }} player(s).</small></a>
-            <span v-if="! team.hasCoach">{{ team.name }} <small>{{ team.players }} player(s).</small></span>
+            <a :href="'/teams/' + team.slug + '/manage'">{{ team.name }} <small>{{ team.players }} player(s).</small></a>
         </h4>
         <a :href="'/admin/teams/' + team.slug + '/edit?v=teams'" class="text-info"><span class="glyphicon glyphicon-edit"></span></a>
         <span v-show="team.players === 0">

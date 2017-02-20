@@ -106,6 +106,7 @@
                                     <li class="dropdown-header">Support</li>
 
                                     <li><a href="{{ route('faq') }}">FAQ</a></li>
+                                    <li><a href="mailto:tania.costello@optusnet.com.au">Contact Admin</a></li>
 
                                     <li role="separator" class="divider"></li>
 
