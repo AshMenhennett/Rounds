@@ -11,7 +11,7 @@ class ClearCompiledViews extends Command
      *
      * @var string
      */
-    protected $signature = 'clear:views';
+    protected $signature = 'clear:compViews';
 
     /**
      * The console command description.
