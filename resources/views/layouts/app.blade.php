@@ -73,9 +73,6 @@
                         @endif
                     </ul>
 
-
-
-
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
@@ -104,6 +101,9 @@
                                     @else
                                         <li><a href="{{ route('coach.teams.index') }}">Join a Team</a></li>
                                     @endif
+
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Support</li>
 
                                     <li><a href="{{ route('faq') }}">FAQ</a></li>
 
