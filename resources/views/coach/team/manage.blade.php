@@ -21,7 +21,11 @@
                 <div class="panel-heading">Stats for {{ strtoupper($team->name) }}</div>
 
                 <div class="panel-body">
-                    <p>Coach: <strong>{{ $team->user->name() }}</strong>.</p>
+                    @if ($team->user)
+                        <p>Coach: <strong>{{ $team->user->name() }}</strong>.</p>
+                    @else
+                        <p><strong>No Coach</strong>.</p>
+                    @endif
                     <p>{{ strtoupper($team->name) }} has played in <strong>{{ count($team->rounds) }}</strong> rounds.</p>
                     <p>{{ strtoupper($team->name) }} has <strong>{{ count($team->players) }}</strong> players.</p>
                 </div>

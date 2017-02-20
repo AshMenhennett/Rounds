@@ -84,11 +84,12 @@ $style = [
                                     <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">
                                         <!-- Greeting -->
                                         <h1 style="{{ $style['header-1'] }}">
-                                            Hello!
+                                            Hello {{ $team->user->name }}!
                                         </h1>
 
                                         <p style="{{ $style['paragraph'] }}">
                                             You have not filled in Round {{ $round->name }}'s data for {{ strtoupper($team->name) }} yet.
+                                            <br>
                                             Please click the button below to fill in the data.
                                         </p>
 
