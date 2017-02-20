@@ -16,7 +16,7 @@ class CreateRoundsTable extends Migration
         Schema::create('rounds', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->timestamp('default_date');
+            $table->datetime('default_date')->default(Carbon\Carbon::parse('+2 weeks')->toDateTimeString());
             $table->timestamps();
         });
     }

@@ -1,0 +1,9 @@
+<template>
+    <section>
+        <admin-import-players></admin-import-players>
+        <hr>
+        <admin-create-player></admin-create-player>
+        <hr>
+        <admin-display-players></admin-display-players>
+    </section>
+</template>

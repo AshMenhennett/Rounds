@@ -1,0 +1,9 @@
+<template>
+    <section>
+        <admin-import-rounds></admin-import-rounds>
+        <hr>
+        <admin-create-round></admin-create-round>
+        <hr>
+        <admin-display-rounds></admin-display-rounds>
+    </section>
+</template>

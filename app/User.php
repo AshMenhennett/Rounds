@@ -28,6 +28,16 @@ class User extends Authenticatable
     ];
 
     /**
+     * Attribute accessor for name property.
+     *
+     * @return string
+     */
+    public function getNameAttribute(){
+        return $this->attributes['first_name'];
+    }
+
+
+    /**
      * A User has one Team.
      *
      * @return Illuminate\Database\Eloquent\Relations\HasOne
@@ -55,5 +65,15 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->role === 'admin';
+    }
+
+    /**
+     * Returns 0 if the User has no Team.
+     *
+     * @return boolean
+     */
+    public function hasTeam()
+    {
+        return count($this->team);
     }
 }

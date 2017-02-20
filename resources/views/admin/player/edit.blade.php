@@ -1,0 +1,42 @@
+
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <a href="{{ route('admin.home') }}">&laquo; Dashboard</a>
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-heading">Edit player for {{ strtoupper($player->team->first()->name) }}</div>
+
+                <div class="panel-body">
+                    <form action="{{ route('admin.player.update', [$player, 'v=' . Request::get('v')]) }}" method="post">
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            <label for="name" class="label-control">Name</label>
+                            <input type="text" name="name" id="name" class="form-control" value="{{ (old('name') ? old('name') : $player->name ) }}" required>
+                            @if ($errors->has('name'))
+                                <div class="help-block danger">
+                                    {{ $errors->first('name') }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="form-group checkbox pull-right">
+                            <label for="temp">
+                                <input type="checkbox" name="temp" id="temp" style="margin-top:4px; padding:8px;" {{ ($player->temp ? 'checked' : '') }}> Temporary Player?
+                            </label>
+                        </div>
+                        <br />
+                        <br />
+
+                        {{ csrf_field() }}
+                        {{  method_field('PUT') }}
+                        <button type="submit" class="btn btn-primary pull-right btn-ok-cancel-relation">Update</button>
+                        <a href="{{ route('admin.home', [$player, 'v=' . Request::get('v')]) }}" class="btn btn-default pull-right btn-ok-cancel-relation">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

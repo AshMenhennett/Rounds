@@ -1,0 +1,9 @@
+<template>
+    <section>
+        <admin-import-teams></admin-import-teams>
+        <hr>
+        <admin-create-team></admin-create-team>
+        <hr>
+        <admin-display-teams></admin-display-teams>
+    </section>
+</template>

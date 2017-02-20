@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Round;
 use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
@@ -67,6 +68,16 @@ class Team extends Model
     public function playersById()
     {
         return $this->players->pluck('id')->all();
+    }
+
+    /**
+     * Return the Team's Coach or null, if no Coach exists for this Team.
+     *
+     * @return App\User | null
+     */
+    public function hasCoach()
+    {
+        return $this->user;
     }
 
 }

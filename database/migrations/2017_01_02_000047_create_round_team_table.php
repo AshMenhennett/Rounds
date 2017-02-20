@@ -17,7 +17,7 @@ class CreateRoundTeamTable extends Migration
             $table->increments('id');
             $table->integer('round_id')->unsigned();
             $table->integer('team_id')->unsigned();
-            $table->timestamp('date')->nullable();
+            $table->datetime('date')->nullable();
             $table->timestamps();
 
             $table->foreign('round_id')->references('id')->on('rounds')->onDelete('cascade');

@@ -124,20 +124,7 @@ class TeamPolicy
      * @param  App\Team   $team
      * @return boolean
      */
-    public function deletePlayer(User $user, Team $team)
-    {
-        return  $user->id === $team->user_id || $user->isAdmin();
-    }
-
-    /**
-     * Allows coach and admin to view a Round and fill in data.
-     * Used in RoundController
-     *
-     * @param  App\User   $user
-     * @param  App\Team   $team
-     * @return boolean
-     */
-    public function showRound(User $user, Team $team)
+    public function destroyPlayer(User $user, Team $team)
     {
         return  $user->id === $team->user_id || $user->isAdmin();
     }
@@ -156,6 +143,19 @@ class TeamPolicy
     }
 
     /**
+     * Allows coach and admin to view a Round and fill in data.
+     * Used in RoundController
+     *
+     * @param  App\User   $user
+     * @param  App\Team   $team
+     * @return boolean
+     */
+    public function showRound(User $user, Team $team)
+    {
+        return  $user->id === $team->user_id || $user->isAdmin();
+    }
+
+    /**
      * Allows coach and admin to save a custom date for a Round.
      * Used in RoundDateController
      *
@@ -169,7 +169,7 @@ class TeamPolicy
     }
 
     /**
-     * Allows coach and admin to save input for a Round.
+     * Allows coach and admin save association for a Team and Round.
      * Used in RoundController
      *
      * @param  App\User   $user
@@ -181,4 +181,29 @@ class TeamPolicy
         return  $user->id === $team->user_id || $user->isAdmin();
     }
 
+    /**
+     * Allows coach and admin to update input for a Round.
+     * Used in RoundController
+     *
+     * @param  App\User   $user
+     * @param  App\Team   $team
+     * @return boolean
+     */
+    public function updateRound(User $user, Team $team)
+    {
+        return  $user->id === $team->user_id || $user->isAdmin();
+    }
+
+    /**
+     * Allows coach and admin to remove a round from a Team.
+     * Used in RoundController
+     *
+     * @param  App\User   $user
+     * @param  App\Team   $team
+     * @return boolean
+     */
+    public function destroyRoundForTeam(User $user, Team $team)
+    {
+        return  $user->id === $team->user_id || $user->isAdmin();
+    }
 }

@@ -1,3 +1,18 @@
+/* Brand Colours */
+$branding-blue : #0d0394;
+$branding-white : #fff;
+$branding-light-grey : #f1f1f1;
+$branding-dark-grey : #808080;
+
+/* Bootstrap Navbar Border Color*/
+$nav-border-color: #d3e0e9;
+
+/* Global */
+body {
+    height: 100vh;
+}
+
+/* Team Styling */
 .team {
     padding: 40px;
     margin: 10px;
@@ -6,6 +21,10 @@
 }
 
 .temp-players li {
+   background: #efefef;
+}
+
+li.temp-player {
    background: #efefef;
 }
 
@@ -19,7 +38,8 @@
     }
 }
 
-hr.round-input {
+/* General */
+hr {
     border: 0;
     margin: 45px 0;
     height: 1px;
@@ -27,19 +47,87 @@ hr.round-input {
     background: #d3e0e9;
 }
 
-.btn-round-input {
-    margin-top: 45px;
-}
-
 a > span.glyphicon {
-    font-size: 1.3em;
-}
-.v-spinner {
-    margin-top: 50px;
+    font-size: 1.35em;
+    margin: 9px;
 }
 
-.help-block.danger {
-    color: #A9443A;
+/* Footer */
+.footer-container {
+    border: none;
+    border-top: 1px solid $nav-border-color;
+    border-bottom: 1px solid $nav-border-color;
+    padding: 20px;
+    background: #fff;
+
+    footer {
+        text-align: center;
+        a {
+            color: #636b6f !important;
+        }
+    }
+}
+
+/* Welcome Page */
+.jumbotron{
+    margin-bottom: 0px;
+    padding-top: 225px;
+    background: #2b5876; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #2b5876 , #4e4376); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #2b5876 , #4e4376); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff;
+
+    .container-fluid {
+        max-width: 1200px;
+        height: 100vh;
+        text-align: center;
+    }
+}
+
+/* Browser Alerts */
+.upgrade-browser {
+    width: 100%;
+    height: 100%;
+    padding-top: 12px;
+    text-align: center;
+    color: #fff;
+
+    &.danger {
+        display: none;
+        font-size: 1.3em;
+        background: #9b59b6;
+
+        a {
+            color: #dedede;
+        }
+    }
+
+    &.warning {
+        border-bottom: 1px solid $nav-border-color;
+        color: #636b6f;
+        background: #f5f8fa;
+    }
+
+}
+
+/* Global Helpers */
+#flash-message {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    z-index: 999;
+    padding: 20px;
+}
+
+.pull-right-mobile {
+    @media (max-width: 767px) {
+        float: right;
+    }
+}
+
+.col-no-pad.col-md-6 {
+    padding-left: 0;
+    padding-right: 0;
 }
 
 form.custom-horizontal {
@@ -50,6 +138,29 @@ form.custom-horizontal {
     }
 }
 
-.round-input .alert {
-    margin-bottom: 50px;
+.btn-ok-cancel-relation {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.v-spinner {
+    margin-top: 50px;
+}
+
+.help-block.danger {
+    color: #A9443A;
+}
+
+.alert {
+    margin-bottom: 10px;
+}
+
+/* Components */
+.component {
+    margin-top: 25px;
+    margin-bottom: 25px;
+
+    nav.pagination-nav {
+        text-align: center;
+    }
 }

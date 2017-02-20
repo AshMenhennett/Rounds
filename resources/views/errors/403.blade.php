@@ -40,7 +40,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Forbidden.</div>
+                <div class="title">I don't think you are supposed to do that.</div>
             </div>
         </div>
     </body>

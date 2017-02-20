@@ -9,6 +9,11 @@ class Round extends Model
 {
 
     /**
+     * Date fields as Carbon instance
+     */
+    protected $dates = ['default_date'];
+
+    /**
      * Mass assignable fields.
      *
      * @var array
