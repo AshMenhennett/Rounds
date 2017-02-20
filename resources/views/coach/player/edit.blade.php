@@ -32,11 +32,7 @@
                         {{ csrf_field() }}
                         {{  method_field('PUT') }}
                         <button type="submit" class="btn btn-primary pull-right btn-ok-cancel-relation">Update</button>
-<<<<<<< HEAD:resources/views/coach/player/edit.blade.php
                         <a href="{{ route('coach.players.index', $team) }}" class="btn btn-default pull-right btn-ok-cancel-relation">Cancel</a>
-=======
-                        <a href="{{ route('players.index', $team) }}" class="btn btn-default pull-right btn-ok-cancel-relation">Cancel</a>
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3:resources/views/player/edit.blade.php
                     </form>
                 </div>
             </div>

@@ -31,7 +31,6 @@ class AdminImportPlayersController extends \App\Http\Controllers\Controller
         // moving imported file to local storage
         $request->file('players')->move(storage_path('/import/excel/players/'), $fileName);
 
-<<<<<<< HEAD
         $players = null;
         try {
             // create a Collection from the results returned from file
@@ -40,11 +39,6 @@ class AdminImportPlayersController extends \App\Http\Controllers\Controller
             // no dates are expected, but handling the edge case
             abort(406, 'INVALID_DATE_PRESENT');
         }
-
-=======
-        // create a Collection from the results returned from file
-        $players = collect(Excel::load(storage_path('import/excel/players/') . $fileName)->get());
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
 
         // reject all data that is not in correct format (there is not a 'player_name' key or the corresponding value is 'empty')
         $players = $players->reject(function ($player) {

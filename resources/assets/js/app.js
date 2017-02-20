@@ -13,17 +13,9 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-<<<<<<< HEAD
 // coach components
 Vue.component('coach-round-input', require('./components/Coach/Rounds/RoundInputComponent.vue'));
 Vue.component('coach-team-players', require('./components/Coach/Players/TeamPlayersComponent.vue'));
-=======
-
-Vue.component('round-input', require('./components/Coach/RoundInputComponent.vue'));
-Vue.component('team-players', require('./components/Coach/TeamPlayersComponent.vue'));
-
-
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
 
 // admin dashboard
 Vue.component('admin-dashboard', require('./components/Admin/AdminDashboardComponent.vue'));
@@ -49,7 +41,6 @@ Vue.component('admin-teams-master', require('./components/Admin/Teams/AdminTeams
     // displays all players with pagination
     Vue.component('admin-display-teams', require('./components/Admin/Teams/AdminDisplayTeamsComponent.vue'));
 
-<<<<<<< HEAD
 // houses all admin player components
 Vue.component('admin-coaches-master', require('./components/Admin/Coaches/AdminCoachesMasterComponent.vue'));
     // displays coaches
@@ -64,17 +55,12 @@ Vue.component('admin-rounds-master', require('./components/Admin/Rounds/AdminRou
     // displays rounds
     Vue.component('admin-display-rounds', require('./components/Admin/Rounds/AdminDisplayRoundsComponent.vue'));
 
-=======
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
 // generic
 Vue.component('bootstrap-alert', require('./components/Generic/BootstrapAlertComponent.vue'));
 Vue.component('player', require('./components/Generic/PlayerComponent.vue'));
 Vue.component('team', require('./components/Generic/TeamComponent.vue'));
-<<<<<<< HEAD
 Vue.component('coach', require('./components/Generic/CoachComponent.vue'));
 Vue.component('round', require('./components/Generic/RoundComponent.vue'));
-=======
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
 Vue.component('pages', require('./components/Generic/PagesComponent.vue'));
 
 // Vue.component('moon-loader', require('vue-spinner/src/MoonLoader.vue'));

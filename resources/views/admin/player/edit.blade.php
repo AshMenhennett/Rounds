@@ -32,11 +32,7 @@
                         {{ csrf_field() }}
                         {{  method_field('PUT') }}
                         <button type="submit" class="btn btn-primary pull-right btn-ok-cancel-relation">Update</button>
-<<<<<<< HEAD
                         <a href="{{ route('admin.home', [$player, 'v=' . Request::get('v')]) }}" class="btn btn-default pull-right btn-ok-cancel-relation">Cancel</a>
-=======
-                        <a href="{{ route('admin.home') }}" class="btn btn-default pull-right btn-ok-cancel-relation">Cancel</a>
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                     </form>
                 </div>
             </div>

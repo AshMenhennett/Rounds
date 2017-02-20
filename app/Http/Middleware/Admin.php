@@ -20,9 +20,5 @@ class Admin
         }
 
         return redirect()->route('home');
-<<<<<<< HEAD
-=======
-
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
     }
 }

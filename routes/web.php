@@ -34,7 +34,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/home', 'Coach\HomeController@index')->name('home');
 
-<<<<<<< HEAD
     Route::get('/teams', 'Coach\Teams\TeamsController@index')->name('coach.teams.index');
     Route::post('/teams/{team}', 'Coach\Teams\TeamController@store')->name('coach.team.store');
     Route::delete('/teams/{team}/coach', 'Coach\Teams\TeamController@detach')->name('coach.team.user.detach');
@@ -65,26 +64,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('/teams/{team}/rounds/{round}', 'Coach\Rounds\RoundController@destroy')->name('coach.round.destroy');
     // fetch all team data for a Round
     Route::get('/teams/{team}/rounds/{round}/fetch ', 'Coach\Rounds\RoundController@fetchPlayers')->name('coach.round.fetch');
-=======
-    Route::get('/teams', 'Coach\TeamsController@index')->name('teams.index');
-    Route::post('/teams/{team}', 'Coach\TeamController@store')->name('team.store');
-    Route::delete('/teams/{team}/coach', 'Coach\TeamController@detach')->name('team.user.detach');
-    Route::get('/teams/{team}/manage', 'Coach\TeamManagementController@show')->name('team.manage');
-
-    Route::get('/teams/{team}/players', 'Coach\PlayersController@index')->name('players.index');
-    Route::get('/teams/{team}/players/fetch', 'Coach\PlayersController@fetch')->name('players.fetch');
-
-    Route::post('/teams/{team}/players/new', 'Coach\PlayerController@store')->name('player.store');
-    Route::get('/teams/{team}/players/{player}/edit', 'Coach\PlayerController@edit')->name('player.edit');
-    Route::put('/teams/{team}/players/{player}', 'Coach\PlayerController@update')->name('player.update');
-    Route::delete('/teams/{team}/players/{player}', 'Coach\PlayerController@destroy')->name('player.destroy');
-
-    Route::get('/teams/{team}/rounds', 'Coach\RoundsController@index')->name('rounds.index');
-    Route::get('/teams/{team}/rounds/{round}', 'Coach\RoundController@show')->name('round.show');
-    Route::post('/teams/{team}/rounds/{round}/date', 'Coach\RoundDateController@store')->name('round.store.date');
-    Route::post('/teams/{team}/rounds/{round}', 'Coach\RoundController@store')->name('round.store');
-    Route::get('/teams/{team}/rounds/{round}/fetch ', 'Coach\RoundController@fetchPlayers')->name('round.fetch');
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
 
     Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
 
@@ -113,7 +92,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('/teams/{team}', 'Admin\Teams\AdminTeamController@destroy')->name('admin.team.destroy');
 
         Route::post('/teams/import', 'Admin\Teams\AdminImportTeamsController@store')->name('admin.teams.import');
-<<<<<<< HEAD
 
         // gets coaches for pagination with fractal
         Route::get('/coaches/fetch', 'Admin\Coaches\AdminCoachesController@fetch')->name('admin.coaches.fetch');
@@ -132,11 +110,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('rounds/import/fixed', 'Admin\Rounds\AdminImportFixedRoundsController@store')->name('admin.rounds.import.fixed');
 
         Route::get('stats/fetch', 'Admin\Stats\AdminStatsController@fetch')->name('admin.stats.fetch');
-=======
-        //Route::post('/teams/import/fixed', 'Admin\AdminImportFixedTeamsController@store')->name('admin.teams.import.fixed');
-
-        // TODO spice up player import component, like team import component, checks for file empty and no valid data
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
 
     });
 

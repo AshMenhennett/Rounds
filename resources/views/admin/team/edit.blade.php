@@ -26,10 +26,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon">{{ env('APP_URL') . '/teams/'}}</span>
                                 <input type="text" name="slug" id="slug" class="form-control" value="{{ (old('slug') ? old('slug') : $team->slug ) }}" required>
-<<<<<<< HEAD
                                 <span class="input-group-addon">/manage</span>
-=======
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                             </div>
                             @if ($errors->has('slug'))
                                 <div class="help-block danger">
@@ -44,11 +41,7 @@
                         {{ csrf_field() }}
                         {{  method_field('PUT') }}
                         <button type="submit" class="btn btn-primary pull-right btn-ok-cancel-relation">Update</button>
-<<<<<<< HEAD
                         <a href="{{ route('admin.home', [$team, 'v=' . Request::get('v')]) }}" class="btn btn-default pull-right btn-ok-cancel-relation">Cancel</a>
-=======
-                        <a href="{{ route('admin.home') }}" class="btn btn-default pull-right btn-ok-cancel-relation">Cancel</a>
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                     </form>
                 </div>
             </div>

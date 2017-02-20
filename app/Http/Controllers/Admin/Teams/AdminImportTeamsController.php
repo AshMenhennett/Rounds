@@ -30,7 +30,6 @@ class AdminImportTeamsController extends Controller
         // moving uploaded file to application storage
         $request->file('teams')->move(storage_path('/import/excel/teams/'), $fileName);
 
-<<<<<<< HEAD
         $teams = null;
         try {
             // create a Collection from the results returned from file
@@ -45,14 +44,6 @@ class AdminImportTeamsController extends Controller
             return ! isset($team['team_name'])
                 || $team->team_name == null
                 || $team->team_name == '';
-=======
-        // create a Collection from the results returned from file
-        $teams = collect(Excel::load(storage_path('import/excel/teams/') . $fileName)->get());
-
-        // reject all data that is not in correct format (there is not a 'team_name' key or the corresponding value is 'empty')
-        $teams = $teams->reject(function ($team) {
-            return ! isset($team['team_name']) || $team->team_name == null || $team->team_name == '';
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
         })->values();
 
         if (! count($teams)) {

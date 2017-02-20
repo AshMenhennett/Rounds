@@ -4,11 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-<<<<<<< HEAD:resources/views/coach/rounds/index.blade.php
             <a href="{{ route('coach.team.manage', $team) }}">&laquo; Team Management</a>
-=======
-            <a href="{{ route('team.manage', $team) }}">&laquo; Team Management</a>
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3:resources/views/rounds/index.blade.php
             <br />
 
             <div class="panel panel-default">

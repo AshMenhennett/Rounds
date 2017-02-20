@@ -23,11 +23,7 @@ class AdminPlayerTest extends TestCase
             ->call('GET', '/admin/players/fetch');
 
         $players->each(function ($player) {
-<<<<<<< HEAD
             $this->see('{"id":' . $player->id . ',"name":"' . $player->name . '","temp":0,"recent":0,"rounds":0}');
-=======
-            $this->see('{"id":' . $player->id . ',"name":"' . $player->name . '","temp":0,"rounds":0}');
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
         });
 
         $this->see('"meta":{"pagination":{"total":5,"count":5,"per_page":10,"current_page":1,"total_pages":1,"links":[]}}');
@@ -55,11 +51,7 @@ class AdminPlayerTest extends TestCase
     }
 
     /** @test */
-<<<<<<< HEAD
     public function admin_can_visit_edit_player_view()
-=======
-    public function admin_can_edit_visit_edit_player_view()
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
     {
         $user = factory(App\User::class)->create(['role' => 'admin']);
         $team = factory(App\Team::class)->create();
@@ -88,12 +80,6 @@ class AdminPlayerTest extends TestCase
                 'temp' => 1,
             ]);
 
-<<<<<<< HEAD
-=======
-        // redirected to admin dashboard
-        $this->assertRedirectedTo('/admin');
-
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
         $this->seeInDatabase('players', [
                 'id' => $player->id,
                 'name' => 'Bob',
@@ -122,7 +108,6 @@ class AdminPlayerTest extends TestCase
     }
 
     /** @test */
-<<<<<<< HEAD
     public function admin_cannot_delete_player_if_player_has_played_in_rounds()
     {
         $user = factory(App\User::class)->create(['role' => 'admin']);
@@ -146,8 +131,6 @@ class AdminPlayerTest extends TestCase
     }
 
     /** @test */
-=======
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
     public function admin_can_fetch_teams_for_player_use()
     {
         $user = factory(App\User::class)->create(['role' => 'admin']);
@@ -168,7 +151,6 @@ class AdminPlayerTest extends TestCase
     /** @test */
     public function admin_can_import_players_with_all_valid_data()
     {
-<<<<<<< HEAD
         // create test file
         copy(storage_path('test_files/master_files/AllValidPlayers.xlsx'), storage_path('test_files/Players.xlsx'));
 
@@ -396,20 +378,6 @@ class AdminPlayerTest extends TestCase
 
     /** @test */
     public function admin_can_attempt_to_import_fixed_players_with_not_all_valid_data()
-=======
-        $user = factory(App\User::class)->create(['role' => 'admin']);
-        $teamA = factory(App\Team::class)->create(['name' => 'Team a', 'slug' => 'team-a']);
-        $teamB = factory(App\Team::class)->create(['name' => 'Team b', 'slug' => 'team-b']);
-
-        // TODO: need to implement, mock file upload
-        // something like: new Symfony\Component\HttpFoundation\File\UploadedFile( storage_path( 'testing_files/AllValidPlayers.xlsx' ), 'test_AllValidPlayers.xlsx', 'application/vnd.ms-excel', 300, null, true );
-
-        $this->assertTrue(true);
-    }
-
-    /** @test */
-    public function admin_can_import_fixed_players_with_not_all_valid_data()
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
     {
         $user = factory(App\User::class)->create(['role' => 'admin']);
         $teamA = factory(App\Team::class)->create(['name' => 'Team a', 'slug' => 'team-a']);
@@ -487,11 +455,8 @@ class AdminPlayerTest extends TestCase
                 'player_id' => 2,
                 'team_id' => 2,
              ]);
-<<<<<<< HEAD
 
         $this->assertResponseStatus(200);
-=======
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
     }
 
    /**
@@ -594,7 +559,6 @@ class AdminPlayerTest extends TestCase
     }
 
     /** @test */
-<<<<<<< HEAD
     public function admin_gets_validation_error_if_players_is_not_a_file()
     {
         $user = factory(App\User::class)->create(['role' => 'admin']);
@@ -627,8 +591,6 @@ class AdminPlayerTest extends TestCase
     }
 
     /** @test */
-=======
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
     public function admin_must_submit_players_for_import_fixed_data()
     {
         $user = factory(App\User::class)->create(['role' => 'admin']);

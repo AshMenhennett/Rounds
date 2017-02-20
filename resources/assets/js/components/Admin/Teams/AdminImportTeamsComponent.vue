@@ -38,11 +38,7 @@
         </bootstrap-alert>
 
         <bootstrap-alert
-<<<<<<< HEAD
             :expression="! importing && (error.validation || error.empty_file || error.bad_date_present)"
-=======
-            :expression="! importing && (error.validation || error.empty_file)"
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
             alert-type="danger"
             message-bold="Error!"
         >
@@ -88,10 +84,7 @@
                 error: {
                     validation: false,
                     empty_file: false,
-<<<<<<< HEAD
                     bad_date_present: false,
-=======
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                     other: false
                 },
                 warning: {
@@ -113,10 +106,7 @@
                 this.warning.invalid_data = false;
                 this.error.validation = false;
                 this.error.empty_file = false;
-<<<<<<< HEAD
                 this.error.bad_date_present = false;
-=======
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                 this.error.other = false;
 
                 // clear success
@@ -146,12 +136,9 @@
                     } else if (response.status == 400) {
                         // file is considered empty (eg. wrong format)
                         this.error.empty_file = true;
-<<<<<<< HEAD
                     } else if (response.status == 406) {
                         // an invalid date was present in uploaded file
                         this.error.bad_date_present = true;
-=======
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
                     } else {
                         // some other error
                         this.error.other = true;

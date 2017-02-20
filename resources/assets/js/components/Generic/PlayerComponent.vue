@@ -12,15 +12,6 @@
 
 <script>
     export default {
-<<<<<<< HEAD
-=======
-        data () {
-            return {
-                players: [],
-                meta: null
-            }
-        },
->>>>>>> ba045595f44a630f23913d926284dcd1f49686e3
         props: {
             player: {
                 id: Number,
