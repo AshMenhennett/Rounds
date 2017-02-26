@@ -159,7 +159,7 @@ class CoachRoundsTest extends TestCase
 
         $user->team()->save($team);
 
-        $players->each(function ($player) use (&$team) {
+        $players->each(function ($player) use ($team) {
             $team->players()->attach($player);
         });
 
@@ -176,7 +176,10 @@ class CoachRoundsTest extends TestCase
                             'round' => [
                                 'best_player' => 1,
                                 'second_best_player' => 0,
-                                'quarters' => 4,
+                                'quarters' => [
+                                    'count' => 4,
+                                    'reason' => 'No reason'
+                                ]
                             ],
                         ],
                         [
@@ -184,7 +187,10 @@ class CoachRoundsTest extends TestCase
                             'round' => [
                                 'best_player' => 0,
                                 'second_best_player' => 1,
-                                'quarters' => 3,
+                                'quarters' => [
+                                    'count' => 3,
+                                    'reason' => 'Ill'
+                                ]
                             ]
                         ]
                     ]
@@ -196,6 +202,7 @@ class CoachRoundsTest extends TestCase
             'best_player' => 1,
             'second_best_player' => 0,
             'quarters' => 4,
+            'quarters_reason' => 'No reason'
         ]);
 
         $this->seeInDatabase('players', [
@@ -209,6 +216,7 @@ class CoachRoundsTest extends TestCase
             'best_player' => 0,
             'second_best_player' => 1,
             'quarters' => 3,
+            'quarters_reason' => 'Ill',
         ]);
 
         $this->seeInDatabase('players', [
@@ -226,7 +234,10 @@ class CoachRoundsTest extends TestCase
                             'round' => [
                                 'best_player' => 0,
                                 'second_best_player' => 0,
-                                'quarters' => 1,
+                                'quarters' => [
+                                    'count' => 1,
+                                    'reason' => NULL
+                                ]
                             ],
                         ],
                         [
@@ -234,7 +245,10 @@ class CoachRoundsTest extends TestCase
                             'round' => [
                                 'best_player' => 1,
                                 'second_best_player' => 0,
-                                'quarters' => 2,
+                                'quarters' => [
+                                    'count' => 2,
+                                    'reason' => NULL
+                                ],
                             ]
                         ]
                     ]
@@ -259,6 +273,7 @@ class CoachRoundsTest extends TestCase
             'best_player' => 0,
             'second_best_player' => 0,
             'quarters' => 1,
+            'quarters_reason' => NULL
         ]);
 
         // check new player is flagged as recent
@@ -274,6 +289,7 @@ class CoachRoundsTest extends TestCase
             'best_player' => 1,
             'second_best_player' => 0,
             'quarters' => 2,
+            'quarters_reason' => NULL,
         ]);
 
          $this->seeInDatabase('players', [
@@ -306,7 +322,7 @@ class CoachRoundsTest extends TestCase
             ->visit('/teams/' . $team->slug . '/rounds/' . $rounds->first()->id . '/fetch');
 
         $players->each(function ($player) {
-            $this->see('{"id":' . $player->id . ',"name":"'. $player->name .'","temp":0,"recent":0,"rounds":5,"round":{"exists":1,"best_player":0,"second_best_player":0,"quarters":0}}');
+            $this->see('{"id":' . $player->id . ',"name":"'. $player->name .'","temp":0,"recent":0,"rounds":5,"round":{"exists":1,"best_player":0,"second_best_player":0,"quarters":{"count":0,"reason":""}}}');
         });
 
     }
@@ -439,7 +455,10 @@ class CoachRoundsTest extends TestCase
                             'round' => [
                                 'best_player' => 0,
                                 'second_best_player' => 0,
-                                'quarters' => 1,
+                                'quarters' => [
+                                    'count' => 1,
+                                    'reason' => NULL
+                                ],
                             ],
                         ]
                     ]
@@ -478,7 +497,10 @@ class CoachRoundsTest extends TestCase
                             'round' => [
                                 'best_player' => 0,
                                 'second_best_player' => 0,
-                                'quarters' => 1,
+                                'quarters' => [
+                                    'count' => 1,
+                                    'reason' => NULL
+                                ],
                             ],
                         ]
                     ]
@@ -578,7 +600,10 @@ class CoachRoundsTest extends TestCase
                             'round' => [
                                 'best_player' => 0,
                                 'second_best_player' => 0,
-                                'quarters' => 1,
+                                'quarters' => [
+                                    'count' => 1,
+                                    'reason' => NULL
+                                ],
                             ],
                         ]
                     ]
@@ -619,7 +644,10 @@ class CoachRoundsTest extends TestCase
                             'round' => [
                                 'best_player' => 0,
                                 'second_best_player' => 0,
-                                'quarters' => 'hello',
+                                'quarters' => [
+                                    'count' => 'hello',
+                                    'reason' => NULL
+                                ],
                             ],
                         ]
                     ]
@@ -644,7 +672,10 @@ class CoachRoundsTest extends TestCase
                             'round' => [
                                 'best_player' => 0,
                                 'second_best_player' => 0,
-                                'quarters' => 99,
+                                'quarters' => [
+                                    'count' => 99,
+                                    'reason' => NULL
+                                ],
                             ],
                         ]
                     ]
@@ -687,7 +718,10 @@ class CoachRoundsTest extends TestCase
                             'round' => [
                                 'best_player' => 0,
                                 'second_best_player' => 0,
-                                'quarters' => 2,
+                                'quarters' => [
+                                    'count' => 2,
+                                    'reason' => NULL
+                                ],
                             ],
                         ]
                     ]
@@ -715,7 +749,10 @@ class CoachRoundsTest extends TestCase
                             'round' => [
                                 'best_player' => 0,
                                 'second_best_player' => 0,
-                                'quarters' => 99,
+                                'quarters' => [
+                                    'count' => 99,
+                                    'reason' => NULL
+                                ],
                             ],
                         ]
                     ]
@@ -773,7 +810,10 @@ class CoachRoundsTest extends TestCase
                             'round' => [
                                 'best_player' => 0,
                                 'second_best_player' => 0,
-                                'quarters' => 2,
+                                'quarters' => [
+                                    'count' => 2,
+                                    'reason' => NULL
+                                ],
                             ],
                         ]
                     ]
@@ -785,6 +825,7 @@ class CoachRoundsTest extends TestCase
             'round_id' => $rounds->first()->id,
             'player_id' => $players->first()->id,
             'quarters' => 2,
+            'quarters_reason' => NULL
         ]);
 
         $this->seeInDatabase('players', [
@@ -802,7 +843,10 @@ class CoachRoundsTest extends TestCase
                             'round' => [
                                 'best_player' => 0,
                                 'second_best_player' => 0,
-                                'quarters' => 1,
+                                'quarters' => [
+                                    'count' => 1,
+                                    'reason' => NULL
+                                ],
                             ],
                         ]
                     ]
@@ -830,6 +874,7 @@ class CoachRoundsTest extends TestCase
             'round_id' => $rounds->first()->id,
             'player_id' => $players->last()->id,
             'quarters' => 1,
+            'quarters_reason' => NULL
         ]);
     }
 
@@ -1028,7 +1073,10 @@ class CoachRoundsTest extends TestCase
                         'round' => [
                             'best_player' => 0,
                             'second_best_player' => 0,
-                            'quarters' => 1,
+                            'quarters' => [
+                                'count' => 1,
+                                'reason' => NULL
+                            ],
                         ],
                     ]
                 ]
@@ -1104,7 +1152,10 @@ class CoachRoundsTest extends TestCase
                         'round' => [
                             'best_player' => 0,
                             'second_best_player' => 0,
-                            'quarters' => 1,
+                            'quarters' => [
+                                'count' => 1,
+                                'reason' => NULL
+                            ],
                         ],
                     ]
                 ]

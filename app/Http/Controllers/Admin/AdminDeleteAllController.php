@@ -16,18 +16,18 @@ class AdminDeleteAllController extends Controller
      */
     public function destroy()
     {
+        DB::table('failed_jobs')->delete();
+        DB::table('jobs')->delete();
+        DB::table('password_resets')->delete();
+        DB::table('player_round')->delete();
+        DB::table('player_team')->delete();
+        DB::table('round_team')->delete();
+        DB::table('players')->delete();
+        DB::table('rounds')->delete();
+        DB::table('teams')->delete();
+        DB::table('users')->where('role', 'coach')->delete();
 
-        // DB::table('failed_jobs')->truncate();
-        // DB::table('jobs')->truncate();
-        // DB::table('password_resets')->truncate();
-        // DB::table('player_round')->truncate();
-        DB::table('player_team')->truncate();
-        // DB::table('players')->truncate();
-        // DB::table('round_team')->truncate();
-        // DB::table('rounds')->truncate();
-        // DB::table('teams')->truncate();
-        // DB::table('users')->where('role', 'coach')->delete();
-
+        return response()->json(null, 200);
     }
 
 }

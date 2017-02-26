@@ -25,10 +25,10 @@ class AdminPlayersController extends \App\Http\Controllers\Controller
         $playersCollection = $players->getCollection();
 
         return fractal()
-                        ->collection($playersCollection)
-                        ->transformWith(new PlayerTransformer)
-                        ->paginateWith(new IlluminatePaginatorAdapter($players))
-                        ->toArray();
+                ->collection($playersCollection)
+                ->transformWith(new PlayerTransformer)
+                ->paginateWith(new IlluminatePaginatorAdapter($players))
+                ->toArray();
     }
 
 }

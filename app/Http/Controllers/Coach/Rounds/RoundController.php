@@ -114,6 +114,8 @@ class RoundController extends Controller
             // making sure all indexes are available in request
             if (! array_key_exists('round', $player_data) ||
                 ! array_key_exists('quarters', $player_data['round']) ||
+                ! array_key_exists('count', $player_data['round']['quarters']) ||
+                ! array_key_exists('reason', $player_data['round']['quarters']) ||
                 ! array_key_exists('best_player', $player_data['round']) ||
                 ! array_key_exists('second_best_player', $player_data['round']) ||
                 ! array_key_exists('id', $player_data) ) {

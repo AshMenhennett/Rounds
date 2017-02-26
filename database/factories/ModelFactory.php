@@ -38,7 +38,6 @@ $factory->define(App\Team::class, function (Faker\Generator $faker) {
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Round::class, function (Faker\Generator $faker) {
-
     return [
         'name' => $faker->word,
         'default_date' => $faker->date(),
@@ -47,7 +46,6 @@ $factory->define(App\Round::class, function (Faker\Generator $faker) {
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Player::class, function (Faker\Generator $faker) {
-
     return [
         'name' => $faker->name,
     ];
