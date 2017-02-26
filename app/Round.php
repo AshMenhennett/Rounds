@@ -16,6 +16,8 @@ class Round extends Model
     /**
      * Mass assignable fields.
      *
+     * Name is to be a numeric value, i.e. 1
+     *
      * @var array
      */
     protected $fillable = [
@@ -42,7 +44,7 @@ class Round extends Model
     public function players()
     {
         return $this->belongsToMany(Player::class)
-                ->withPivot('best_player', 'second_best_player', 'quarters')
+                ->withPivot('best_player', 'second_best_player', 'quarters', 'quarters_reason')
                 ->withTimestamps();
     }
 

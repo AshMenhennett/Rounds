@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading"><h4>FAQ</h4></div>
+                <div class="panel-heading">FAQ</div>
 
                 <div class="panel-body">
                     <h3>Your Team</h3>
@@ -60,6 +60,14 @@
                         <li>
                             <strong>What happens if I make a mistake with a rounds data entry?</strong>
                              <p>If you make a mistake, just go back and make the correct selections (players), attributes (quarters and best players) and update the details.</p>
+                        </li>
+                    </ul>
+
+                    <h3>Support</h3>
+                    <ul>
+                        <li>
+                            <strong>How can I contact support?</strong>
+                            <p>Feel free to send the administrator an email: <a href="{{ 'mailto:' . env('ADMIN_SUPPORT_EMAIL_ADDRESS') }}">Email Admin</a>.</p>
                         </li>
                     </ul>
                 </div>

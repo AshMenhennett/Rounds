@@ -19,6 +19,8 @@ Vue.component('coach-team-players', require('./components/Coach/Players/TeamPlay
 
 // admin dashboard
 Vue.component('admin-dashboard', require('./components/Admin/AdminDashboardComponent.vue'));
+// delete all
+Vue.component('admin-delete-all', require('./components/Admin/AdminDeleteAllComponent.vue'));
 
 // stats
 Vue.component('admin-stats', require('./components/Admin/Stats/AdminStatsComponent.vue'));
@@ -54,6 +56,9 @@ Vue.component('admin-rounds-master', require('./components/Admin/Rounds/AdminRou
     Vue.component('admin-import-rounds', require('./components/Admin/Rounds/AdminImportRoundsComponent.vue'));
     // displays rounds
     Vue.component('admin-display-rounds', require('./components/Admin/Rounds/AdminDisplayRoundsComponent.vue'));
+
+// exports player quarter data by team
+Vue.component('admin-export-player-quarter-data', require('./components/Admin/Export/AdminExportPlayerQuarterDataByTeamComponent.vue'));
 
 // generic
 Vue.component('bootstrap-alert', require('./components/Generic/BootstrapAlertComponent.vue'));

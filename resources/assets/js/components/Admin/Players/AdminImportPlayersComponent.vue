@@ -22,7 +22,7 @@
                 <br>
                 Please check the file is a valid Excel file.
                 <br>
-                <a href="/faq#valid-excel" target="_blank" class="alert-link">Example of valid Excel format <span class="glyphicon glyphicon-new-window"></span></a>.
+                <a href="/admin/examples" target="_blank" class="alert-link">Examples of valid Excel Spreadsheets <span class="glyphicon glyphicon-new-window"></span></a>.
             </template>
         </bootstrap-alert>
 

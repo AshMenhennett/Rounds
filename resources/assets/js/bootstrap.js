@@ -11,6 +11,11 @@ window.$ = window.jQuery = require('jquery');
 require('bootstrap-sass');
 
 /**
+ * Load FileSaver to save a blob returned from back end response to a file.
+ */
+window.FileSaver = require('file-saver');
+
+/**
  * Vue is a modern JavaScript library for building interactive web interfaces
  * using reactive data binding and reusable components. Vue's API is clean
  * and simple, leaving you to focus on building your next great project.

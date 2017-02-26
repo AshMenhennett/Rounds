@@ -63,6 +63,7 @@
                         @if (Auth::check())
                             @if (Auth::user()->isAdmin())
                                 <li><a href="{{ route('admin.home') }}">Admin Dashboard</a></li>
+                                <li><a href="{{ route('admin.export.index') }}">Export</a></li>
                             @else
                                 @if (Auth::user()->hasTeam())
                                     <li><a href="{{ route('coach.team.manage', Auth::user()->team()->first()) }}">My Team</a></li>
@@ -89,6 +90,7 @@
                                     @if (Auth::user()->isAdmin())
                                         <li class="dropdown-header">Admin</li>
                                         <li><a href="{{ route('admin.home') }}">Dashboard</a></li>
+                                        <li><a href="{{ route('admin.export.index') }}">Export Data</a></li>
                                         <li role="separator" class="divider"></li>
 
                                         <li class="dropdown-header">Coach</li>
@@ -106,7 +108,7 @@
                                     <li class="dropdown-header">Support</li>
 
                                     <li><a href="{{ route('faq') }}">FAQ</a></li>
-                                    <li><a href="mailto:tania.costello@optusnet.com.au">Contact Admin</a></li>
+                                    <li><a href="{{ 'mailto:' . env('ADMIN_SUPPORT_EMAIL_ADDRESS') }}">Contact Admin</a></li>
 
                                     <li role="separator" class="divider"></li>
 

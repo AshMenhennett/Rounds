@@ -19,7 +19,9 @@
                 </div>
             </div>
         </div>
+
     @else
+
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <a href="{{ route('coach.rounds.index', $team) }}">&laquo; Rounds</a>

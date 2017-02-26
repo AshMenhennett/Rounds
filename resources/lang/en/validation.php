@@ -86,23 +86,8 @@ return [
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
 
-    /**
-     * Validator::extend('team_exists', function($attributes, $value, $parameters) {
-            // checks if a team exists
-            return Team::find($value);
-        });
-
-        Validator::extend('team_not_exists', function($attributes, $value, $parameters) {
-            // check value (team name) in current case and lowercase
-            return ! Team::where('name', $value)->first() && ! Team::where('name', strtolower($value))->first();
-        });
-
-        Validator::extend('unique_slug_team_name', function($attributes, $value, $parameters) {
-            // checks if slug'ified version of the team name is unique, compared to existing team slugs
-            return ! Team::where('slug', str_slug($value, '-'))->first();
-        });
-     */
-
+    'team_exists'          => 'The :attribute selection was invalid.',
+    'team_exists_by_slug'  => 'The :attribute selection was invalid.',
 
 
     /*

@@ -4,7 +4,7 @@
             <div class="col-md-8 col-md-offset-2">
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Admin Dashboard</div>
+                    <div class="panel-heading">Admin Dashboard <a href="/admin/examples" class="pull-right">Valid Excel Examples</a></div>
                     <div class="panel-body">
                         <ul class="nav nav-pills nav-justified">
                             <li role="presentation" :class="{ 'active' : currentView == 'admin-stats' }"><a href="#" @click.prevent="changeView('admin-stats')">Stats</a></li>
@@ -22,6 +22,8 @@
 
             </div>
         </div>
+
+        <admin-delete-all></admin-delete-all>
     </div>
 </template>
 

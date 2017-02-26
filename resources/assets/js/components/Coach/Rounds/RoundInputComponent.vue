@@ -46,14 +46,18 @@
             </div>
         </div>
 
-        <hr v-if="! loading && (players.length > 0 || temp_players.length > 0)" class="round-input" />
+        <hr v-if="! loading && (players.length || temp_players.length)" class="round-input" />
 
         <div v-if="selected_players.length && ! loading">
             <h4>Enter Quarters</h4>
-            <div class="form-group" v-for="player in selected_players" :class="errors.quarter_input.invalid && player.id === errors.quarter_input.player_id ? 'has-error' : ''">
+            <div class="form-group" v-for="player in selected_players" :class="player.round.quarters.count > 4 || (errors.quarter_input.invalid && player.id === errors.quarter_input.player_id) ? 'has-error' : ''">
                 <label :for="'player' + player.id" class="label-control">{{ player.name }} *</label>
-                <input type="number" :id="'player' + player.id" name="name" v-model="player.round.quarters" id="name" class="form-control" min="1" max="4" step="1">
-                <div v-if="errors.quarter_input.invalid && player.id === errors.quarter_input.player_id" class="help-block danger">
+                <input type="number" :id="'player' + player.id" name="name" v-model="player.round.quarters.count" id="name" class="form-control" min="1" max="4" step="1">
+                <div class="input-group">
+                    <div class="input-group-addon">Reason quarters played</div>
+                    <input type="text" v-model="player.round.quarters.reason" class="form-control">
+                </div>
+                <div v-if="player.round.quarters.count > 4 || (errors.quarter_input.invalid && player.id === errors.quarter_input.player_id)" class="help-block danger">
                     A quarter must be a numeric value of no more than 4.
                 </div>
             </div>
@@ -67,7 +71,7 @@
                 </select>
             </div>
 
-            <h4>Select Second Best Player</h4>
+            <h4>Select Team Spirit Player</h4>
             <div class="form-group">
                 <select name="second-best-player" id="second-best-player" v-model="second_best_player" class="form-control">
                     <option v-for="player in selected_players" :value="player.id">{{ player.name }}</option>
@@ -216,7 +220,10 @@
                         round: {
                             best_player: 0,
                             exists: 0,
-                            quarters: 0,
+                            quarters: {
+                                count: 0,
+                                reason: ''
+                            },
                             second_best_player: 0
                         }
                     });

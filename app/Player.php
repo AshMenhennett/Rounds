@@ -37,8 +37,28 @@ class Player extends Model
     public function rounds()
     {
         return $this->belongsToMany(Round::class)
-                ->withPivot('best_player', 'second_best_player', 'quarters')
+                ->withPivot('best_player', 'second_best_player', 'quarters', 'quarters_reason')
                 ->withTimestamps();
+    }
+
+    /**
+     * Returns the count of how many times the Player was a 'best_player'
+     *
+     * @return int
+     */
+    public function countBestPlayerStatus()
+    {
+        return $this->rounds()->wherePivot('best_player', '=', 1)->count();
+    }
+
+    /**
+     * Returns the count of how many times the Player was a 'second_best_player'
+     *
+     * @return int
+     */
+    public function countSecondBestPlayerStatus()
+    {
+        return $this->rounds()->wherePivot('second_best_player', '=', 1)->count();
     }
 
 }

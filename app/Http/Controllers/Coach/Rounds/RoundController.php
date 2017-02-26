@@ -81,7 +81,10 @@ class RoundController extends Controller
                         // gross code, but will do for now
                         'best_player' => isset($player->rounds()->find($round->id)->pivot->best_player) ? $player->rounds()->find($round->id)->pivot->best_player : 0,
                         'second_best_player' => isset($player->rounds()->find($round->id)->pivot->second_best_player) ? $player->rounds()->find($round->id)->pivot->second_best_player : 0,
-                        'quarters' => isset($player->rounds()->find($round->id)->pivot->quarters) ? $player->rounds()->find($round->id)->pivot->quarters : 0,
+                        'quarters' => [
+                            'count' => isset($player->rounds()->find($round->id)->pivot->quarters) ? $player->rounds()->find($round->id)->pivot->quarters : 0,
+                            'reason' => isset($player->rounds()->find($round->id)->pivot->quarters_reason) ? $player->rounds()->find($round->id)->pivot->quarters_reason : '',
+                        ]
                     ]
                 ];
             }
@@ -117,7 +120,7 @@ class RoundController extends Controller
                 abort(400, 'INCOMPLETE_DATA');
             }
 
-            if (((int) $player_data['round']['quarters'] > 4) || ((int) $player_data['round']['quarters'] < 0) || ! is_int($player_data['round']['quarters'])) {
+            if (((int) $player_data['round']['quarters']['count'] > 4) || ((int) $player_data['round']['quarters']['count'] < 0) || ! is_int($player_data['round']['quarters']['count'])) {
                 // invalid data for quarters submitted
                 // return JSON with id of invalid quarter input
                 return response()->json(['player_id' => $player_data['id']], 422);
@@ -163,7 +166,8 @@ class RoundController extends Controller
             $round->players()->attach($player, [
                 'best_player' => $player_data['round']['best_player'] != 0 ? 1 : 0,
                 'second_best_player' => $player_data['round']['second_best_player'] != 0 ? 1 : 0,
-                'quarters' => $player_data['round']['quarters'],
+                'quarters' => $player_data['round']['quarters']['count'],
+                'quarters_reason' => $player_data['round']['quarters']['reason'],
             ]);
         }
 
@@ -193,7 +197,7 @@ class RoundController extends Controller
 
         $round->players()->detach($team->players);
 
-        $team->players(function ($player) {
+        $team->players->each(function ($player) use ($round) {
             $round->players()->detach($player);
         });
 

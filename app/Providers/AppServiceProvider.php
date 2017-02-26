@@ -23,6 +23,11 @@ class AppServiceProvider extends ServiceProvider
             return Team::find($value);
         });
 
+        Validator::extend('team_exists_by_slug', function($attributes, $value, $parameters) {
+            // checks if a team exists
+            return Team::where('slug', $value)->first();
+        });
+
         Validator::extend('unique_slug', function($attributes, $value, $parameters) {
             // checks if slug'ified version of the team name is unique, compared to existing team slugs
             return ! Team::where('slug', str_slug($value, '-'))->first();

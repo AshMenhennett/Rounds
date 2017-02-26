@@ -25,7 +25,6 @@ Route::get('/legal/privacy', function () {
     return view('legal.privacy');
 })->name('legal.privacy');
 
-// TODO: add valid excel format to faq
 Route::get('/faq', function () {
     return view('faq');
 })->name('faq');
@@ -69,6 +68,10 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/', 'Admin\AdminDashboardController@index')->name('admin.home');
 
+        Route::get('/examples', function () {
+            return view('admin.examples');
+        })->name('admin.examples');
+
         // gets players for pagination with fractal
         Route::get('/players/fetch', 'Admin\Players\AdminPlayersController@fetch')->name('admin.players.fetch');
 
@@ -82,6 +85,8 @@ Route::group(['middleware' => ['auth']], function () {
 
         // gets teams as an array, no pagination, no fractal
         Route::get('/teams/fetch', 'Admin\Teams\AdminTeamsController@fetch')->name('admin.teams.fetch');
+        // gets players for a given team
+        Route::get('/teams/{team}/players/fetch', 'Admin\Teams\AdminTeamPlayersController@fetch')->name('admin.team.players.fetch');
 
         // gets teams for pagination with fractal
         Route::get('/teams/fetch/pagination', 'Admin\Teams\AdminTeamsController@fetchForPagination')->name('admin.teams.fetch.pagination');
@@ -110,6 +115,18 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('rounds/import/fixed', 'Admin\Rounds\AdminImportFixedRoundsController@store')->name('admin.rounds.import.fixed');
 
         Route::get('stats/fetch', 'Admin\Stats\AdminStatsController@fetch')->name('admin.stats.fetch');
+
+        Route::group(['prefix' => 'export'], function () {
+            Route::get('/', 'Admin\Export\AdminExportDataController@index')->name('admin.export.index');
+
+            // includes both best players and second best players (team spirit) and their votes
+            Route::post('/best-players', 'Admin\Export\AdminExportBestPlayersByTeamController@export')->name('admin.export.bestPlayers');
+            Route::post('/all/team', 'Admin\Export\AdminExportAllByTeamController@export')->name('admin.export.allByTeam');
+            Route::post('/quarters/player', 'Admin\Export\AdminExportPlayerQuarterDataByTeamController@export')->name('admin.export.playerQuarters');
+            Route::post('/quarters/team', 'Admin\Export\AdminExportTeamQuarterDataController@export')->name('admin.export.teamQuarters');
+        });
+
+        Route::delete('/delete', 'Admin\AdminDeleteAllController@destroy')->name('admin.delete.all');
 
     });
 
