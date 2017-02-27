@@ -88,7 +88,7 @@ class AdminExportBestPlayersByTeamController extends Controller
                         $round['team_spirit'] = $round['team_spirit']->name;
                     }
                     $sheet->appendRow([
-                        $round->name, $round->date->format('d/m/Y'), $team->name, $round->best_player, $round->team_spirit
+                        $round->name, \Carbon\Carbon::parse($round->date($team))->format('d/m/Y'), $team->name, $round->best_player, $round->team_spirit
                     ]);
                 });
 

@@ -153,6 +153,7 @@
                     }
                     this.adding = false;
                     this.success = true;
+                    this.name = '';
                 }, (response) => {
                     this.adding = false;
                     this.adding_error = true;

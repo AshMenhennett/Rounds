@@ -173,8 +173,14 @@
                     player: this.selected_player.id
                 }).then((response) => {
                     this.processing.request = false;
+                    // get probable team name from team slug
+                    var teamNameSegments = this.selected_team.slug.replace('-', ' ').split(' ');
+                    var teamName = '';
+                    teamNameSegments.forEach(function (value, index, arr) {
+                        teamName += value.charAt(0).toUpperCase() + value.slice(1).toLowerCase() + (! index >= (arr.length-1) ? ' ' : '');
+                    });
                     // save the returned blob to a file
-                    FileSaver.saveAs(response.body, 'Player ' + this.selected_player.id + ' - ' + this.selected_team.slug + ' Quarter Data - ' + (new Date().toLocaleString()) + '.xls');
+                    FileSaver.saveAs(response.body, 'Player ' + this.selected_player.id + ' - ' + teamName + ' Quarter Data -' + this.getDate() + '.xls');
                 }, (response) => {
                     if (response.data.team) {
                         this.error.validation.team = true;
@@ -185,13 +191,13 @@
                     }
                     this.processing.request = false;
                 });
+            },
+            getDate() {
+                return moment().format('Y-M-D hh-mm-ss');
             }
         },
         mounted() {
             this.getTeams();
-
-
-
         }
     }
 </script>
