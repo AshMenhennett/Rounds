@@ -14,7 +14,7 @@ class Team extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'slug', 'name',
+        'user_id', 'slug', 'name', 'best_players_allowed',
     ];
 
     /**
@@ -78,6 +78,16 @@ class Team extends Model
     public function hasCoach()
     {
         return $this->user;
+    }
+
+    /**
+     * Returns whether a Team is required to enter in best players when filling in a Round.
+     *
+     * @return boolean
+     */
+    public function bestPlayersAllowed()
+    {
+        return $this->best_players_allowed === 1;
     }
 
 }

@@ -144,7 +144,7 @@ class AdminPlayerTest extends TestCase
             ->call('GET', '/admin/teams/fetch');
 
         $teams->each(function ($team) use($user) {
-            $this->see('{"id":'. $team->id .',"user_id":'. $user->id .',"name":"'. $team->name .'","slug":"'. $team->slug .'","created_at":"'. $team->created_at .'","updated_at":"'. $team->updated_at .'"}');
+            $this->see('{"id":'. $team->id .',"user_id":'. $user->id .',"name":"'. $team->name .'","slug":"'. $team->slug .'","created_at":"'. $team->created_at .'","updated_at":"'. $team->updated_at .'","best_players_allowed":1}');
         });
     }
 

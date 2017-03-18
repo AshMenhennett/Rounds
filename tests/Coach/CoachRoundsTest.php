@@ -367,6 +367,27 @@ class CoachRoundsTest extends TestCase
 
     }
 
+    /** @test */
+    public function user_can_get_best_players_allowed_status()
+    {
+        $user = factory(App\User::class)->create();
+        $team = factory(App\Team::class)->create();
+
+        $user->team()->save($team);
+
+        $response = $this->actingAs($user)
+            ->call('GET', '/teams/' . $team->slug . '/bestPlayersAllowed/status');
+
+        $this->assertTrue($response->content() === 'true');
+
+        $team->update(['best_players_allowed' => 0]);
+
+        $response = $this->actingAs($user)
+            ->call('GET', '/teams/' . $team->slug . '/bestPlayersAllowed/status');
+
+        $this->assertTrue($response->content() === 'false');
+    }
+
     /**
      * Validation
      */
@@ -1296,5 +1317,34 @@ class CoachRoundsTest extends TestCase
             'round_id' => $rounds->first()->id,
             'team_id' => $team->id,
         ]);
+    }
+
+    /** @test */
+    public function other_user_cannot_get_best_players_allowed_status_for_a_team_they_dont_own()
+    {
+        $users = factory(App\User::class, 2)->create();
+        $team = factory(App\Team::class)->create();
+
+        $users->first()->team()->save($team);
+
+        $this->actingAs($users->last())
+            ->call('GET', '/teams/' . $team->slug . '/bestPlayersAllowed/status');
+
+        $this->assertResponseStatus(403);
+    }
+
+    /** @test */
+    public function admin_user_can_get_best_players_allowed_status_for_a_team_they_dont_own()
+    {
+        $users = factory(App\User::class, 2)->create();
+        $team = factory(App\Team::class)->create();
+
+        $users->last()->update(['role' => 'admin']);
+        $users->first()->team()->save($team);
+
+        $this->actingAs($users->last())
+            ->call('GET', '/teams/' . $team->slug . '/bestPlayersAllowed/status');
+
+        $this->assertResponseStatus(200);
     }
 }

@@ -10,6 +10,14 @@
                 <div class="panel-body">
                     <a href="{{ route('coach.players.index', $team) }}" class="btn btn-default">Add Players</a>
                     <a href="{{ route('coach.rounds.index', $team) }}" class="btn btn-primary">Fill in Rounds</a>
+
+                    @if (Auth::user()->isAdmin())
+                        <form class="inline" action="{{ route('admin.team.bestPlayersAllowed.toggle', $team) }}" method="post">
+                            {{ csrf_field() }}
+                            {{ method_field('PUT') }}
+                            <button type="submit" class="btn {{ $team->bestPlayersAllowed() ? 'btn-danger' : 'btn-success' }}">{{ $team->bestPlayersAllowed() ? 'Revoke Best Player Rights' : 'Allow Best Players' }}</button>
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>

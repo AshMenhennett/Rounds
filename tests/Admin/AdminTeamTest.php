@@ -18,7 +18,7 @@ class AdminTeamTest extends TestCase
             ->call('GET', '/admin/teams/fetch');
 
         $teams->each(function ($team) {
-            $this->see('{"id":' . $team->id . ',"user_id":null,"name":"' . $team->name . '","slug":"' . $team->slug . '","created_at":"'. $team->created_at .'","updated_at":"'. $team->updated_at .'"}');
+            $this->see('{"id":' . $team->id . ',"user_id":null,"name":"' . $team->name . '","slug":"' . $team->slug . '","created_at":"'. $team->created_at .'","updated_at":"'. $team->updated_at .'","best_players_allowed":1}');
         });
     }
 
@@ -325,6 +325,29 @@ class AdminTeamTest extends TestCase
             ]);
 
         $this->assertResponseStatus(400);
+    }
+
+    /** @test */
+    public function admin_can_set_best_players_allowed_status()
+    {
+        $user = factory(App\User::class)->create(['role' => 'admin']);
+        $team = factory(App\Team::class)->create(['best_players_allowed' => 0]);
+
+        $this->actingAs($user)
+            ->call('PUT', '/admin/teams/' . $team->slug . '/bestPlayersAllowed/toggle');
+
+        $this->seeInDatabase('teams', [
+            'id' => $team->id,
+            'best_players_allowed' => 1
+        ]);
+
+        $this->actingAs($user)
+            ->call('PUT', '/admin/teams/' . $team->slug . '/bestPlayersAllowed/toggle');
+
+        $this->seeInDatabase('teams', [
+            'id' => $team->id,
+            'best_players_allowed' => 0
+        ]);
     }
 
    /**

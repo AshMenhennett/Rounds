@@ -64,19 +64,23 @@
 
             <hr v-if="! loading" class="round-input" />
 
-            <h4>Select Best Player</h4>
-            <div class="form-group">
-                <select name="best-player" id="best-player" v-model="best_player" class="form-control">
-                    <option v-for="player in selected_players" :value="player.id">{{ player.name }}</option>
-                </select>
-            </div>
+            <template v-if="can_set_best_players">
+                <h4>Select Best Player</h4>
+                <div class="form-group">
+                    <select name="best-player" id="best-player" v-model="best_player" class="form-control">
+                        <option value="-1">&nbsp;</option>
+                        <option v-for="player in selected_players" :value="player.id">{{ player.name }}</option>
+                    </select>
+                </div>
 
-            <h4>Select Team Spirit Player</h4>
-            <div class="form-group">
-                <select name="second-best-player" id="second-best-player" v-model="second_best_player" class="form-control">
-                    <option v-for="player in selected_players" :value="player.id">{{ player.name }}</option>
-                </select>
-            </div>
+                <h4>Select Team Spirit Player</h4>
+                <div class="form-group">
+                    <select name="second-best-player" id="second-best-player" v-model="second_best_player" class="form-control">
+                        <option value="-1">&nbsp;</option>
+                        <option v-for="player in selected_players" :value="player.id">{{ player.name }}</option>
+                    </select>
+                </div>
+            </template>
         </div>
 
         <bootstrap-alert
@@ -136,6 +140,7 @@
                 players: [],
                 temp_players: [],
                 selected_players: [],
+                can_set_best_players: true,
                 best_player: Number,
                 second_best_player: Number,
                 // loading- entire component
@@ -202,6 +207,11 @@
                         this.setRecentSelected();
                     }
                     this.loading = false;
+                });
+            },
+            getBestPlayersAllowedStatus() {
+                return this.$http.get('/teams/' + this.team + '/bestPlayersAllowed/status').then((response) => {
+                    this.can_set_best_players = response.data;
                 });
             },
             addPlayer() {
@@ -308,6 +318,11 @@
                         this.selected_players[i].round.second_best_player = 0;
                     }
 
+                    if (! this.can_set_best_players) {
+                        // if we can't set best players, don't set default options for select elements
+                        continue;
+                    }
+
                     // set best and second best player attributes, depending on value of model bound to select elements
                     if (this.selected_players[i].id === this.best_player) {
                         this.selected_players[i].round.best_player = 1;
@@ -353,6 +368,7 @@
         },
         mounted() {
             this.fetchPlayers();
+            this.getBestPlayersAllowedStatus();
         }
     }
 </script>

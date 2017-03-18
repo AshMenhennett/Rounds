@@ -206,4 +206,18 @@ class TeamPolicy
     {
         return  $user->id === $team->user_id || $user->isAdmin();
     }
+
+    /**
+     * Allows coach and admin to access a Teams bestPlayersAllowed() status
+     * Used in TeamBestPlayerAllowedStatusController
+     *
+     * @param  App\User   $user
+     * @param  App\Team   $team
+     * @return boolean
+     */
+    public function toggleTeamBestPlayerAllowed(User $user, Team $team)
+    {
+        return  $user->id === $team->user_id || $user->isAdmin();
+    }
+
 }

@@ -177,6 +177,20 @@ class CoachTeamTest extends TestCase
             ->see(strtoupper($team->name) . ' has <strong>' . count($team->players) . '</strong> players.');
     }
 
+    /** @test */
+    public function user_cannot_see_best_players_allowed_action_button_in_team_dashboard()
+    {
+        $user = factory(App\User::class)->create();
+        $team = factory(App\Team::class)->create();
+
+        $user->team()->save($team);
+
+
+        $this->actingAs($user)
+            ->visit('/teams/' . $team->slug . '/manage')
+            ->dontSee('Revoke Best Player Rights');
+    }
+
     /**
      * Authorization
      */

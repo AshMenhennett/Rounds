@@ -38,6 +38,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('/teams/{team}/coach', 'Coach\Teams\TeamController@detach')->name('coach.team.user.detach');
     Route::get('/teams/{team}/manage', 'Coach\Teams\TeamManagementController@show')->name('coach.team.manage');
 
+    // gets the status of a Team's ability to set best players for a Round
+    Route::get('/teams/{team}/bestPlayersAllowed/status', 'Coach\Teams\TeamBestPlayerAllowedStatusController@index')->name('coach.teams.bestPlayer.index');
+
     // displays Vue component to view all players within a Team
     Route::get('/teams/{team}/players', 'Coach\Players\PlayersController@index')->name('coach.players.index');
     // gets players for pagination with fractal
@@ -97,6 +100,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('/teams/{team}', 'Admin\Teams\AdminTeamController@destroy')->name('admin.team.destroy');
 
         Route::post('/teams/import', 'Admin\Teams\AdminImportTeamsController@store')->name('admin.teams.import');
+
+        // Toggles whether a Coach can fill in the Best Players section of the Coach/RoundInputComponent.vue
+        Route::put('/teams/{team}/bestPlayersAllowed/toggle', 'Admin\Teams\AdminTeamBestPlayersAllowedToggleController@update')->name('admin.team.bestPlayersAllowed.toggle');
 
         // gets coaches for pagination with fractal
         Route::get('/coaches/fetch', 'Admin\Coaches\AdminCoachesController@fetch')->name('admin.coaches.fetch');
