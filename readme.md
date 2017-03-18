@@ -13,7 +13,7 @@ There are a few commands for use with this application:
 - The local storage of compiled blade views can be cleaned, if you wish. To do so, execute the following command ```php artisan clear:compViews```.
 
 ##Functionality
-- ```User```s (coaches) can register and join ```Teams```s and manage said ```Team```s data.
+- ```User```s (coaches) can register and join ```Teams```s and manage said ```Team```'s ```Round``` (match) data.
 - Each ```User``` has a role- either ```coach``` or ```admin```.
 - An ```admin``` ```User``` has complete control over coaches, ```Team```s, ```Player```s and ```Round```s and is also considered a coach.
 - An ```admin``` ```User``` can import mass data and export crucial club data.
