@@ -19,9 +19,7 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers {
-        logout as performLogout;
-    }
+    use AuthenticatesUsers;
 
     protected $redirectTo = '/home';
 
@@ -43,7 +41,11 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        $this->performLogout($request);
+        $this->guard()->logout();
+
+        $request->session()->flush();
+
+        $request->session()->regenerate();
 
         return redirect('/login');
     }
