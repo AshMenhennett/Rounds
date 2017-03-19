@@ -22,8 +22,8 @@ class CoachTransformer extends \League\Fractal\TransformerAbstract
             'email' => $coach->email,
             'role' => $coach->role,
             'team' => [
-                'name' => $coach->team ? $coach->team->first()->name : null,
-                'slug' => $coach->team ? $coach->team->first()->slug : null,
+                'name' => $coach->team ? $coach->team->name : null,
+                'slug' => $coach->team ? $coach->team->slug : null,
             ]
         ];
     }
