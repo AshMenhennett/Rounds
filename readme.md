@@ -2,17 +2,17 @@
 
 This is a repository for a data entry application to track a sport team's stats, built with Laravel and Vue.
 
-##Highlight
+## Highlight
 - Import and export of crucial club data, including teams, players and rounds.
 
-##Commands
+## Commands
 There are a few commands for use with this application:
 - When the 'to-be' Administrator registers for an account, it is necessary to execute the ```alter:role``` command via command line, after they have registered, passing in the id of the ```User``` and the role (i.e. ```admin```). Eg. ```php artisan alter:role 1 admin```.
 - To remind coaches that they have not fullfilled their duties (haven't filled in round data by the end of the day specified by either the ```default_date``` in ```rounds``` or ```date``` in ```round_team```), you can setup a Cron job to run daily (at an appropriate time, by which a round will have been completed by i.e. 5pm), executing this command ```php artisan send:roundReminder```.
 - The local storage of excel spreadsheets will have to be cleaned every now and then. To do so, execute the following command ```php artisan clear:imports```.
 - The local storage of compiled blade views can be cleaned, if you wish. To do so, execute the following command ```php artisan clear:compViews```.
 
-##Functionality
+## Functionality
 - ```User```s (coaches) can register and join ```Teams```s and manage said ```Team```'s ```Round``` (match) data.
 - Each ```User``` has a role- either ```coach``` or ```admin```.
 - An ```admin``` ```User``` has complete control over coaches, ```Team```s, ```Player```s and ```Round```s and is also considered a coach.
@@ -23,7 +23,7 @@ There are a few commands for use with this application:
 - For more insight into the models and their relations, read the comments in ```App\Player```, ```App\Round```, ```App\Team``` and ```App\User```.
 - The coach FAQ will provide insight into some of the naming conventions used throughout the app (i.e. rounds, temporary players): ```views/faq.blade.php```
 
-##Installation & Configuration
+## Installation & Configuration
 If you would like to install this project, treat it as you would any other Laravel application:
 - Clone the repo.
 - Install dependencies: ```composer install``` (also, ```npm install```, if you need).
@@ -44,20 +44,16 @@ Further steps:
 - Set the ```APP_ENV``` environment variable to ```production``` when the app is on a live sever, to force HTTPS connections on all routes.
 - Run ```php artisan queue:work``` to allow jobs, queued mail and event broadcasting to function.
 
-##Routes
-![Routes](https://cloud.githubusercontent.com/assets/9494635/23349180/b3931c98-fd00-11e6-9ae4-547c46c7444e.png)
-Thanks to [Pretty Routes](https://github.com/garygreen/pretty-routes)
-
-##Additional Packages
+## Additional Packages
 - [Laravel Excel](https://github.com/Maatwebsite/Laravel-Excel)
 - [Laravel Fractal](https://github.com/spatie/laravel-fractal)
 
-##Additional Modules
+## Additional Modules
 - [FileSaver.js](https://github.com/eligrey/FileSaver.js/)
 - [Moment.js](https://github.com/moment/moment/)
 
-##Other
+## Other
 *Please do not use the associated legal views, if they still exist in this repository (terms.blade.php and privacy.blade.php). Use at your own peril.*
 
-##License
+## License
 [MIT](https://s3-ap-southeast-2.amazonaws.com/ashleymenhennett/LICENSE)
