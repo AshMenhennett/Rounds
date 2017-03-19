@@ -1,4 +1,4 @@
-#Rounds
+# Rounds
 
 This is a repository for a data entry application to track a sport team's stats, built with Laravel and Vue.
 
