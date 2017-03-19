@@ -19,6 +19,7 @@ There are a few commands for use with this application:
 - An ```admin``` ```User``` can import mass data and export crucial club data.
 - A coach may leave a ```Team```, but may not delete it.
 - An ```admin``` ```User``` may not delete a ```Team``` while it contains players.
+- A ```Player``` may not be deleted if it has played in a ```Round``` (match).
 - For more insight into the models and their relations, read the comments in ```App\Player```, ```App\Round```, ```App\Team``` and ```App\User```.
 - The coach FAQ will provide insight into some of the naming conventions used throughout the app (i.e. rounds, temporary players): ```views/faq.blade.php```
 
