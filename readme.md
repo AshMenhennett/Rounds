@@ -4,7 +4,7 @@ This is a repository for a data entry application to track a sport team's stats,
 
 ## Highlight
 - Import and export of crucial club data, including teams, players and rounds.
-- Admin Dashboard
+- Fully featured Admin Dashboard
 
 ## Commands
 There are a few commands for use with this application:
