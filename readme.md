@@ -4,6 +4,7 @@ This is a repository for a data entry application to track a sport team's stats,
 
 ## Highlight
 - Import and export of crucial club data, including teams, players and rounds.
+- Admin Dashboard
 
 ## Commands
 There are a few commands for use with this application:
@@ -54,6 +55,7 @@ Further steps:
 
 ## Other
 *Please do not use the associated legal views, if they still exist in this repository (terms.blade.php and privacy.blade.php). Use at your own peril.*
+*Also, do not use the images included in ```public/img```.*
 
 ## License
 [MIT](https://s3-ap-southeast-2.amazonaws.com/ashleymenhennett/LICENSE)
