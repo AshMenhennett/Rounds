@@ -6,13 +6,6 @@ This is a repository for a data entry application to track a sport team's stats,
 - Import and export of crucial club data, including teams, players and rounds.
 - Fully featured Admin Dashboard
 
-## Commands
-There are a few commands for use with this application:
-- When the 'to-be' Administrator registers for an account, it is necessary to execute the ```alter:role``` command via command line, after they have registered, passing in the id of the ```User``` and the role (i.e. ```admin```). Eg. ```php artisan alter:role 1 admin```.
-- To remind coaches that they have not fullfilled their duties (haven't filled in round data by the end of the day specified by either the ```default_date``` in ```rounds``` or ```date``` in ```round_team```), you can setup a Cron job to run daily (at an appropriate time, by which a round will have been completed by i.e. 5pm), executing this command ```php artisan send:roundReminder```.
-- The local storage of excel spreadsheets will have to be cleaned every now and then. To do so, execute the following command ```php artisan clear:imports```.
-- The local storage of compiled blade views can be cleaned, if you wish. To do so, execute the following command ```php artisan clear:compViews```.
-
 ## Functionality
 - ```User```s (coaches) can register and join ```Teams```s and manage said ```Team```'s ```Round``` (match) data.
 - Each ```User``` has a role- either ```coach``` or ```admin```.
@@ -44,6 +37,13 @@ Further steps:
 - Set the ```QUEUE_DRIVER``` environment variable to ```database```.
 - Set the ```APP_ENV``` environment variable to ```production``` when the app is on a live sever, to force HTTPS connections on all routes.
 - Run ```php artisan queue:work``` to allow jobs, queued mail and event broadcasting to function.
+
+## Commands
+There are a few commands for use with this application:
+- When the 'to-be' Administrator registers for an account, it is necessary to execute the ```alter:role``` command via command line, after they have registered, passing in the id of the ```User``` and the role (i.e. ```admin```). Eg. ```php artisan alter:role 1 admin```.
+- To remind coaches that they have not fullfilled their duties (haven't filled in round data by the end of the day specified by either the ```default_date``` in ```rounds``` or ```date``` in ```round_team```), you can setup a Cron job to run daily (at an appropriate time, by which a round will have been completed by i.e. 5pm), executing this command ```php artisan send:roundReminder```.
+- The local storage of excel spreadsheets will have to be cleaned every now and then. To do so, execute the following command ```php artisan clear:imports```.
+- The local storage of compiled blade views can be cleaned, if you wish. To do so, execute the following command ```php artisan clear:compViews```.
 
 ## Additional Packages
 - [Laravel Excel](https://github.com/Maatwebsite/Laravel-Excel)
