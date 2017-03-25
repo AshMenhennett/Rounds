@@ -50,6 +50,8 @@ hr {
 a > span.glyphicon {
     font-size: 1.35em;
     margin: 9px;
+} a.btn > span.glyphicon {
+    margin: 0;
 }
 
 /* Footer */
@@ -73,6 +75,7 @@ a > span.glyphicon {
     margin-bottom: 0px;
     padding-top: 225px;
     background: #2b5876; /* fallback for old browsers */
+    background-color: transparent !important; /* Allows body background color to be seen, to avoid issue in some browsers */
     background: -webkit-linear-gradient(to bottom, #2b5876 , #4e4376); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to bottom, #2b5876 , #4e4376); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     color: #fff;
@@ -82,6 +85,10 @@ a > span.glyphicon {
         height: 100vh;
         text-align: center;
     }
+}
+
+body.with-colour {
+    background: #2b5876 !important;
 }
 
 /* Browser Alerts */

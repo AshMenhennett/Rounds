@@ -64,6 +64,7 @@
                             @if (Auth::user()->isAdmin())
                                 <li><a href="{{ route('admin.home') }}">Admin Dashboard</a></li>
                                 <li><a href="{{ route('admin.export.index') }}">Export</a></li>
+                                <li><a href="{{ route('admin.ecosystem.index') }}">Manage Ecosystem</a></li>
                             @else
                                 @if (Auth::user()->hasTeam())
                                     <li><a href="{{ route('coach.team.manage', Auth::user()->team()->first()) }}">My Team</a></li>
@@ -91,6 +92,7 @@
                                         <li class="dropdown-header">Admin</li>
                                         <li><a href="{{ route('admin.home') }}">Dashboard</a></li>
                                         <li><a href="{{ route('admin.export.index') }}">Export Data</a></li>
+                                        <li><a href="{{ route('admin.ecosystem.index') }}">Manage Ecosystem</a></li>
                                         <li role="separator" class="divider"></li>
 
                                         <li class="dropdown-header">Coach</li>

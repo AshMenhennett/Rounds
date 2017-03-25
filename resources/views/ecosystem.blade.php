@@ -36,9 +36,11 @@
             @include('includes.partials._upgrade_browser_danger')
             <div class="jumbotron">
                 <div class="container-fluid">
-                    <h1>{{ config('app.name', 'Laravel') }}</h1>
-                    <p>The new way to track your Team!</p>
-                    <p><a href="{{ url('/login') }}" class="btn btn-primary btn-lg">Login</a> &nbsp; <a href="{{ url('/register') }}" class="btn btn-primary btn-lg">Sign Up!</a></p>
+                    <h1>Ecosystem</h1>
+                    <p>The latest links!</p>
+                    @foreach ($buttons as $button)
+                        <p class="text-center"><a class="btn btn-success btn-lg" href="{{ $button->destination() }}">{{ $button->value }} <span class="glyphicon glyphicon-{{ $button->hasFile() ? 'file' : 'new-window' }}"></span></a></p>
+                    @endforeach
                 </div>
             </div>
         </div>

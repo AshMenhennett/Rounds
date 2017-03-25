@@ -60,6 +60,9 @@ Vue.component('admin-rounds-master', require('./components/Admin/Rounds/AdminRou
 // exports player quarter data by team
 Vue.component('admin-export-player-quarter-data', require('./components/Admin/Export/AdminExportPlayerQuarterDataByTeamComponent.vue'));
 
+// admin ecosystem buttons
+Vue.component('admin-ecosystem-buttons', require('./components/Admin/Ecosystem/AdminEcosystemButtonsComponent.vue'));
+
 // generic
 Vue.component('bootstrap-alert', require('./components/Generic/BootstrapAlertComponent.vue'));
 Vue.component('player', require('./components/Generic/PlayerComponent.vue'));

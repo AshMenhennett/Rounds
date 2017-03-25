@@ -29,6 +29,8 @@ Route::get('/faq', function () {
     return view('faq');
 })->name('faq');
 
+Route::get('/ecosystem', 'EcosystemController@index')->name('ecosystem');
+
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/home', 'Coach\HomeController@index')->name('home');
@@ -133,6 +135,12 @@ Route::group(['middleware' => ['auth']], function () {
         });
 
         Route::delete('/delete', 'Admin\AdminDeleteAllController@destroy')->name('admin.delete.all');
+
+        Route::group(['prefix' => 'ecosystem'], function () {
+            Route::get('/buttons', 'Admin\Ecosystem\AdminEcosystemManagementController@index')->name('admin.ecosystem.index');
+            Route::post('/buttons/new', 'Admin\Ecosystem\AdminEcosystemManagementController@store')->name('admin.ecosystem.button.store');
+            Route::delete('/buttons/{button}', 'Admin\Ecosystem\AdminEcosystemManagementController@destroy')->name('admin.ecosystem.button.destroy');
+        });
 
     });
 
