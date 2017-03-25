@@ -25,6 +25,7 @@ class AdminStatsController extends Controller
                 'teams' => Team::all(),
                 'players' => Player::all(),
                 'rounds' => Round::all(),
+                'filledinRoundsCount' => \DB::table('round_team')->count(),
                 'coaches' => User::all(),
                 'teamsWithCoaches' => Team::where('user_id', '!=', null)->get(),
             ], 200);

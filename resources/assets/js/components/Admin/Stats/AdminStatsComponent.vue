@@ -19,9 +19,10 @@
                 <p>Teams count: <strong>{{ teams.length }}</strong></p>
                 <p>Players count: <strong>{{ players.length }}</strong></p>
                 <p>Created Rounds count: <strong>{{ rounds.length }}</strong></p>
+                <p>Filled in Rounds count: <strong>{{ filledinRoundsCount }}</strong></p>
                 <p>Teams with assigned coaches count: <strong>{{ teamsWithCoaches.length }}</strong></p>
                 <div class="help-block">
-                    Note: Administrators can also be coaches.
+                    Note: You are also a coach.
                 </div>
             </div>
         </template>
@@ -38,6 +39,7 @@
                 rounds: [],
                 coaches: [],
                 teamsWithCoaches: [],
+                filledinRoundsCount: 0,
 
                 loading: true,
                 loader_color: '#0d0394',
@@ -57,6 +59,7 @@
                     this.rounds = response.body.rounds;
                     this.coaches = response.body.coaches;
                     this.teamsWithCoaches = response.body.teamsWithCoaches;
+                    this.filledinRoundsCount = response.body.filledinRoundsCount;
 
                     this.loading = false;
                 }, (response) => {
