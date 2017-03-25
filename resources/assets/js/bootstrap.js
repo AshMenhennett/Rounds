@@ -16,7 +16,7 @@ require('bootstrap-sass');
 window.FileSaver = require('file-saver');
 
 /**
- * Moment JS
+ * Load Moment JS to assist in creating file name for excel file in component
  */
 window.moment = require('moment');
 

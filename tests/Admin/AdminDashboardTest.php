@@ -4,14 +4,14 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class AdminDashboardTest extends TestCase
+class AdminDashboardTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 
     /** @test */
     public function admin_sees_admin_dashboard()
     {
-        $user = factory(App\User::class, 1)->create(['role' => 'admin']);
+        $user = factory(App\User::class)->create(['role' => 'admin']);
 
         $this->actingAs($user)
             ->visit('/admin');
@@ -22,7 +22,7 @@ class AdminDashboardTest extends TestCase
     /** @test */
     public function coach_cannot_access_admin_dashboard()
     {
-        $user = factory(App\User::class, 1)->create(['role' => 'coach']);
+        $user = factory(App\User::class)->create(['role' => 'coach']);
 
         $this->actingAs($user)
             ->visit('/admin');
