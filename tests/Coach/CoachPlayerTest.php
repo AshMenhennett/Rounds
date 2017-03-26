@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CoachPlayerTest extends BrowserKitTestCase
 {
-    use DatabaseTransactions;
 
     /** @test */
     public function user_can_access_players_as_array_in_team()

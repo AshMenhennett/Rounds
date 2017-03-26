@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AdminLoginTest extends BrowserKitTestCase
 {
-    use DatabaseTransactions;
 
     /** @test */
     public function admin_gets_redirected_to_admin_home_on_login()

@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CoachRoundsTest extends BrowserKitTestCase
 {
-    use DatabaseTransactions;
 
     /** @test */
     public function user_can_see_available_rounds()

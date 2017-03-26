@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AdminDeleteAllTest extends BrowserKitTestCase
 {
-    use DatabaseTransactions;
 
     /** @test */
     public function admin_can_clear_out_select_tables_except_admins()

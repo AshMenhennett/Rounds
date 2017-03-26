@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CoachTeamTest extends BrowserKitTestCase
 {
-    use DatabaseTransactions;
 
     /** @test */
     public function user_stays_on_correct_url_when_they_have_no_team()

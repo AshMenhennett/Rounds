@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AdminPlayerTest extends BrowserKitTestCase
 {
-    use DatabaseTransactions;
 
     /** @test */
     public function admin_can_fetch_paginated_players()

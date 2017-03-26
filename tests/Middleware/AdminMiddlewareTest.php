@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AdminMiddlewareTest extends BrowserKitTestCase
 {
-    use DatabaseTransactions;
 
     /** @test */
     public function admin_middleware_prevents_non_admin_from_accessing_admin_area()

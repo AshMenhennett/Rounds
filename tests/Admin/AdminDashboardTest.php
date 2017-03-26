@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AdminDashboardTest extends BrowserKitTestCase
 {
-    use DatabaseTransactions;
 
     /** @test */
     public function admin_sees_admin_dashboard()

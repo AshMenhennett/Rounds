@@ -20,6 +20,9 @@ abstract class BrowserKitTestCase extends Laravel\BrowserKitTesting\TestCase
     public function tearDown()
     {
         Artisan::call('migrate:reset');
+        foreach ($this->app->make('db')->getConnections() as $connection) {
+            $connection->disconnect();
+        }
         parent::tearDown();
     }
 

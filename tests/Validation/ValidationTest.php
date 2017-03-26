@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ValidationTest extends BrowserKitTestCase
 {
-    use DatabaseTransactions;
 
     /** @test */
     public function valid_team_passes_team_exists_rule()

@@ -71,13 +71,13 @@ class Team extends Model
     }
 
     /**
-     * Return the Team's Coach or null, if no Coach exists for this Team.
+     * Return whether the Team has a coach or not
      *
-     * @return App\User | null
+     * @return boolean
      */
     public function hasCoach()
     {
-        return $this->user;
+        return $this->user !== null;
     }
 
     /**

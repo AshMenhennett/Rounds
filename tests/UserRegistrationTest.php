@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserRegistrationTest extends BrowserKitTestCase
 {
-    use DatabaseTransactions;
 
     /** @test */
     public function guest_sees_SMAA_Rounds_at_base_route()
