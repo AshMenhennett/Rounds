@@ -168,6 +168,7 @@ return [
          */
         Spatie\Fractal\FractalServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
         //
 
         /*
@@ -229,6 +230,7 @@ return [
 
         'Fractal' => Spatie\Fractal\FractalFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
 
     ],
 
