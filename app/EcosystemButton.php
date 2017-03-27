@@ -37,4 +37,40 @@ class EcosystemButton extends Model
         return $this->file_name !== null;
     }
 
+    /**
+     * Whether or not a button has a link associated with it.
+     *
+     * @return boolean
+     */
+    public function hasLink()
+    {
+        return $this->link !== null;
+    }
+
+    /**
+     * Returns a buttons file name, if it has one, otherwise, return null
+     *
+     * @return string | null
+     */
+    public function getFileName()
+    {
+        if ($this->hasFile()) {
+            return $this->file_name;
+        }
+        return null;
+    }
+
+    /**
+     * Returns a buttons link url, if it has one, otherwise, return null
+     *
+     * @return string | null
+     */
+    public function getUrl()
+    {
+        if ($this->hasLink()) {
+            return $this->link;
+        }
+        return null;
+    }
+
 }
