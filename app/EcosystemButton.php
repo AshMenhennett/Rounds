@@ -65,7 +65,7 @@ class EcosystemButton extends Model
      *
      * @return string | null
      */
-    public function getUrl()
+    public function getLink()
     {
         if ($this->hasLink()) {
             return $this->link;
