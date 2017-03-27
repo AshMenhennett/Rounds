@@ -43,7 +43,8 @@
                             <p class="text-center"><a class="btn btn-success btn-lg" href="{{ $button->destination() }}">{{ $button->value }} &nbsp; <span class="glyphicon glyphicon-{{ $button->hasFile() ? 'file' : 'new-window' }}"></span></a></p>
                         @endforeach
                     @else
-                        <p>No links yet..</p>
+                        <p>There are no links yet..</p>
+                        <p>Check back later, after we have curated some links for you :)</p>
                     @endif
                 </div>
             </div>
