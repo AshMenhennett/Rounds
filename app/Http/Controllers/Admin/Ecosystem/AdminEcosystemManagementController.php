@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Ecosystem;
 use App\EcosystemButton;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\http\Requests\Admin\StoreEcosystemButtonFormRequest;
+use App\Http\Requests\Admin\StoreEcosystemButtonFormRequest;
 
 class AdminEcosystemManagementController extends Controller
 {
@@ -26,7 +26,7 @@ class AdminEcosystemManagementController extends Controller
     /**
      * Creates a new button.
      *
-     * @param  App\http\Requests\Admin\StoreEcosystemButtonFormRequest $request
+     * @param  App\Http\Requests\Admin\StoreEcosystemButtonFormRequest $request
      * @return Illuminate\Http\Response
      */
     public function store(StoreEcosystemButtonFormRequest $request)
