@@ -16,7 +16,7 @@ class AdminEcosystemTest extends BrowserKitTestCase
         $this->actingAs($admin)
             ->visit('/admin/ecosystem/buttons');
 
-        $this->see('Create some buttons to show on the <a href="'.$url.'/ecosystem">ecosystem</a> page.');
+        $this->see('Create some buttons to show on the <a href="'.$url.'/ecosystem" target="_blank">ecosystem</a> page.');
     }
 
     /** @test */
@@ -56,12 +56,10 @@ class AdminEcosystemTest extends BrowserKitTestCase
 
         $this->assertResponseStatus(200);
 
-        $button = \App\EcosystemButton::find(1);
-
         $this->seeInDatabase('ecosystem_buttons', [
             'value' => 'My File Button Text',
             'link' => null,
-            'file_name' => $button->file_name,
+            'file_name' => \App\EcosystemButton::find(1)->file_name,
          ]);
     }
 

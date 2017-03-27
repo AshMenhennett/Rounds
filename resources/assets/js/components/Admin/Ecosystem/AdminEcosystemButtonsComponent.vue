@@ -17,7 +17,7 @@
             <li v-for="(button, index) in buttons" class="list-group-item text-center">
                 <h4>{{ button.value }}</h4>
                 <span v-show="button.file_name != null">
-                    <a :href="'https://s3-ap-southeast-2.amazonaws.com/files.smaa-ch.herokuapp/files/' + button.file_name" target="_blank" class="text-info"><span class="glyphicon glyphicon-file"></span></a>
+                    <a :href="s3_files_bucket_url + '/files/' + button.file_name" target="_blank" class="text-info"><span class="glyphicon glyphicon-file"></span></a>
                 </span>
                 <span v-show="button.file_name == null">
                     <a :href="button.link" target="_blank" class="text-info"><span class="glyphicon glyphicon-new-window"></span></a>
@@ -33,7 +33,8 @@
     export default {
         data () {
             return {
-                buttons: []
+                buttons: [],
+                s3_files_bucket_url: window.App.s3_files_bucket_url
             }
         },
         props: {

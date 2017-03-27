@@ -35,7 +35,7 @@ class AdminEcosystemManagementController extends Controller
     {
         if ($request->hasFile('file')) {
 
-            $fileName = $request->file('file')->getClientOriginalName();
+            $fileName = uniqid(true) . '-' . $request->file('file')->getClientOriginalName();
             Storage::disk('s3')->put('files/'. $fileName, File::get($request->file('file')));
 
             EcosystemButton::create([

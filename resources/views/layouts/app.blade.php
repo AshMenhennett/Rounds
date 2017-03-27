@@ -21,6 +21,11 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+    <script>
+        window.App = <?php echo json_encode([
+            's3_files_bucket_url' => env('S3_FILES_BUCKET_URL'),
+        ]); ?>
+    </script>
     <!--[if lt IE 9]>
         <style type="text/css">
             .upgrade-browser.danger { display: block; }
