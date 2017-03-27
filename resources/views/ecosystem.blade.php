@@ -40,7 +40,7 @@
                     @if (count($buttons))
                         <p>The latest links!</p>
                         @foreach ($buttons as $button)
-                            <p class="text-center"><a class="btn btn-success btn-lg" href="{{ $button->destination() }}" target="_blank">{{ $button->value }} &nbsp; <span class="glyphicon glyphicon-{{ $button->hasFile() ? 'file' : 'new-window' }}"></span></a></p>
+                            <p class="text-center"><a class="btn btn-success btn-lg" href="{{ env('S3_FILES_BUCKET_URL') . '/files/' . $button->destination() }}" target="_blank">{{ $button->value }} &nbsp; <span class="glyphicon glyphicon-{{ $button->hasFile() ? 'file' : 'new-window' }}"></span></a></p>
                         @endforeach
                     @else
                         <p>There are no links yet..</p>

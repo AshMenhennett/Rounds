@@ -17,7 +17,7 @@
             <li v-for="(button, index) in buttons" class="list-group-item text-center">
                 <h4>{{ button.value }}</h4>
                 <span v-show="button.file_name != null">
-                    <a :href="'/storage/' + button.file_name" target="_blank" class="text-info"><span class="glyphicon glyphicon-file"></span></a>
+                    <a :href="'https://s3-ap-southeast-2.amazonaws.com/files.smaa-ch.herokuapp/files/' + button.file_name" target="_blank" class="text-info"><span class="glyphicon glyphicon-file"></span></a>
                 </span>
                 <span v-show="button.file_name == null">
                     <a :href="button.link" target="_blank" class="text-info"><span class="glyphicon glyphicon-new-window"></span></a>

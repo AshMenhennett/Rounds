@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Ecosystem;
 
+use File;
+use Storage;
 use App\EcosystemButton;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -32,12 +34,14 @@ class AdminEcosystemManagementController extends Controller
     public function store(StoreEcosystemButtonFormRequest $request)
     {
         if ($request->hasFile('file')) {
-            $path = $request->file('file')->store('uploads', 'public');
+
+            $fileName = $request->file('file')->getClientOriginalName();
+            Storage::disk('s3')->put('files/'. $fileName, File::get($request->file('file')));
 
             EcosystemButton::create([
                 'value' => $request->value,
                 'link' => null,
-                'file_name' => $path,
+                'file_name' => $fileName,
             ]);
 
             $request->session()->flash('success_message', 'Button Created!');
