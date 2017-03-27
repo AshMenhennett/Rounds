@@ -28,6 +28,7 @@ If you would like to install this project, treat it as you would any other Larav
 Make sure you configure these environment variables:
 - ```APP_URL``` : the url of the application. This variable is used for linking to the application in emails.
 - ```APP_NAME```: the human readable name of the application. This variable is used for refering to the application via emails and the welcome page. It is also used in the navbar as the application branding.
+- ```S3_KEY```, ```S3_SECRET```, ```S3_REGION```, ```S3_BUCKET_NAME``` and ```S3_FILES_BUCKET_URL```: the conncetion to Amazon S3 variables. These values are used for the ecosystem button file uploading facility built in to the application.
 - ```MAIL_FROM_ADDRESS``` and ```MAIL_FROM_NAME```: the 'from' email address and name. This is used for sending out emails.
 - ```ADMIN_SUPPORT_EMAIL_ADDRESS```: the email address of admin, whom you wish users to contact for administrative purposes (support).
 - ```COPY_NAME```: the copyright name in the footer.
