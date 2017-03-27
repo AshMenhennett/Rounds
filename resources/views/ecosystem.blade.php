@@ -39,7 +39,7 @@
                     <h1>Ecosystem</h1>
                     <p>The latest links!</p>
                     @foreach ($buttons as $button)
-                        <p class="text-center"><a class="btn btn-success btn-lg" href="{{ $button->destination() }}">{{ $button->value }} &nbsp; &nbsp; <span class="glyphicon glyphicon-{{ $button->hasFile() ? 'file' : 'new-window' }}"></span></a></p>
+                        <p class="text-center"><a class="btn btn-success btn-lg" href="{{ $button->destination() }}">{{ $button->value }} &nbsp; <span class="glyphicon glyphicon-{{ $button->hasFile() ? 'file' : 'new-window' }}"></span></a></p>
                     @endforeach
                 </div>
             </div>
