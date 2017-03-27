@@ -97,6 +97,30 @@ class AdminEcosystemTest extends BrowserKitTestCase
          ]);
     }
 
+    /** @test */
+    public function admin_creates_file_button_if_link_and_file_are_supplied()
+    {
+        $admin = factory(App\User::class)->create(['role' => 'admin']);
+
+        copy(storage_path('test_files/master_files/Empty.xlsx'), storage_path('test_files/Test.xlsx'));
+
+        $this->actingAs($admin)
+            ->visit('/admin/ecosystem/buttons')
+            ->type('My File Button Text', 'value')
+            ->type('http://google.com', 'link')
+            ->attach(storage_path('test_files/Test.xlsx'), 'file')
+            ->press('Add Button')
+            ->seePageIs('/admin/ecosystem/buttons');
+
+        $this->assertResponseStatus(200);
+
+        $this->seeInDatabase('ecosystem_buttons', [
+            'value' => 'My File Button Text',
+            'link' => null,
+            'file_name' => \App\EcosystemButton::find(1)->file_name,
+         ]);
+    }
+
     /**
      * Validation
      */
