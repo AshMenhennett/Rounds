@@ -6,14 +6,14 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Create some buttons to show on the <a href="{{ config('app.url') . '/ecosystem' }}">ecosystem</a> page.
+                    Create some buttons to show on the <a href="{{ config('app.url') . '/ecosystem' }}" target="_blank">ecosystem</a> page.
                 </div>
 
                 <div class="panel-body">
                     <form action="{{ route('admin.ecosystem.button.store') }}" enctype="multipart/form-data" method="post">
                         <div class="form-group{{ $errors->has('value') ? ' has-error' : '' }}">
                             <label for="value" class="label-control">Button Text</label>
-                            <input type="text" name="value" id="value" class="form-control" value="{{ (old('value') ? old('value') : '' ) }}" placeholder="Goto My Cool site">
+                            <input type="text" name="value" id="value" class="form-control" value="{{ (old('value') ? old('value') : '' ) }}" placeholder="Goto My Cool site" required>
                             @if ($errors->has('value'))
                                 <div class="help-block danger">
                                     {{ $errors->first('value') }}
