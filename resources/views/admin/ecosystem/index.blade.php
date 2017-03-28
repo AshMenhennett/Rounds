@@ -46,7 +46,7 @@
                         </div>
 
                         {{ csrf_field() }}
-                        <button type="submit" class="btn btn-primary pull-right btn-ok-cancel-relation">Add Button</button>
+                        <button type="submit" class="btn btn-primary pull-right">Add to Ecosystem</button>
                     </form>
                 </div>
             </div>

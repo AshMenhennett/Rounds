@@ -17,13 +17,13 @@
             <li v-for="(button, index) in buttons" class="list-group-item text-center">
                 <h4>{{ button.value }}</h4>
                 <span v-show="button.file_name != null">
-                    <a :href="s3_files_bucket_url + '/files/' + button.file_name" target="_blank" class="text-info"><span class="glyphicon glyphicon-file"></span></a>
+                    <span @click.prevent="sendToUrlForInternalFile(button)" class="text-info" style="cursor:pointer;"><span class="glyphicon glyphicon-file"></span></span>
                 </span>
                 <span v-show="button.file_name == null">
                     <a :href="button.link" target="_blank" class="text-info"><span class="glyphicon glyphicon-new-window"></span></a>
                 </span>
 
-                <a href="#" @click.prevent="destroy(button.id, index)" class="text-danger"><span class="glyphicon glyphicon-remove"></span></a>
+                <a href="#" @click.prevent="destroy(button.id, index)" class="text-danger" style="cursor:pointer;"><span class="glyphicon glyphicon-remove"></span></a>
             </li>
         </ul>
     </div>
@@ -44,6 +44,18 @@
             destroy(id, index) {
                 this.buttons.splice(index, 1);
                 return this.$http.delete('/admin/ecosystem/buttons/' + id);
+            },
+            sendToUrlForInternalFile(button) {
+                if (this.hasPDFFile(button)) {
+                    return window.open('/view/files/pdf/' + button.file_name, '_blank');
+                }
+                return window.open(this.s3_files_bucket_url + button.file_name, '_blank');
+            },
+            getFileExtension(button) {
+                return button.file_name.substr(button.file_name.lastIndexOf('.') + 1);
+            },
+            hasPDFFile(button) {
+                return this.getFileExtension(button) === 'pdf';
             }
         },
         mounted() {

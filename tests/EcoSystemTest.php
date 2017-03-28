@@ -11,26 +11,27 @@ class EcoSystemTest extends BrowserKitTestCase
     public function user_can_see_all_ecosystem_buttons()
     {
         $admin = factory(App\User::class)->create(['role' => 'admin']);
+        $user = factory(App\User::class)->create();
 
         $this->actingAs($admin)
             ->visit('/admin/ecosystem/buttons')
             ->type('My Link Button Text', 'value')
             ->type('http://google.com', 'link')
-            ->press('Add Button')
+            ->press('Add to Ecosystem')
             ->seePageIs('/admin/ecosystem/buttons');
 
         $this->actingAs($admin)
             ->visit('/admin/ecosystem/buttons')
             ->type('My Link Button Text 2', 'value')
             ->type('http://google.com', 'link')
-            ->press('Add Button')
+            ->press('Add to Ecosystem')
             ->seePageIs('/admin/ecosystem/buttons');
 
         $this->actingAs($admin)
             ->visit('/admin/ecosystem/buttons')
             ->type('My Link Button Text 3', 'value')
             ->type('http://google.com', 'link')
-            ->press('Add Button')
+            ->press('Add to Ecosystem')
             ->seePageIs('/admin/ecosystem/buttons');
 
         $this->assertResponseStatus(200);
@@ -54,7 +55,8 @@ class EcoSystemTest extends BrowserKitTestCase
          ]);
 
 
-        $this->visit('/ecosystem');
+        $this->actingAs($user)
+            ->visit('/ecosystem');
 
         $this->see('My Link Button Text');
         $this->see('My Link Button Text 2');

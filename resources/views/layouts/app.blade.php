@@ -23,7 +23,7 @@
     </script>
     <script>
         window.App = <?php echo json_encode([
-            's3_files_bucket_url' => env('S3_FILES_BUCKET_URL'),
+            's3_files_bucket_url' => config('app.s3_files_bucket_url'),
         ]); ?>
     </script>
     <!--[if lt IE 9]>

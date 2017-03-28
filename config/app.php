@@ -2,6 +2,9 @@
 
 return [
 
+
+    's3_files_bucket_url' => env('S3_FILES_BUCKET_URL'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

@@ -40,7 +40,15 @@
                     @if (count($buttons))
                         <p>The latest links!</p>
                         @foreach ($buttons as $button)
-                            <p class="text-center"><a class="btn btn-success btn-lg" href="{{ $button->hasFile() ? env('S3_FILES_BUCKET_URL') . '/files/' . $button->getFileName() : $button->getLink() }}" target="_blank">{{ $button->value }} &nbsp; <span class="glyphicon glyphicon-{{ $button->hasFile() ? 'file' : 'new-window' }}"></span></a></p>
+                            @if ($button->hasFile())
+                                @if ($button->hasPDFFile())
+                                    <p class="text-center"><a class="btn btn-success btn-lg" href="{{ route('view.pdf', $button->getFileName())  }}" target="_blank">{{ $button->value }} &nbsp; <span class="glyphicon glyphicon-file"></span></a></p>
+                                @else
+                                    <p class="text-center"><a class="btn btn-success btn-lg" href="{{ config('app.s3_files_bucket_url') . $button->getFileName() }}" target="_blank">{{ $button->value }} &nbsp; <span class="glyphicon glyphicon-file"></span></a></p>
+                                @endif
+                            @else
+                                <p class="text-center"><a class="btn btn-success btn-lg" href="{{ $button->getLink() }}" target="_blank">{{ $button->value }} &nbsp; <span class="glyphicon glyphicon-new-window"></span></a></p>
+                            @endif
                         @endforeach
                     @else
                         <p>There are no links yet..</p>

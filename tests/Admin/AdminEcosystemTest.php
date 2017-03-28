@@ -28,10 +28,15 @@ class AdminEcosystemTest extends BrowserKitTestCase
             ->visit('/admin/ecosystem/buttons')
             ->type('My Link Button Text', 'value')
             ->type('http://google.com', 'link')
-            ->press('Add Button')
+            ->press('Add to Ecosystem')
             ->seePageIs('/admin/ecosystem/buttons');
 
         $this->assertResponseStatus(200);
+
+        $button = \App\EcosystemButton::find(1);
+
+        $this->assertTrue($button->hasLink() === true);
+        $this->assertTrue($button->getLink() === 'http://google.com');
 
         $this->seeInDatabase('ecosystem_buttons', [
             'value' => 'My Link Button Text',
@@ -51,15 +56,22 @@ class AdminEcosystemTest extends BrowserKitTestCase
             ->visit('/admin/ecosystem/buttons')
             ->type('My File Button Text', 'value')
             ->attach(storage_path('test_files/Test.xlsx'), 'file')
-            ->press('Add Button')
+            ->press('Add to Ecosystem')
             ->seePageIs('/admin/ecosystem/buttons');
 
         $this->assertResponseStatus(200);
 
+        $button = \App\EcosystemButton::find(1);
+
+        $this->assertTrue($button->hasFile() === true);
+        $this->assertTrue($button->getFileExtension() === 'xlsx');
+        $this->assertTrue($button->hasPDFFile() === false);
+        $this->assertTrue($button->getFileName() === $button->file_name);
+
         $this->seeInDatabase('ecosystem_buttons', [
             'value' => 'My File Button Text',
             'link' => null,
-            'file_name' => \App\EcosystemButton::find(1)->file_name,
+            'file_name' => $button->file_name,
          ]);
     }
 
@@ -72,7 +84,7 @@ class AdminEcosystemTest extends BrowserKitTestCase
             ->visit('/admin/ecosystem/buttons')
             ->type('My File Button Text', 'value')
             ->type('http://google.com', 'link')
-            ->press('Add Button')
+            ->press('Add to Ecosystem')
             ->seePageIs('/admin/ecosystem/buttons');
 
         $this->assertResponseStatus(200);
@@ -107,7 +119,7 @@ class AdminEcosystemTest extends BrowserKitTestCase
             ->type('My File Button Text', 'value')
             ->type('http://google.com', 'link')
             ->attach(storage_path('test_files/Test.xlsx'), 'file')
-            ->press('Add Button')
+            ->press('Add to Ecosystem')
             ->seePageIs('/admin/ecosystem/buttons');
 
         $this->assertResponseStatus(200);
