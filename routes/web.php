@@ -32,7 +32,7 @@ Route::get('/faq', function () {
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/ecosystem', 'EcosystemController@index')->name('ecosystem');
-    Route::get('/view/files/pdf/{fileName}', 'ViewPDFFileController@show')->name('view.pdf');
+    Route::get('/view/files/pdf/{fileName}', 'Files\ViewPDFFileController@show')->name('view.pdf');
 
     Route::get('/home', 'Coach\HomeController@index')->name('home');
 

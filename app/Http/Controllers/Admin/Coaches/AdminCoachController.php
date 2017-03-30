@@ -19,6 +19,7 @@ class AdminCoachController extends Controller
      */
     public function destroy(User $coach)
     {
+
         if ($coach->isAdmin()) {
             // user is admin, let's not let any admin remove another admin, not even their own account
             return response()->json(null, 403);
@@ -26,7 +27,9 @@ class AdminCoachController extends Controller
 
         if (count($coach->team)) {
             // detach coach from team
-            $coach->team()->detach($coach->team);
+            $coach->team->update([
+                'user_id' => null,
+            ]);
         }
 
         $coach->delete();
