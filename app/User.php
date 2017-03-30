@@ -72,8 +72,19 @@ class User extends Authenticatable
      *
      * @return boolean
      */
-    public function hasTeam()
+    public function associatedWithTeam()
     {
         return count($this->team);
+    }
+
+    /**
+     * Whether a user is associated with a given Team.
+     *
+     * @param  App\Team    $team
+     * @return boolean
+     */
+    public function hasTeam($team)
+    {
+        return $this->team()->get()->contains($team);
     }
 }

@@ -71,7 +71,7 @@
                                 <li><a href="{{ route('admin.export.index') }}">Export</a></li>
                                 <li><a href="{{ route('admin.ecosystem.index') }}">Manage Ecosystem</a></li>
                             @else
-                                @if (Auth::user()->hasTeam())
+                                @if (Auth::user()->associatedWithTeam())
                                     <li><a href="{{ route('coach.team.manage', Auth::user()->team()->first()) }}">My Team</a></li>
                                 @else
                                     <li><a href="{{ route('home') }}">Home</a></li>
@@ -103,7 +103,7 @@
                                         <li class="dropdown-header">Coach</li>
                                     @endif
 
-                                    @if (Auth::user()->hasTeam())
+                                    @if (Auth::user()->associatedWithTeam())
                                         <li><a href="{{ route('coach.team.manage', Auth::user()->team()->first()) }}">Manage Team</a></li>
                                         <li><a href="{{ route('coach.rounds.index', Auth::user()->team()->first()) }}">Fill in Rounds</a></li>
                                         <li><a href="{{ route('coach.players.index', Auth::user()->team()->first()) }}">Add Players</a></li>

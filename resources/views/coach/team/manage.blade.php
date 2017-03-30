@@ -41,20 +41,22 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Leave Team</div>
+    @if (Auth::user()->hasTeam($team))
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Leave Team</div>
 
-                <div class="panel-body">
-                    <form action="{{ route('coach.team.user.detach', $team) }}" method="post">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                        <button type="submit" class="btn btn-danger">Leave Team</button>
-                    </form>
+                    <div class="panel-body">
+                        <form action="{{ route('coach.team.user.detach', $team) }}" method="post">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <button type="submit" class="btn btn-danger">Leave Team</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 </div>
 @endsection
