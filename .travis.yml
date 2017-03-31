@@ -1,0 +1,17 @@
+language: php
+
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
+  - hhvm
+
+before_script:
+  - cp .env.travis .env
+  - mysql -e 'create database rounds-smaa_testing;'
+  - composer self-update
+  - composer install --prefer-source --no-interaction --dev
+
+script:
+  - vendor/bin/phpunit
