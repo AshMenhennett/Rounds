@@ -8,7 +8,6 @@ php:
   - hhvm
 
 before_script:
-  - cp .env.travis .env
   - mysql -e 'create database rounds-smaa_testing;'
   - composer self-update
   - composer install --prefer-source --no-interaction --dev
