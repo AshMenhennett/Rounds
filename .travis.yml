@@ -8,7 +8,7 @@ php:
   - hhvm
 
 before_script:
-  - mysql -e 'create database rounds-smaa_testing;'
+  - mysql -e 'CREATE DATABASE rounds_testing;'
   - composer self-update
   - composer install --prefer-source --no-interaction --dev
 
