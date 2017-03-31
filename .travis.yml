@@ -1,13 +1,13 @@
 language: php
-
 php:
-  - 5.6
-  - 7.0
-
+- 5.6
+- 7.0
 before_script:
-  - mysql -e 'CREATE DATABASE rounds_testing;'
-  - composer self-update
-  - composer install --prefer-source --no-interaction --dev
-
+- mysql -e 'CREATE DATABASE rounds_testing;'
+- composer self-update
+- composer install --prefer-source --no-interaction --dev
 script:
-  - vendor/bin/phpunit
+- vendor/bin/phpunit
+deploy:
+  api_key:
+    secure: tpoBeGMR3bHggxqrShaweZZFXM1Ve2iE+2yamAkt1PgzJoEiXZT8P94iz4toHMT1+ggvKH2UCb6i1MudAt2SdoG8fn4ASk9sTFyboDL0RbLSilRkexOItlvc8hs8E5439VxAvVkwV/mwtYXKLiHOkIPetb6q/RZTB6lr6Zn/+fg6GOxjUQlQ8LdTjKPKzTGeTbN5x9p7EPpbBP2bfZzMwDd9ykL5+UgfaS+3wkvinJTfCEravZrUe+QAEEXlVuvsqtcdEiTYK3g43bhPJPcYc+5szk4ovt+4yuRxs+Nwr/B9uPGdkj+Pu0Jsbo9OodUNd1Qw0Jwktkir0VtK1m0LDAA4XT3/YPwejRHLEEa0pWYeG1T+y2LsVksuvf3tn9dH0KMrz81/Nb9k88KRM3ozANrZ292StqObtvwUSQ/4kVOM8r+gCdxPiAtefSKxmd4lLbAi4+DsV8bH4iXaZX4ysxhFyxYhEO3/4Uata7+Ji4Cxp1LVmEJouNqUInNuALu+KcZjs6p3TSkkEtchxouRmkqIwBONI3JxF7wRjeYDGb6ASxWx/WWViQyPVBXldvqUnTvcIDrAl5a0P6b29y0vWaLZlkqZ6Ne/h5WHqIiyy61BfNlpQ0cZKpiDXdr9lX+fyUu4adMBg4Ispc7iw4YaYBURcv+IoDZKrhGuMUM789M=
