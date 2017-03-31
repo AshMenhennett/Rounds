@@ -35,12 +35,18 @@
                 font-size: 72px;
                 margin-bottom: 40px;
             }
+
+            .go-back-link {
+                font-size: 46px;
+                color: #525151;
+            }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
                 <div class="title">We Will Be right back.</div>
+                 <p><a href="#" class="go-back-link" onClick="window.history.back()">Go Back?</a></p>
             </div>
         </div>
     </body>
