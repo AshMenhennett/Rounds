@@ -1,5 +1,7 @@
 # Rounds
 
+[![Build Status](https://travis-ci.com/AshMenhennett/Rounds.svg?token=4gLWjKqxiRU4baJ7fexc&branch=master)](https://travis-ci.com/AshMenhennett/Rounds)
+
 This is a repository for a data entry application to track a sport team's stats, built with Laravel and Vue.
 
 ## Highlight
