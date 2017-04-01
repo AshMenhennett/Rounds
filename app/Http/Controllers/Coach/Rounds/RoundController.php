@@ -122,7 +122,7 @@ class RoundController extends Controller
                 abort(400, 'INCOMPLETE_DATA');
             }
 
-            if (((int) $player_data['round']['quarters']['count'] > 4) || ((int) $player_data['round']['quarters']['count'] < 0) || ! is_int($player_data['round']['quarters']['count'])) {
+            if (((int) $player_data['round']['quarters']['count'] > 4) || ((int) $player_data['round']['quarters']['count'] < 0)) {
                 // invalid data for quarters submitted
                 // return JSON with id of invalid quarter input
                 return response()->json(['player_id' => $player_data['id']], 422);
