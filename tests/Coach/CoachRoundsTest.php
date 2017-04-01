@@ -638,78 +638,78 @@ class CoachRoundsTest extends BrowserKitTestCase
     }
 
     /** @test */
-    // public function user_cant_store_round_with_invalid_quarters()
-    // {
-    //     $user = factory(App\User::class)->create();
-    //     $team = factory(App\Team::class)->create();
-    //     $rounds = factory(App\Round::class, 5)->create();
-    //     $players = factory(App\Player::class, 5)->create();
+    public function user_cant_store_round_with_invalid_quarters()
+    {
+        $user = factory(App\User::class)->create();
+        $team = factory(App\Team::class)->create();
+        $rounds = factory(App\Round::class, 5)->create();
+        $players = factory(App\Player::class, 5)->create();
 
-    //     $user->team()->save($team);
+        $user->team()->save($team);
 
-    //     $players->each(function ($player) use (&$team) {
-    //         $team->players()->attach($player);
-    //     });
+        $players->each(function ($player) use (&$team) {
+            $team->players()->attach($player);
+        });
 
-    //     $this->actingAs($user)
-    //         ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
+        $this->actingAs($user)
+            ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
 
-    //     // quarter posted as string
-    //     $response = $this->actingAs($user)
-    //         ->call('PUT', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
-    //             'players' =>
-    //                 [
-    //                     [
-    //                         'id' => $players->first()->id,
-    //                         'round' => [
-    //                             'best_player' => 0,
-    //                             'second_best_player' => 0,
-    //                             'quarters' => [
-    //                                 'count' => 'hello',
-    //                                 'reason' => NULL
-    //                             ],
-    //                         ],
-    //                     ]
-    //                 ]
-    //         ]);
+        // quarter posted as string
+        $response = $this->actingAs($user)
+            ->call('PUT', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+                'players' =>
+                    [
+                        [
+                            'id' => $players->first()->id,
+                            'round' => [
+                                'best_player' => 0,
+                                'second_best_player' => 0,
+                                'quarters' => [
+                                    'count' => '5',
+                                    'reason' => NULL
+                                ],
+                            ],
+                        ]
+                    ]
+            ]);
 
-    //     $this->assertTrue($response->getContent() == '{"player_id":'. $players->first()->id . '}');
+        $this->assertTrue($response->getContent() == '{"player_id":'. $players->first()->id . '}');
 
-    //     $this->assertResponseStatus(422);
+        $this->assertResponseStatus(422);
 
-    //     $this->dontSeeInDatabase('player_round', [
-    //         'round_id' => $rounds->first()->id,
-    //         'player_id' => $players->first()->id
-    //     ]);
+        $this->dontSeeInDatabase('player_round', [
+            'round_id' => $rounds->first()->id,
+            'player_id' => $players->first()->id
+        ]);
 
-    //     // quarters posted as invalid integer
-    //     $response = $this->actingAs($user)
-    //         ->call('PUT', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
-    //             'players' =>
-    //                 [
-    //                     [
-    //                         'id' => $players->first()->id,
-    //                         'round' => [
-    //                             'best_player' => 0,
-    //                             'second_best_player' => 0,
-    //                             'quarters' => [
-    //                                 'count' => 99,
-    //                                 'reason' => NULL
-    //                             ],
-    //                         ],
-    //                     ]
-    //                 ]
-    //         ]);
+        // quarters posted as invalid integer
+        $response = $this->actingAs($user)
+            ->call('PUT', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id, [
+                'players' =>
+                    [
+                        [
+                            'id' => $players->first()->id,
+                            'round' => [
+                                'best_player' => 0,
+                                'second_best_player' => 0,
+                                'quarters' => [
+                                    'count' => 99,
+                                    'reason' => NULL
+                                ],
+                            ],
+                        ]
+                    ]
+            ]);
 
-    //     $this->assertTrue($response->getContent() == '{"player_id":'. $players->first()->id . '}');
+        $this->assertTrue($response->getContent() == '{"player_id":'. $players->first()->id . '}');
 
-    //     $this->assertResponseStatus(422);
+        $this->assertResponseStatus(422);
 
-    //     $this->dontSeeInDatabase('player_round', [
-    //         'round_id' => $rounds->first()->id,
-    //         'player_id' => $players->first()->id
-    //     ]);
-    // }
+        $this->dontSeeInDatabase('player_round', [
+            'round_id' => $rounds->first()->id,
+            'player_id' => $players->first()->id
+        ]);
+    }
 
     /** @test */
     public function existing_player_recent_flag_and_player_round_assoc_doesnt_change_if_round_submission_was_invalid()
