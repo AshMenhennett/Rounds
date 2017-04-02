@@ -30,6 +30,9 @@
         },
         methods: {
             destroy(index) {
+                if (! confirm("Are you sure you want to delete this player?")) {
+                    return;
+                }
                 this.$emit(this.isFor + 'DestroyedPlayer', index);
             }
         }

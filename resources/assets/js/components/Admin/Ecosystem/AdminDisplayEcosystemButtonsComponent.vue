@@ -14,17 +14,7 @@
             </bootstrap-alert>
 
         <ul class="list-item-group">
-            <li v-for="(button, index) in buttons" class="list-group-item text-center">
-                <h4>{{ button.value }}</h4>
-                <span v-show="button.file_name != null">
-                    <span @click.prevent="button.sendToUrlForInternalFile()" class="text-info" style="cursor:pointer;"><span class="glyphicon glyphicon-file"></span></span>
-                </span>
-                <span v-show="button.file_name == null">
-                    <a :href="button.link" target="_blank" class="text-info"><span class="glyphicon glyphicon-new-window"></span></a>
-                </span>
-
-                <a href="#" @click.prevent="destroy(button.id, index)" class="text-danger" style="cursor:pointer;"><span class="glyphicon glyphicon-remove"></span></a>
-            </li>
+            <ecosystem-button v-for="(button, index) in buttons" :button="button" :index="index" isFor="admin" @adminDestroyedEcosystemButton="destroy"></ecosystem-button>
         </ul>
     </div>
 </template>
@@ -41,7 +31,8 @@
             buttonsProp: null
         },
         methods: {
-            destroy(id, index) {
+            destroy(index) {
+                var id = this.buttons[index].id;
                 this.buttons.splice(index, 1);
                 return this.$http.delete('/admin/ecosystem/buttons/' + id);
             }

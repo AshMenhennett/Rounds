@@ -1,9 +1,9 @@
 <template>
     <li class="list-group-item text-center">
-        <h4>{{ coach.first_name }} {{ coach.last_name }} <small>{{ coach.team.name && coach.team.name ?  coach.team.name : '' }}</small></h4>
-        <a :href="'mailto:' + coach.email">Send Email</a>
-        <span v-show="coach.role != 'admin'">
-            <br />
+        <h4>{{ round.name }} <small>{{ round.default_date }}</small></h4>
+        <a :href="'/admin/rounds/' + round.id + '/edit?v=rounds'" class="text-info"><span class="glyphicon glyphicon-edit"></span></a>
+        <span v-show="round.teams === 0">
+            &nbsp;
             <a href="#" @click.prevent="destroy(index)" class="text-danger"><span class="glyphicon glyphicon-trash"></span></a>
         </span>
     </li>
@@ -12,16 +12,12 @@
 <script>
     export default {
         props: {
-            coach: {
+            round: {
                 id: Number,
-                first_name: String,
-                last_name: String,
+                name: String,
+                default_date: String,
                 email: String,
-                role: String,
-                team: {
-                    name: String,
-                    slug: String
-                }
+                teams: Number
             },
             index: {
                 type: Number,
@@ -34,7 +30,10 @@
         },
         methods: {
             destroy(index) {
-                this.$emit(this.isFor + 'DestroyedCoach', index);
+                if (! confirm("Are you sure you want to delete this round?")) {
+                    return;
+                }
+                this.$emit(this.isFor + 'DestroyedRound', index);
             }
         }
     }

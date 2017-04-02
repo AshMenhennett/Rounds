@@ -161,6 +161,9 @@
                 });
             },
             deletePlayer(id) {
+                if (! confirm("Are you sure you want to delete this player?")) {
+                    return;
+                }
                 for (var i = 0; i < this.players.length; i++) {
                     if (this.players[i].id === id) {
                         this.players.splice(i, 1);
