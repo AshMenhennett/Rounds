@@ -168,7 +168,7 @@ class RoundController extends Controller
             $round->players()->attach($player, [
                 'best_player' => $player_data['round']['best_player'] != 0 ? 1 : 0,
                 'second_best_player' => $player_data['round']['second_best_player'] != 0 ? 1 : 0,
-                'quarters' => $player_data['round']['quarters']['count'],
+                'quarters' => (int) $player_data['round']['quarters']['count'],
                 'quarters_reason' => $player_data['round']['quarters']['reason'],
             ]);
         }
