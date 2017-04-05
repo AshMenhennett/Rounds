@@ -71,4 +71,72 @@ class AdminCoachTest extends BrowserKitTestCase
             ]);
     }
 
+    /** @test */
+    public function admin_can_kick_coach_off_team()
+    {
+        $users = factory(App\User::class, 2)->create();
+        $team = factory(App\Team::class)->create();
+
+        $users->first()->update(['role' => 'admin']);
+        $users->last()->teams()->save($team);
+
+        $this->seeInDatabase('teams', [
+            'id' => $team->id,
+            'user_id' => $users->last()->id,
+        ]);
+
+        $this->actingAs($users->first())
+                ->call('PUT', '/admin/teams/' . $team->slug . '/kick/coach');
+
+        $this->dontSeeInDatabase('teams', [
+            'id' => $team->id,
+            'user_id' => $users->last()->id,
+        ]);
+    }
+
+    /** @test */
+    public function admin_cannot_kick_self_off_team()
+    {
+        $users = factory(App\User::class, 2)->create();
+        $team = factory(App\Team::class)->create();
+
+        $users->first()->update(['role' => 'admin']);
+        $users->first()->teams()->save($team);
+
+        $this->seeInDatabase('teams', [
+            'id' => $team->id,
+            'user_id' => $users->first()->id,
+        ]);
+
+        $this->actingAs($users->first())
+                ->call('PUT', '/admin/teams/' . $team->slug . '/kick/coach');
+
+        $this->seeInDatabase('teams', [
+            'id' => $team->id,
+            'user_id' => $users->first()->id,
+        ]);
+    }
+
+    /** @test */
+    public function admin_can_toggle_ability_for_coach_to_select_best_players_in_a()
+    {
+        $users = factory(App\User::class, 2)->create();
+        $team = factory(App\Team::class)->create();
+
+        $users->first()->update(['role' => 'admin']);
+
+        $this->seeInDatabase('teams', [
+            'id' => $team->id,
+            'best_players_allowed' => 1,
+        ]);
+
+        $this->actingAs($users->first())
+                ->call('PUT', '/admin/teams/' . $team->slug . '/bestPlayersAllowed/toggle');
+
+        $this->seeInDatabase('teams', [
+            'id' => $team->id,
+            'best_players_allowed' => 0,
+        ]);
+    }
+
 }

@@ -16,7 +16,7 @@
                         @foreach ($rounds as $round)
                             <li class="list-group-item round">
                                 <h4>
-                                    <a href="{{ route('coach.round.show', [$team, $round]) }}">Fill in Round {{ $round->name }}</a>
+                                    <a href="{{ route('coach.team.round.show', [$team, $round]) }}">Fill in Round {{ $round->name }}</a>
                                     <small class="pull-right"><strong>Date</strong>: {{ Carbon\Carbon::createFromTimeStamp(strtotime($round->date($team)))->format('d/m/y') }}</small>
                                 </h4>
                             </li>

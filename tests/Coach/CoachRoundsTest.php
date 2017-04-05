@@ -14,7 +14,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->actingAs($user)
             ->visit('/teams/' . $team->slug . '/rounds');
@@ -31,7 +31,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->actingAs($user)
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
@@ -55,7 +55,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->actingAs($user)
             ->visit('/teams/' . $team->slug . '/rounds');
@@ -73,7 +73,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
         $rounds->each(function ($round) use (&$team) {
             $team->rounds()->attach($round, [
                 'date' => '2018-01-12 02:26:03',
@@ -101,12 +101,12 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $round = factory(App\Round::class)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->actingAs($user)
-            ->call('POST', '/teams/' . $team->slug . '/rounds/' . $round->id);
+            ->call('GET', '/teams/' . $team->slug . '/rounds/' . $round->id);
 
-        $this->assertRedirectedTo('/teams/' . $team->slug . '/rounds/' . $round->id);
+        $this->assertResponseStatus(200);
     }
 
     /** @test */
@@ -116,7 +116,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $round = factory(App\Round::class)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         // initial store
         $this->actingAs($user)
@@ -156,7 +156,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $rounds = factory(App\Round::class, 5)->create();
         $players = factory(App\Player::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $players->each(function ($player) use ($team) {
             $team->players()->attach($player);
@@ -305,7 +305,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $players = factory(App\Player::class, 5)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $players->each(function ($player) use (&$team) {
             $team->players()->attach($player);
@@ -334,7 +334,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $round = factory(App\Round::class)->create();
         $players = factory(App\Player::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
         $players->each(function ($player) use ($team) {
             $team->players()->attach($player);
         });
@@ -372,7 +372,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $user = factory(App\User::class)->create();
         $team = factory(App\Team::class)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $response = $this->actingAs($user)
             ->call('GET', '/teams/' . $team->slug . '/bestPlayersAllowed/status');
@@ -398,7 +398,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->actingAs($user)
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id . '/date', [
@@ -421,7 +421,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->actingAs($user)
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
@@ -451,8 +451,8 @@ class CoachRoundsTest extends BrowserKitTestCase
         $rounds = factory(App\Round::class, 5)->create();
         $players = factory(App\Player::class, 5)->create();
 
-        $users->first()->team()->save($teams->first());
-        $users->last()->team()->save($teams->last());
+        $users->first()->teams()->save($teams->first());
+        $users->last()->teams()->save($teams->last());
 
         $teams->first()->players()->attach($players->find(1));
         $teams->first()->players()->attach($players->find(2));
@@ -500,8 +500,8 @@ class CoachRoundsTest extends BrowserKitTestCase
         $rounds = factory(App\Round::class, 5)->create();
         $players = factory(App\Player::class, 5)->create();
 
-        $users->first()->team()->save($teams->first());
-        $users->last()->team()->save($teams->last());
+        $users->first()->teams()->save($teams->first());
+        $users->last()->teams()->save($teams->last());
 
         $teams->first()->players()->attach($players->first());
 
@@ -605,7 +605,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->actingAs($user)
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
@@ -645,7 +645,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $rounds = factory(App\Round::class, 5)->create();
         $players = factory(App\Player::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $players->each(function ($player) use (&$team) {
             $team->players()->attach($player);
@@ -719,7 +719,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $rounds = factory(App\Round::class, 5)->create();
         $players = factory(App\Player::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $players->each(function ($player) use (&$team) {
             $team->players()->attach($player);
@@ -811,7 +811,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $rounds = factory(App\Round::class, 5)->create();
         $players = factory(App\Player::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $players->each(function ($player) use (&$team) {
             $team->players()->attach($player);
@@ -909,7 +909,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->actingAs($user)
             ->call('GET', '/teams/' . $team->slug . '/rounds');
@@ -924,7 +924,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $users->first()->team()->save($team);
+        $users->first()->teams()->save($team);
 
         $this->actingAs($users->last())
             ->call('GET', '/teams/' . $team->slug . '/rounds');
@@ -943,7 +943,7 @@ class CoachRoundsTest extends BrowserKitTestCase
             'role' => 'admin',
         ]);
 
-        $users->first()->team()->save($team);
+        $users->first()->teams()->save($team);
 
         $this->actingAs($users->last())
             ->call('GET', '/teams/' . $team->slug . '/rounds');
@@ -958,7 +958,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->actingAs($user)
             ->call('GET', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
@@ -973,7 +973,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $users->first()->team()->save($team);
+        $users->first()->teams()->save($team);
 
         $this->actingAs($users->last())
             ->call('GET', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
@@ -992,7 +992,7 @@ class CoachRoundsTest extends BrowserKitTestCase
             'role' => 'admin',
         ]);
 
-        $users->first()->team()->save($team);
+        $users->first()->teams()->save($team);
 
         $this->actingAs($users->last())
             ->call('GET', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
@@ -1007,7 +1007,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->actingAs($user)
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
@@ -1031,7 +1031,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $users->first()->team()->save($team);
+        $users->first()->teams()->save($team);
 
         $this->actingAs($users->last())
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id . '/date', [
@@ -1048,7 +1048,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $users->first()->team()->save($team);
+        $users->first()->teams()->save($team);
         $users->last()->update([
             'role' => 'admin',
         ]);
@@ -1075,7 +1075,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $rounds = factory(App\Round::class, 5)->create();
         $players = factory(App\Player::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $players->each(function ($player) use (&$team) {
             $team->players()->attach($player);
@@ -1113,8 +1113,8 @@ class CoachRoundsTest extends BrowserKitTestCase
         $rounds = factory(App\Round::class, 5)->create();
         $players = factory(App\Player::class, 5)->create();
 
-        $users->first()->team()->save($teams->first());
-        $users->last()->team()->save($teams->last());
+        $users->first()->teams()->save($teams->first());
+        $users->last()->teams()->save($teams->last());
 
         $players->each(function ($player) use (&$teams) {
             $teams->first()->players()->attach($player);
@@ -1151,8 +1151,8 @@ class CoachRoundsTest extends BrowserKitTestCase
         $rounds = factory(App\Round::class, 5)->create();
         $players = factory(App\Player::class, 5)->create();
 
-        $users->first()->team()->save($teams->first());
-        $users->last()->team()->save($teams->last());
+        $users->first()->teams()->save($teams->first());
+        $users->last()->teams()->save($teams->last());
 
         $users->last()->update(['role' => 'admin']);
 
@@ -1191,12 +1191,10 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->actingAs($user)
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
-
-        $this->assertRedirectedTo('/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
     }
 
     /** @test */
@@ -1206,7 +1204,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $users->first()->team()->save($team);
+        $users->first()->teams()->save($team);
 
         $this->actingAs($users->last())
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
@@ -1223,12 +1221,10 @@ class CoachRoundsTest extends BrowserKitTestCase
 
         $users->first()->update(['role' => 'admin']);
 
-        $users->last()->team()->save($team);
+        $users->last()->teams()->save($team);
 
         $this->actingAs($users->first())
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
-
-        $this->assertRedirectedTo('/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
     }
 
     /** @test */
@@ -1238,7 +1234,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->actingAs($user)
             ->call('POST', '/teams/' . $team->slug . '/rounds/' . $rounds->first()->id);
@@ -1264,7 +1260,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $users->first()->team()->save($team);
+        $users->first()->teams()->save($team);
 
         // attaching team/ round as first user
         $this->actingAs($users->first())
@@ -1297,7 +1293,7 @@ class CoachRoundsTest extends BrowserKitTestCase
 
         $users->last()->update(['role' => 'admin']);
 
-        $users->first()->team()->save($team);
+        $users->first()->teams()->save($team);
 
         // acting as first, non admin user
         $this->actingAs($users->first())
@@ -1324,7 +1320,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $users = factory(App\User::class, 2)->create();
         $team = factory(App\Team::class)->create();
 
-        $users->first()->team()->save($team);
+        $users->first()->teams()->save($team);
 
         $this->actingAs($users->last())
             ->call('GET', '/teams/' . $team->slug . '/bestPlayersAllowed/status');
@@ -1339,7 +1335,7 @@ class CoachRoundsTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
 
         $users->last()->update(['role' => 'admin']);
-        $users->first()->team()->save($team);
+        $users->first()->teams()->save($team);
 
         $this->actingAs($users->last())
             ->call('GET', '/teams/' . $team->slug . '/bestPlayersAllowed/status');

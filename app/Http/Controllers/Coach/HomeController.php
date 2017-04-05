@@ -18,12 +18,8 @@ class HomeController extends \App\Http\Controllers\Controller
     {
         $user = $request->user();
 
-        if ($user->isAdmin()) {
-            return redirect()->route('admin.home');
-        }
-
         return view('home', [
-            'team' => $user->team,
+            'teams' => $user->teams,
         ]);
     }
 

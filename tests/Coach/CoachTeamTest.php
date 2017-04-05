@@ -18,20 +18,7 @@ class CoachTeamTest extends BrowserKitTestCase
     }
 
     /** @test */
-    public function user_is_redirected_to_correct_url_when_they_have_a_team()
-    {
-        $user = factory(App\User::class)->create();
-        $team = factory(App\Team::class)->create();
-
-        $user->team()->save($team);
-
-        $this->actingAs($user)
-            ->visit('/teams')
-            ->seePageIs('/home');
-    }
-
-    /** @test */
-    public function user_sees_error_when_there_are_no_available_teams_when_logged_in_and_doesnt_have_a_team()
+    public function user_sees_message_when_there_are_no_available_teams_when_logged_in_and_doesnt_have_a_team()
     {
         $user = factory(App\User::class)->create();
 
@@ -69,17 +56,17 @@ class CoachTeamTest extends BrowserKitTestCase
     }
 
     /** @test */
-    public function user_is_able_to_join_only_one_team()
+    public function user_can_join_multiple_teams()
     {
         $user = factory(App\User::class)->create();
         $teams = factory(App\Team::class, 5)->create();
 
-        $user->team()->save($teams->first());
+        $user->teams()->save($teams->first());
 
         $this->actingAs($user)
             ->call('POST', '/teams/' . $teams->last()->slug);
 
-        $this->dontSeeInDatabase('teams', [
+        $this->seeInDatabase('teams', [
             'id' => $teams->last()->id,
             'user_id' => $user->id,
         ]);
@@ -91,7 +78,7 @@ class CoachTeamTest extends BrowserKitTestCase
         $user = factory(App\User::class)->create();
         $team = factory(App\Team::class)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->actingAs($user)
             ->visit('/home')
@@ -106,7 +93,7 @@ class CoachTeamTest extends BrowserKitTestCase
         $user = factory(App\User::class)->create();
         $team = factory(App\Team::class)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->actingAs($user)
             ->visit('/teams/' . $team->slug . '/manage')
@@ -121,7 +108,7 @@ class CoachTeamTest extends BrowserKitTestCase
         $user = factory(App\User::class)->create();
         $team = factory(App\Team::class)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->actingAs($user)
             ->visit('/teams/' . $team->slug . '/manage')
@@ -136,7 +123,7 @@ class CoachTeamTest extends BrowserKitTestCase
         $user = factory(App\User::class)->create();
         $team = factory(App\Team::class)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->seeInDatabase('teams', [
             'user_id' => $user->id
@@ -159,7 +146,7 @@ class CoachTeamTest extends BrowserKitTestCase
         $players = factory(App\Player::class, 5)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $players->each(function ($player) use (&$team) {
             $team->players()->attach($player);
@@ -170,7 +157,7 @@ class CoachTeamTest extends BrowserKitTestCase
 
         $this->actingAs($user)
             ->visit('/teams/' . $team->slug . '/manage')
-            ->see('Stats for ' . strtoupper($team->name))
+            ->see('Stats for Team ' . strtoupper($team->name))
             ->see('Coach: <strong>' . $team->user->name() . '</strong>.')
             ->see(strtoupper($team->name) . ' has played in <strong>' . count($team->rounds) . '</strong> rounds.')
             ->see(strtoupper($team->name) . ' has <strong>' . count($team->players) . '</strong> players.');
@@ -182,8 +169,7 @@ class CoachTeamTest extends BrowserKitTestCase
         $user = factory(App\User::class)->create();
         $team = factory(App\Team::class)->create();
 
-        $user->team()->save($team);
-
+        $user->teams()->save($team);
 
         $this->actingAs($user)
             ->visit('/teams/' . $team->slug . '/manage')
@@ -200,7 +186,7 @@ class CoachTeamTest extends BrowserKitTestCase
         $user = factory(App\User::class)->create();
         $team = factory(App\Team::class)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->actingAs($user)
             ->call('GET', '/teams/' . $team->slug . '/manage');
@@ -214,7 +200,7 @@ class CoachTeamTest extends BrowserKitTestCase
         $users = factory(App\User::class, 2)->create();
         $team = factory(App\Team::class)->create();
 
-        $users->first()->team()->save($team);
+        $users->first()->teams()->save($team);
 
         $this->actingAs($users->last())
             ->call('GET', '/teams/' . $team->slug . '/manage');
@@ -232,7 +218,7 @@ class CoachTeamTest extends BrowserKitTestCase
             'role' => 'admin',
         ]);
 
-        $users->first()->team()->save($team);
+        $users->first()->teams()->save($team);
 
         $this->actingAs($users->last())
             ->call('GET', '/teams/' . $team->slug . '/manage');
@@ -246,7 +232,7 @@ class CoachTeamTest extends BrowserKitTestCase
         $user = factory(App\User::class)->create();
         $teams = factory(App\Team::class, 5)->create();
 
-        $user->team()->save($teams->first());
+        $user->teams()->save($teams->first());
 
         $this->seeInDatabase('teams', [
             'user_id' => $user->id
@@ -266,7 +252,7 @@ class CoachTeamTest extends BrowserKitTestCase
         $users = factory(App\User::class, 2)->create();
         $team = factory(App\Team::class)->create();
 
-        $users->first()->team()->save($team);
+        $users->first()->teams()->save($team);
 
         $this->actingAs($users->last())
             ->call('DELETE', '/teams/' . $team->slug . '/coach');
@@ -286,7 +272,7 @@ class CoachTeamTest extends BrowserKitTestCase
             'role' => 'admin',
         ]);
 
-        $users->first()->team()->save($team);
+        $users->first()->teams()->save($team);
 
         $this->actingAs($users->last())
             ->call('DELETE', '/teams/' . $team->slug . '/coach');
@@ -302,7 +288,7 @@ class CoachTeamTest extends BrowserKitTestCase
         $user = factory(App\User::class)->create();
         $team = factory(App\Team::class)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->actingAs($user)
             ->visit('/teams/' . $team->slug . '/manage')

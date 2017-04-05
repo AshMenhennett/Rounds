@@ -5,13 +5,13 @@
     @if (! $team->rounds()->find($round->id))
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <a href="{{ route('coach.rounds.index', $team) }}">&laquo; Rounds</a>
+                <a href="{{ route('coach.team.rounds.index', $team) }}">&laquo; Rounds</a>
                 <br />
                 <div class="panel panel-default">
                     <div class="panel-heading">Add a Round {{ $round->name }} to {{ strtoupper($team->name) }}?</div>
 
                     <div class="panel-body">
-                        <form action="{{ route('coach.round.store', [$team, $round]) }}" method="post">
+                        <form action="{{ route('coach.team.round.store', [$team, $round]) }}" method="post">
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-primary">Yes, add this Round</button>
                         </form>
@@ -24,13 +24,13 @@
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <a href="{{ route('coach.rounds.index', $team) }}">&laquo; Rounds</a>
+                <a href="{{ route('coach.team.rounds.index', $team) }}">&laquo; Rounds</a>
                 <br />
                 <div class="panel panel-default">
                     <div class="panel-heading">Pick a date for Round {{ $round->name }}</div>
 
                     <div class="panel-body">
-                        <form class="custom-horizontal" action="{{ route('coach.round.store.date', [$team, $round]) }}" method="post">
+                        <form class="custom-horizontal" action="{{ route('coach.team.round.store.date', [$team, $round]) }}" method="post">
                             <div class="col-md-8 form-group{{ $errors->has('date') ? ' has-error' : ''}}">
                                 <span><strong>Current Set Date</strong>: {{ Carbon\Carbon::createFromTimeStamp(strtotime($round->date($team)))->format('d/m/Y') }}.</span>
                                 <input type="date" name="date" class="form-control" value="{{ old('date') ? old('date') : '' }}" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required />
@@ -67,7 +67,7 @@
                     <div class="panel-heading">Remove this Round for {{ strtoupper($team->name) }}?</div>
 
                     <div class="panel-body">
-                        <form action="{{ route('coach.round.destroy', [$team, $round]) }}" method="post">
+                        <form action="{{ route('coach.team.round.destroy', [$team, $round]) }}" method="post">
                             {{ method_field('DELETE') }}
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-danger">Remove this Round</button>

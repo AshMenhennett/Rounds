@@ -16,6 +16,6 @@ class AdminLoginTest extends BrowserKitTestCase
             ->type('bob@example.com', 'email')
             ->type('secret', 'password')
             ->press('Login')
-            ->seePageIs('/admin');
+            ->seePageIs('/home');
     }
 }

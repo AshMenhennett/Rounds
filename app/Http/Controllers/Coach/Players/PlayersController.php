@@ -24,7 +24,7 @@ class PlayersController extends Controller
         $this->authorize('indexPlayers', $team);
 
         // we need to pass the Team through to the component and we will utilize the fetch method on this controller to gather all players for that Team.
-        return view('coach.players.index', [
+        return view('coach.team.players.index', [
             'team' => $team,
         ]);
     }

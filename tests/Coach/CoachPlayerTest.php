@@ -14,7 +14,7 @@ class CoachPlayerTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $players = factory(App\Player::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $players->each(function ($player) use (&$team) {
             $team->players()->attach($player);
@@ -34,7 +34,7 @@ class CoachPlayerTest extends BrowserKitTestCase
         $players = factory(App\Player::class, 5)->create();
         $rounds = factory(App\Round::class, 5)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $players->each(function ($player) use (&$team) {
             $team->players()->attach($player);
@@ -61,7 +61,7 @@ class CoachPlayerTest extends BrowserKitTestCase
         $user = factory(App\User::class)->create();
         $team = factory(App\Team::class)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->actingAs($user)
             ->call('POST', '/teams/' . $team->slug . '/players/new', [
@@ -83,7 +83,7 @@ class CoachPlayerTest extends BrowserKitTestCase
         $user = factory(App\User::class)->create();
         $team = factory(App\Team::class)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->actingAs($user)
             ->call('POST', '/teams/' . $team->slug . '/players/new', [
@@ -103,7 +103,7 @@ class CoachPlayerTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $player = factory(App\Player::class)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
         $team->players()->attach($player);
 
         $this->actingAs($user)
@@ -144,7 +144,7 @@ class CoachPlayerTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $player = factory(App\Player::class)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
         $team->players()->attach($player);
 
         $this->actingAs($user)
@@ -162,7 +162,7 @@ class CoachPlayerTest extends BrowserKitTestCase
         $round = factory(App\Round::class)->create();
 
         // testing all model associations
-        $user->team()->save($team);
+        $user->teams()->save($team);
         $team->players()->attach($player);
         $player->rounds()->attach($round);
         $round->teams()->attach($team);
@@ -181,7 +181,7 @@ class CoachPlayerTest extends BrowserKitTestCase
         $player = factory(App\Player::class)->create(['name' => 'Bob']);
         $rounds = factory(App\Round::class, 3)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
         $team->players()->attach($player);
 
         $rounds->each(function ($round) use (&$player) {
@@ -213,7 +213,7 @@ class CoachPlayerTest extends BrowserKitTestCase
         $user = factory(App\User::class)->create();
         $team = factory(App\Team::class)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
 
         $this->actingAs($user)
             ->call('POST', '/teams/' . $team->slug . '/players/new', [
@@ -231,7 +231,7 @@ class CoachPlayerTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $player = factory(App\Player::class)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
         $team->players()->attach($player);
 
         $this->actingAs($user)
@@ -254,7 +254,7 @@ class CoachPlayerTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $players = factory(App\Player::class, 2)->create();
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
         $players->each(function($player) use (&$team) {
             $team->players()->attach($player);
         });
@@ -272,7 +272,7 @@ class CoachPlayerTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $players = factory(App\Player::class, 2)->create();
 
-        $users->first()->team()->save($team);
+        $users->first()->teams()->save($team);
         $players->each(function($player) use (&$team) {
             $team->players()->attach($player);
         });
@@ -347,7 +347,7 @@ class CoachPlayerTest extends BrowserKitTestCase
         $team = factory(App\Team::class)->create();
         $player = factory(App\Player::class)->create(['name' => 'Milly', 'temp' => 1]);
 
-        $user->team()->save($team);
+        $user->teams()->save($team);
         $team->players()->attach($player);
 
         $this->actingAs($user)

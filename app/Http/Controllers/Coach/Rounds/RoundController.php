@@ -28,7 +28,7 @@ class RoundController extends Controller
             $team->rounds()->attach($round);
         }
 
-        return redirect()->route('coach.round.show', [
+        return redirect()->route('coach.team.round.show', [
             'team' => $team,
             'round' => $round,
         ]);
@@ -47,7 +47,7 @@ class RoundController extends Controller
     {
         $this->authorize('showRound', $team);
 
-        return view('coach.round.show', [
+        return view('coach.team.round.show', [
             'team' => $team,
             'round' => $round
         ]);
@@ -203,7 +203,7 @@ class RoundController extends Controller
             $round->players()->detach($player);
         });
 
-        return redirect()->route('coach.rounds.index', [
+        return redirect()->route('coach.team.rounds.index', [
             'team' => $team,
         ]);
     }

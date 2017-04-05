@@ -38,13 +38,13 @@ class User extends Authenticatable
 
 
     /**
-     * A User has one Team.
+     * A User has many teams.
      *
-     * @return Illuminate\Database\Eloquent\Relations\HasOne
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function team()
+    public function teams()
     {
-        return $this->hasOne(Team::class);
+        return $this->hasMany(Team::class);
     }
 
     /**
@@ -68,13 +68,13 @@ class User extends Authenticatable
     }
 
     /**
-     * Returns 0 if the User has no Team.
+     * Returns 0 if the User has no team.
      *
      * @return boolean
      */
-    public function associatedWithTeam()
+    public function associatedWithTeams()
     {
-        return count($this->team);
+        return count($this->teams);
     }
 
     /**
@@ -85,6 +85,6 @@ class User extends Authenticatable
      */
     public function hasTeam($team)
     {
-        return $this->team()->get()->contains($team);
+        return $this->teams()->get()->contains($team);
     }
 }

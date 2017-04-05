@@ -10,19 +10,14 @@ class TeamsController extends Controller
 {
 
     /**
-     * Display all paginated teams that do not have a User associated.
+     * Display all paginated teams.
      *
      * @param  Illuminate\Http\Request $request
      * @return Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $teams = Team::where('user_id', null)->orderBy('name')->paginate(5);
-
-        if (count($request->user()->team)) {
-            // user already has a team.. redirect to home- shows links to manage their team
-            return redirect()->route('home');
-        }
+        $teams = Team::where('user_id', '!=', $request->user()->id)->orWhereNull('user_id')->orderBy('name')->paginate(5);
 
         return view('coach.teams.index', [
             'teams' => $teams,

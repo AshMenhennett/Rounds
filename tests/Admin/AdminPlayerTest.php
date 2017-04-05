@@ -136,7 +136,7 @@ class AdminPlayerTest extends BrowserKitTestCase
         $teams = factory(App\Team::class, 5)->create();
 
         $teams->each(function ($team) use ($user) {
-            $user->team()->save($team);
+            $user->teams()->save($team);
         });
 
         $this->actingAs($user)

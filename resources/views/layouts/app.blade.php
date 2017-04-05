@@ -71,8 +71,10 @@
                                 <li><a href="{{ route('admin.export.index') }}">Export</a></li>
                                 <li><a href="{{ route('admin.ecosystem.index') }}">Manage Ecosystem</a></li>
                             @else
-                                @if (Auth::user()->associatedWithTeam())
-                                    <li><a href="{{ route('coach.team.manage', Auth::user()->team()->first()) }}">My Team</a></li>
+                                @if (Auth::user()->associatedWithTeams())
+                                    @foreach (Auth::user()->teams as $team)
+                                        <li><a href="{{ route('coach.team.manage', $team) }}">{{ $team->name }}</a></li>
+                                    @endforeach
                                 @else
                                     <li><a href="{{ route('home') }}">Home</a></li>
                                 @endif
@@ -103,13 +105,13 @@
                                         <li class="dropdown-header">Coach</li>
                                     @endif
 
-                                    @if (Auth::user()->associatedWithTeam())
-                                        <li><a href="{{ route('coach.team.manage', Auth::user()->team()->first()) }}">Manage Team</a></li>
-                                        <li><a href="{{ route('coach.rounds.index', Auth::user()->team()->first()) }}">Fill in Rounds</a></li>
-                                        <li><a href="{{ route('coach.players.index', Auth::user()->team()->first()) }}">Add Players</a></li>
-                                    @else
-                                        <li><a href="{{ route('coach.teams.index') }}">Join a Team</a></li>
+                                    @if (Auth::user()->associatedWithTeams())
+                                        @foreach (Auth::user()->teams as $team)
+                                            <li><a href="{{ route('coach.team.manage', $team) }}">Manage Team {{ $team->name }}</a></li>
+                                        @endforeach
                                     @endif
+
+                                    <li><a href="{{ route('coach.teams.index') }}">Join a Team</a></li>
 
                                     <li role="separator" class="divider"></li>
                                     <li class="dropdown-header">Support</li>

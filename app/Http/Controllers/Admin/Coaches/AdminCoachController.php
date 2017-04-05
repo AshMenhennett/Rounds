@@ -25,11 +25,13 @@ class AdminCoachController extends Controller
             return response()->json(null, 403);
         }
 
-        if (count($coach->team)) {
-            // detach coach from team
-            $coach->team->update([
-                'user_id' => null,
-            ]);
+        if (count($coach->teams)) {
+            $coach->teams->each(function ($team) {
+                // detach coach from teams
+                $team->update([
+                    'user_id' => null,
+                ]);
+            });
         }
 
         $coach->delete();

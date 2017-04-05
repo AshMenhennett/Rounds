@@ -1,5 +1,5 @@
 <template>
-    <div class="component">
+    <div class="component no-top-mar">
         <scale-loader :loading="loading" :color="loader_color"></scale-loader>
 
         <div v-if="players.length && ! loading">

@@ -22,7 +22,7 @@ class RoundsController extends Controller
 
         $rounds = Round::all();
 
-        return view('coach.rounds.index', [
+        return view('coach.team.rounds.index', [
             'team' => $team,
             'rounds' => $rounds,
         ]);

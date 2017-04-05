@@ -81,6 +81,16 @@ class Team extends Model
     }
 
     /**
+     * Return whether the Team belongs to a given coach.
+     *
+     * @return boolean
+     */
+    public function belongsToCoach(User $user)
+    {
+        return $this->user()->get()->contains($user);
+    }
+
+    /**
      * Returns whether a Team is required to enter in best players when filling in a Round.
      *
      * @return boolean

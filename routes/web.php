@@ -42,33 +42,33 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/teams/{team}/manage', 'Coach\Teams\TeamManagementController@show')->name('coach.team.manage');
 
     // gets the status of a Team's ability to set best players for a Round
-    Route::get('/teams/{team}/bestPlayersAllowed/status', 'Coach\Teams\TeamBestPlayerAllowedStatusController@index')->name('coach.teams.bestPlayer.index');
+    Route::get('/teams/{team}/bestPlayersAllowed/status', 'Coach\Teams\TeamBestPlayerAllowedStatusController@index')->name('coach.team.bestPlayer.index');
 
     // displays Vue component to view all players within a Team
-    Route::get('/teams/{team}/players', 'Coach\Players\PlayersController@index')->name('coach.players.index');
+    Route::get('/teams/{team}/players', 'Coach\Players\PlayersController@index')->name('coach.team.players.index');
     // gets players for pagination with fractal
-    Route::get('/teams/{team}/players/fetch', 'Coach\Players\PlayersController@fetch')->name('coach.players.fetch');
+    Route::get('/teams/{team}/players/fetch', 'Coach\Players\PlayersController@fetch')->name('coach.team.players.fetch');
 
-    Route::post('/teams/{team}/players/new', 'Coach\Players\PlayerController@store')->name('coach.player.store');
-    Route::get('/teams/{team}/players/{player}/edit', 'Coach\Players\PlayerController@edit')->name('coach.player.edit');
-    Route::put('/teams/{team}/players/{player}', 'Coach\Players\PlayerController@update')->name('coach.player.update');
-    Route::delete('/teams/{team}/players/{player}', 'Coach\Players\PlayerController@destroy')->name('coach.player.destroy');
+    Route::post('/teams/{team}/players/new', 'Coach\Players\PlayerController@store')->name('coach.team.player.store');
+    Route::get('/teams/{team}/players/{player}/edit', 'Coach\Players\PlayerController@edit')->name('coach.team.player.edit');
+    Route::put('/teams/{team}/players/{player}', 'Coach\Players\PlayerController@update')->name('coach.team.player.update');
+    Route::delete('/teams/{team}/players/{player}', 'Coach\Players\PlayerController@destroy')->name('coach.team.player.destroy');
 
     // displays all available rounds that a Team can fill in
-    Route::get('/teams/{team}/rounds', 'Coach\Rounds\RoundsController@index')->name('coach.rounds.index');
+    Route::get('/teams/{team}/rounds', 'Coach\Rounds\RoundsController@index')->name('coach.team.rounds.index');
     // initially displays options for adding a Round to a Team and subsequently displays date input and round input component,
     // as well as destroy button to remove the Team/ Round association
-    Route::get('/teams/{team}/rounds/{round}', 'Coach\Rounds\RoundController@show')->name('coach.round.show');
+    Route::get('/teams/{team}/rounds/{round}', 'Coach\Rounds\RoundController@show')->name('coach.team.round.show');
     // adds association for a Round to a Team
-    Route::post('/teams/{team}/rounds/{round}', 'Coach\Rounds\RoundController@store')->name('coach.round.store');
+    Route::post('/teams/{team}/rounds/{round}', 'Coach\Rounds\RoundController@store')->name('coach.team.round.store');
     //  stores and updates round date
-    Route::post('/teams/{team}/rounds/{round}/date', 'Coach\Rounds\RoundDateController@store')->name('coach.round.store.date');
+    Route::post('/teams/{team}/rounds/{round}/date', 'Coach\Rounds\RoundDateController@store')->name('coach.team.round.store.date');
     //  updates round data for a Team, specifically adding associations in player_round, adding players into this Round, for this Team
-    Route::put('/teams/{team}/rounds/{round}', 'Coach\Rounds\RoundController@update')->name('coach.round.update');
+    Route::put('/teams/{team}/rounds/{round}', 'Coach\Rounds\RoundController@update')->name('coach.team.round.update');
     // removes association between a Team and Round
-    Route::delete('/teams/{team}/rounds/{round}', 'Coach\Rounds\RoundController@destroy')->name('coach.round.destroy');
+    Route::delete('/teams/{team}/rounds/{round}', 'Coach\Rounds\RoundController@destroy')->name('coach.team.round.destroy');
     // fetch all team data for a Round
-    Route::get('/teams/{team}/rounds/{round}/fetch ', 'Coach\Rounds\RoundController@fetchPlayers')->name('coach.round.fetch');
+    Route::get('/teams/{team}/rounds/{round}/fetch ', 'Coach\Rounds\RoundController@fetchPlayers')->name('coach.team.round.fetch');
 
     Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
 
@@ -104,13 +104,15 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::post('/teams/import', 'Admin\Teams\AdminImportTeamsController@store')->name('admin.teams.import');
 
-        // Toggles whether a Coach can fill in the Best Players section of the Coach/RoundInputComponent.vue
-        Route::put('/teams/{team}/bestPlayersAllowed/toggle', 'Admin\Teams\AdminTeamBestPlayersAllowedToggleController@update')->name('admin.team.bestPlayersAllowed.toggle');
-
         // gets coaches for pagination with fractal
         Route::get('/coaches/fetch', 'Admin\Coaches\AdminCoachesController@fetch')->name('admin.coaches.fetch');
 
         Route::delete('/coaches/{coach}', 'Admin\Coaches\AdminCoachController@destroy')->name('admin.coach.destroy');
+
+        // Toggles whether a Coach can fill in the Best Players section of the Coach/RoundInputComponent.vue
+        Route::put('/teams/{team}/bestPlayersAllowed/toggle', 'Admin\Teams\AdminTeamBestPlayersAllowedToggleController@update')->name('admin.team.bestPlayersAllowed.toggle');
+        // Kicks a coach off the team
+        Route::put('/teams/{team}/kick/coach', 'Admin\Teams\AdminTeamKickCoachController@update')->name('admin.team.kick.coach');
 
         // gets rounds for pagination with fractal
         Route::get('/rounds/fetch', 'Admin\Rounds\AdminRoundsController@fetch')->name('admin.rounds.fetch');

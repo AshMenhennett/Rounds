@@ -21,11 +21,11 @@ class AdminDeleteAllTest extends BrowserKitTestCase
         $rounds = factory(App\Round::class, 20)->create();
 
         // assign coaches and admins to teams
-        $coaches->first()->team()->save($teamsLotA->first());
-        $coaches->last()->team()->save($teamsLotA->last());
+        $coaches->first()->teams()->save($teamsLotA->first());
+        $coaches->last()->teams()->save($teamsLotA->last());
 
-        $admins->first()->team()->save($teamsLotB->first());
-        $admins->last()->team()->save($teamsLotB->last());
+        $admins->first()->teams()->save($teamsLotB->first());
+        $admins->last()->teams()->save($teamsLotB->last());
 
         // assign players to teams
         $playersLotA->each(function ($player) use ($teamsLotA) {

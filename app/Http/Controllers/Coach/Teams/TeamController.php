@@ -19,10 +19,10 @@ class TeamController extends Controller
     {
         $user = $request->user();
 
-        if (! count($team->user) && ! count($user->team)) {
-            // team nor user have association of other model.
+        if (! count($team->user)) {
+            // team doesn't belong to a user
             // let's save the 'association'
-            $user->team()->save($team);
+            $user->teams()->save($team);
         }
 
         return redirect()->route('coach.team.manage', [
@@ -41,9 +41,7 @@ class TeamController extends Controller
     {
         $this->authorize('detachUser', $team);
 
-        $user = $request->user();
-
-        $user->team()->update([
+        $team->update([
             'user_id' => null,
         ]);
 

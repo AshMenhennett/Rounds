@@ -29,7 +29,7 @@ class RoundDateController extends Controller
 
         $request->session()->flash('success_message', 'Round date updated!');
 
-        return redirect()->route('coach.round.show', [
+        return redirect()->route('coach.team.round.show', [
             'team' => $team,
             'round' => $round,
         ]);

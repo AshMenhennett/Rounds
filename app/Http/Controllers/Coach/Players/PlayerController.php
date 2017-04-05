@@ -44,7 +44,7 @@ class PlayerController extends Controller
     {
         $this->authorize('editPlayer', $team);
 
-        return view('coach.player.edit', [
+        return view('coach.team.player.edit', [
             'team' => $team,
             'player' => $player,
         ]);
@@ -67,7 +67,7 @@ class PlayerController extends Controller
             'temp' => $request->temp ? 1 : 0,
         ]);
 
-        return redirect()->route('coach.players.index', [
+        return redirect()->route('coach.team.players.index', [
             'team' => $team,
         ]);
     }

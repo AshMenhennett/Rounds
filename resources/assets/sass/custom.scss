@@ -26,6 +26,7 @@ ul.list-item-group {
     padding: 40px;
     margin: 10px;
     border: 1px solid #d3e0e9;
+    background: #fefefe;
     text-align: center;
 }
 
@@ -127,6 +128,10 @@ body.with-colour {
 }
 
 /* Global Helpers */
+.no-top-mar {
+    margin-top: 0 !important;
+}
+
 #flash-message {
     position: absolute;
     bottom: 0;

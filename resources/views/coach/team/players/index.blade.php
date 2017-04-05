@@ -7,7 +7,7 @@
             <a href="{{ route('coach.team.manage', $team) }}">&laquo; Team Management</a>
             <br />
             <div class="panel panel-default">
-                <div class="panel-heading">Players for {{ strtoupper($team->name) }}</div>
+                <div class="panel-heading">Players for Team {{ strtoupper($team->name) }}</div>
 
                 <div class="panel-body">
                     <coach-team-players team="{{ $team->slug }}"></coach-team-players>

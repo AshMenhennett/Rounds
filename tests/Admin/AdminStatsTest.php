@@ -18,7 +18,7 @@ class AdminStatsTest extends BrowserKitTestCase
 
         $teams->each(function ($team) use ($coaches, $rounds) {
             $coaches->each(function ($coach) use ($team) {
-                $coach->team()->save($team);
+                $coach->teams()->save($team);
             });
 
             $rounds->each(function ($round) use ($team) {
