@@ -16,6 +16,7 @@ require('./bootstrap');
 // coach components
 Vue.component('coach-round-input', require('./components/Coach/Rounds/RoundInputComponent.vue'));
 Vue.component('coach-team-players', require('./components/Coach/Players/TeamPlayersComponent.vue'));
+Vue.component('coach-team-player', require('./components/Coach/Players/PlayerComponent.vue'));
 
 // admin dashboard
 Vue.component('admin-dashboard', require('./components/Admin/AdminDashboardComponent.vue'));

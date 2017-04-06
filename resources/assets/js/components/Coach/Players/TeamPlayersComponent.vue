@@ -5,28 +5,14 @@
         <div v-if="players.length && ! loading">
             <h4>Players</h4>
             <ul class="list-group">
-                <li v-for="player in players" class="list-group-item text-center">
-                    <h4>{{ player.name }} <small>{{ player.rounds }} round(s).</small></h4>
-                    <a :href="'/teams/' + team + '/players/' + player.id + '/edit'" class="text-info"><span class="glyphicon glyphicon-edit"></span></a>
-                    <span v-show="player.rounds === 0">
-                        &nbsp;
-                        <a href="#" @click.prevent="deletePlayer(player.id)" class="text-danger"><span class="glyphicon glyphicon-trash"></span></a>
-                    </span>
-                </li>
+                <coach-team-player v-for="(player, index) in players" :player="player" type="Normal" :index="index" :team="team" isFor="coach" @coachDestroyedNormalPlayer="deleteNormalPlayer"></coach-team-player>
             </ul>
         </div>
 
         <div v-if="temp_players.length && ! loading">
             <h4>Temp Players</h4>
             <ul class="list-group temp-players">
-                <li v-for="player in temp_players" class="list-group-item text-center">
-                    <h4>{{ player.name }} <small>{{ player.rounds }} round(s).</small></h4>
-                    <a :href="'/teams/' + team + '/players/' + player.id + '/edit'" class="text-info"><span class="glyphicon glyphicon-edit"></span></a>
-                    <span v-show="player.rounds === 0">
-                        &nbsp;
-                        <a href="#" @click.prevent="deletePlayer(player.id)" class="text-danger"><span class="glyphicon glyphicon-trash"></span></a>
-                    </span>
-                </li>
+                <coach-team-player v-for="(player, index) in temp_players" :player="player" type="Temp" :index="index" :team="team" isFor="coach" @coachDestroyedTempPlayer="deleteTempPlayer"></coach-team-player>
             </ul>
         </div>
 
@@ -160,22 +146,45 @@
                     this.success = false;
                 });
             },
-            deletePlayer(id) {
-                if (! confirm("Are you sure you want to delete this player?")) {
-                    return;
-                }
-                for (var i = 0; i < this.players.length; i++) {
-                    if (this.players[i].id === id) {
-                        this.players.splice(i, 1);
-                        return this.$http.delete('/teams/' + this.team + '/players/' + id);
-                    }
-                }
-                for (var i = 0; i < this.temp_players.length; i++) {
-                    if (this.temp_players[i].id === id) {
-                        this.temp_players.splice(i, 1);
-                        return this.$http.delete('/teams/' + this.team + '/players/' + id);
-                    }
-                }
+            deleteNormalPlayer(index) {
+                var id  = this.players[index].id;
+                this.players.splice(index, 1);
+                return this.$http.delete('/teams/' + this.team + '/players/' + id);
+
+                // for (var i = 0; i < this.players.length; i++) {
+                //     if (this.players[i].id === id) {
+                //         this.players.splice(i, 1);
+                //         return this.$http.delete('/teams/' + this.team + '/players/' + id);
+                //     }
+                // }
+                // for (var i = 0; i < this.temp_players.length; i++) {
+                //     if (this.temp_players[i].id === id) {
+                //         this.temp_players.splice(i, 1);
+                //         return this.$http.delete('/teams/' + this.team + '/players/' + id);
+                //     }
+                // }
+            },
+            deleteTempPlayer(index) {
+                // if (! confirm("Are you sure you want to delete this player?")) {
+                //     return;
+                // }
+
+                var id  = this.temp_players[index].id;
+                this.temp_players.splice(index, 1);
+                return this.$http.delete('/teams/' + this.team + '/players/' + id);
+
+                // for (var i = 0; i < this.players.length; i++) {
+                //     if (this.players[i].id === id) {
+                //         this.players.splice(i, 1);
+                //         return this.$http.delete('/teams/' + this.team + '/players/' + id);
+                //     }
+                // }
+                // for (var i = 0; i < this.temp_players.length; i++) {
+                //     if (this.temp_players[i].id === id) {
+                //         this.temp_players.splice(i, 1);
+                //         return this.$http.delete('/teams/' + this.team + '/players/' + id);
+                //     }
+                // }
             }
         },
         mounted() {
