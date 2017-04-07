@@ -40,6 +40,9 @@ class SendCoachesRoundReminderEmail extends Command
      */
     public function handle()
     {
+
+        \Bugsnag::notifyError('SomeError', 'Round Reminder Email command triggered!');
+
         Round::all()->reject(function ($round) {
             // reject all rounds where the default_date has not passed
             return $round->default_date->gt(\Carbon\Carbon::now());
