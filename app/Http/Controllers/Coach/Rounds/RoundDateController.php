@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Coach\Rounds;
 
 use App\Team;
 use App\Round;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Coach\StoreRoundDateFormRequest;
@@ -24,7 +25,7 @@ class RoundDateController extends Controller
         $this->authorize('storeRoundDate', $team);
 
         $team->rounds()->updateExistingPivot($round->id, [
-            'date' => $request->date
+            'date' => Carbon::parse($request->date)
         ], true);
 
         $request->session()->flash('success_message', 'Round date updated!');

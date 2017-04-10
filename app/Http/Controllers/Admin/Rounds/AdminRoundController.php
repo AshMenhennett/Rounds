@@ -22,7 +22,6 @@ class AdminRoundController extends Controller
      */
     public function store(StoreRoundFormRequest $request)
     {
-        \Log::info($request->date);
         $round = Round::create([
             'name' => $request->name,
         ]);
