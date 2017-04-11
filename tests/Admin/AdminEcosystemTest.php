@@ -82,7 +82,7 @@ class AdminEcosystemTest extends BrowserKitTestCase
 
         $this->actingAs($admin)
             ->visit('/admin/ecosystem/buttons')
-            ->type('My File Button Text', 'value')
+            ->type('My Link Button Text', 'value')
             ->type('http://google.com', 'link')
             ->press('Add to Ecosystem')
             ->seePageIs('/admin/ecosystem/buttons');
@@ -90,7 +90,7 @@ class AdminEcosystemTest extends BrowserKitTestCase
         $this->assertResponseStatus(200);
 
         $this->seeInDatabase('ecosystem_buttons', [
-            'value' => 'My File Button Text',
+            'value' => 'My Link Button Text',
             'link' => 'http://google.com',
             'file_name' => null,
          ]);
@@ -101,7 +101,7 @@ class AdminEcosystemTest extends BrowserKitTestCase
         $this->assertResponseStatus(200);
 
         $this->dontSeeInDatabase('ecosystem_buttons', [
-            'value' => 'My File Button Text',
+            'value' => 'My Link Button Text',
             'link' => 'http://google.com',
             'file_name' => null,
          ]);
@@ -116,7 +116,7 @@ class AdminEcosystemTest extends BrowserKitTestCase
 
         $this->actingAs($admin)
             ->visit('/admin/ecosystem/buttons')
-            ->type('My File Button Text', 'value')
+            ->type('My Link Button Text', 'value')
             ->type('http://google.com', 'link')
             ->attach(storage_path('test_files/Test.xlsx'), 'file')
             ->press('Add to Ecosystem')
@@ -125,7 +125,7 @@ class AdminEcosystemTest extends BrowserKitTestCase
         $this->assertResponseStatus(200);
 
         $this->seeInDatabase('ecosystem_buttons', [
-            'value' => 'My File Button Text',
+            'value' => 'My Link Button Text',
             'link' => null,
             'file_name' => \App\EcosystemButton::find(1)->file_name,
          ]);

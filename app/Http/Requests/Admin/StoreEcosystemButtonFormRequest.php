@@ -25,8 +25,8 @@ class StoreEcosystemButtonFormRequest extends FormRequest
     {
         return [
             'value' => 'required|max:255',
-            'link' => 'required_without:file|url',
-            'file' => 'required_without:link|file'
+            'link' => 'required_without:file',
+            'file' => 'required_without:link'
         ];
     }
 }
