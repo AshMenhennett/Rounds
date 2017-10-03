@@ -88,7 +88,7 @@ $style = [
                                         </h1>
 
                                         <p style="{{ $style['paragraph'] }}">
-                                            You have not filled in Round {{ $round->name }}'s data for {{ strtoupper($team->name) }} yet.
+                                            You have not filled in Round {{ $round->name }}'s data for Team {{ strtoupper($team->name) }} yet.
                                             <br>
                                             Please click the button below to fill in the data.
                                         </p>
