@@ -100,4 +100,14 @@ class Team extends Model
         return $this->best_players_allowed === 1;
     }
 
+    /**
+     * Returns whether a Player belongs to this Team.
+     *
+     * @param  App\Player $player
+     * @return boolean
+     */
+    public function playerInTeam(Player $player) {
+        return $this->players->contains($player);
+    }
+
 }

@@ -64,4 +64,16 @@ class Round extends Model
         return $this->default_date;
     }
 
+    /**
+     * Returns a Collection of Players that belong to a given Team that played in this Round.
+     *
+     * @param  App\Team   $team
+     * @return Illuminate\Support\Collection
+     */
+    public function playersInTeam(Team $team) {
+        return $this->players->filter(function ($player) use ($team) {
+            return $team->playerInTeam($player);
+        });
+    }
+
 }

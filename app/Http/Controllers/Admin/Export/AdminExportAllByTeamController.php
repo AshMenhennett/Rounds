@@ -55,7 +55,8 @@ class AdminExportAllByTeamController extends Controller
                     $sheet->appendRow([
                         'Player Name', 'Best Player?', 'Team Spirit?', 'Quarters', 'Reason for Quarter Count'
                     ]);
-                    $team->rounds()->find($round->id)->players->each(function ($player) use ($sheet) {
+
+                    \App\Round::find($round->id)->playersInTeam($team)->each(function ($player) use ($sheet) {
                         $sheet->appendRow([
                             $player->name,
                             $player->pivot->best_player ? 'yes' : 'no',
