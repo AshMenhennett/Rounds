@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="SMAA Coach's Helper - The new way to track your team's data.">
 
         <link href="{{ url('/img/favicon.png') }}" rel="icon" type="image/png">
 
