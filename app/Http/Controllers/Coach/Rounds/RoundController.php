@@ -77,7 +77,7 @@ class RoundController extends Controller
                     'rounds' => count($player->rounds),
                     'round' => [
                         // whether or not the player is already playing in this Round.
-                        'exists' => count($player->rounds()->find($round->id)) ? 1 : 0,
+                        'exists' => $player->rounds()->find($round->id) !== null ? 1 : 0,
                         // gross code, but will do for now
                         'best_player' => isset($player->rounds()->find($round->id)->pivot->best_player) ? $player->rounds()->find($round->id)->pivot->best_player : 0,
                         'second_best_player' => isset($player->rounds()->find($round->id)->pivot->second_best_player) ? $player->rounds()->find($round->id)->pivot->second_best_player : 0,

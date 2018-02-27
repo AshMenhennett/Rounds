@@ -19,7 +19,7 @@ class TeamController extends Controller
     {
         $user = $request->user();
 
-        if (! count($team->user)) {
+        if (! isset($team->user)) {
             // team doesn't belong to a user
             // let's save the 'association'
             $user->teams()->save($team);
