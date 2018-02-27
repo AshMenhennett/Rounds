@@ -21,15 +21,11 @@ class AdminExportPlayerQuarterDataByTeamController extends Controller
      */
     public function export(ExportPlayerQuarterDataByTeamFormRequest $request)
     {
-        $team = Team::where('slug', $request->team)->first();
 
         $now = Carbon::now()->toDateTimeString();
 
-        if (! $team->players()->find($request->player)) {
-            abort(400, 'PLAYER_DOES_NOT_EXIST');
-        }
-
-        $player = Player::find($request->player);
+        $player = Player::find($request->playerForQuarterData);
+        $team = Team::find($player->team)->first();
 
         Excel::create($player->name . ' - ' . $team->name . ' Quarter Data -' . $now, function ($excel) use ($team, $player) {
             $excel->sheet('Quarter Data', function ($sheet) use ($team, $player) {

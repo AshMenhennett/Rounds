@@ -24,8 +24,7 @@ class ExportPlayerQuarterDataByTeamFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'team' => 'required|team_exists_by_slug',
-            'player' => 'required'
+            'playerForQuarterData' => 'required|player_exists'
         ];
     }
 }

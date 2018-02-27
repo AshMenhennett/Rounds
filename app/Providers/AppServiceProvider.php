@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Team;
+use App\Player;
 use Validator;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,6 +22,10 @@ class AppServiceProvider extends ServiceProvider
         Validator::extend('team_exists', function($attributes, $value, $parameters) {
             // checks if a team exists
             return Team::find($value);
+        });
+        Validator::extend('player_exists', function($attributes, $value, $parameters) {
+            // checks if a player exists
+            return Player::find($value);
         });
 
         Validator::extend('team_exists_by_slug', function($attributes, $value, $parameters) {

@@ -53,7 +53,7 @@ class AdminExportAllByTeamController extends Controller
             $team->rounds->each(function ($round) use ($team, $excel) {
                 $excel->sheet('Round ' . $round->name, function ($sheet) use ($team, $round) {
                     $sheet->appendRow([
-                        'Player Name', 'Best Player?', 'Team Spirit?', 'Quarters', 'Reason for Quarter Count'
+                        'Player Name', 'Best Player?', '2nd Best Player?', 'Quarters', 'Reason for Quarter Count'
                     ]);
 
                     \App\Round::find($round->id)->playersInTeam($team)->each(function ($player) use ($sheet) {

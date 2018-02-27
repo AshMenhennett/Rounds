@@ -87,10 +87,33 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Export Player Quarter Data By Team</div>
+                    <div class="panel-heading">Export Player Quarter Data</div>
 
                     <div class="panel-body">
-                        <admin-export-player-quarter-data></admin-export-player-quarter-data>
+                        <div class="panel-body">
+                            <form action="{{ route('admin.export.playerQuarters') }}" method="post">
+                                <div class="col-md-8 form-group{{ $errors->has('playerForQuarterData') ? ' has-error' : ''}}">
+
+                                    <select class="form-control" name="playerForQuarterData" required>
+                                        @foreach ($teams as $team)
+                                            @foreach ($team->players as $player)
+                                                <option value="{{ $player->id }}">{{ $player->name }} of {{ $team->name }}</option>
+                                            @endforeach
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('playerForQuarterData'))
+                                        <div class="help-block danger">
+                                            {{ $errors->first('playerForQuarterData') }}
+                                        </div>
+                                    @endif
+                                </div>
+
+                                <div class="col-md-4 form-group">
+                                    {{ csrf_field() }}
+                                    <button type="submit" class="btn btn-primary pull-right">Export Player Quarter Data</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

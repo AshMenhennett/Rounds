@@ -28,7 +28,7 @@ class AdminExportBestPlayersByTeamController extends Controller
         $now = Carbon::now()->toDateTimeString();
 
         $rounds = $team->rounds->map(function ($round) use ($team) {
-            // add some properies to each round
+            // add some properties to each round
             $round['date'] = $round->date($team);
             $round['team'] = $team;
 
@@ -76,7 +76,7 @@ class AdminExportBestPlayersByTeamController extends Controller
             $excel->sheet('Best Players', function ($sheet) use ($team, $rounds, $bestPlayers, $teamSpirits) {
 
                 $sheet->appendRow([
-                    'Round #', 'Date', 'Team', 'Best Player', 'Team Spirit'
+                    'Round #', 'Date', 'Team', 'Best Player', '2nd Best Player'
                 ]);
 
                 $rounds->each(function ($round) use ($team, $sheet) {
@@ -106,7 +106,7 @@ class AdminExportBestPlayersByTeamController extends Controller
 
                 $bestPlayers->each(function ($player) use ($sheet) {
                     $sheet->appendRow([
-                        $player->name, $player->best_player_count . ' votes'
+                        $player->name, $player->best_player_count*2 . ' votes' // one best player vote is worth two votes
                     ]);
                 });
 
@@ -115,7 +115,7 @@ class AdminExportBestPlayersByTeamController extends Controller
                 ]);
 
                 $sheet->appendRow([
-                    'TEAM SPIRIT VOTES'
+                    '2nd BEST PLAYER VOTES'
                 ]);
 
                 $teamSpirits->each(function ($player) use ($sheet) {

@@ -88,6 +88,7 @@ return [
 
     'team_exists'          => 'The :attribute selection was invalid.',
     'team_exists_by_slug'  => 'The :attribute selection was invalid.',
+    'player_exists'        => 'The :attribute selection was invalid.',
 
 
     /*
