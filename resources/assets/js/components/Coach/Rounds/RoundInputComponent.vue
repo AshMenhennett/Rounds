@@ -73,7 +73,7 @@
                     </select>
                 </div>
 
-                <h4>Select Team Spirit Player</h4>
+                <h4>Select 2nd Best Player</h4>
                 <div class="form-group">
                     <select name="second-best-player" id="second-best-player" v-model="second_best_player" class="form-control">
                         <option value="-1">&nbsp;</option>
